@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import axios from 'axios'
-import Track from '../components/Track'
+import Tracks from '../components/Tracks'
 
 export default function Home() {
   const [trackTitle, setTrackTitle] = useState('havana')
@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Track />
+      <Tracks data={data} />
     </div>
   )
 }
