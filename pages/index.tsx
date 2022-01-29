@@ -24,8 +24,16 @@ export default function Home() {
 
   console.log(data)
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    getData()
+  }
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex flex-col justify-center gap-2">
+      <form onSubmit={handleSubmit}>
+        <input onChange={(e) => setTrackTitle(e.target.value)} />
+      </form>
       <Tracks data={data} />
     </div>
   )
