@@ -30,9 +30,9 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col justify-center gap-2">
+    <div className="flex flex-col justify-center items-center gap-2 mt-3">
       <form onSubmit={handleSubmit}>
-        <input onChange={(e) => setTrackTitle(e.target.value)} />
+        <input className='border rounded-sm' onChange={(e) => setTrackTitle(e.target.value)} />
       </form>
       <Tracks data={data} />
     </div>
