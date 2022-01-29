@@ -5,7 +5,7 @@ import Tracks from '../components/Tracks'
 import Input from '../components/Input'
 
 export default function Home() {
-  const [trackTitle, setTrackTitle] = useState('havana')
+  const [trackTitle, setTrackTitle] = useState<string>('')
   const [data, setData] = useState<any>([])
 
   const getData = () => {
@@ -31,7 +31,7 @@ export default function Home() {
   }
 
   return (
-    <div className="mt-3 flex flex-col items-center justify-center gap-2">
+    <div className="mt-3 flex flex-col items-center justify-center gap-3">
       <Input trackTitle={trackTitle} setTrackTitle={setTrackTitle} handleSubmit={handleSubmit} />
       <Tracks data={data} />
     </div>
