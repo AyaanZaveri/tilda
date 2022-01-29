@@ -5,7 +5,7 @@ import Tracks from '../components/Tracks'
 
 export default function Home() {
   const [trackTitle, setTrackTitle] = useState('havana')
-  const [data, setData] = useState(null)
+  const [data, setData] = useState<any>([])
 
   const getData = () => {
     axios

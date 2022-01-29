@@ -1,11 +1,18 @@
 import React from 'react'
+import Track from '../components/Track'
 
 interface Props {
-  data: Object
+  data: Object[]
 }
 
-const Track = ({ data }: Props) => {
-  return <div>{<li></li>}</div>
+const Tracks = ({ data }: Props) => {
+  return (
+    <div>
+      {data.map((item: any) => (
+        <Track key={item.track.track_id} track={item.track} />
+      ))}
+    </div>
+  )
 }
 
-export default Track
+export default Tracks
