@@ -10,10 +10,12 @@ export default function Home() {
   const getData = () => {
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_track=${trackTitle}&page_size=10&page=1&s_track_rating=desc&apikey=${process.env.NEXT_PUBLIC_KEY}`
+        `https://cors-anywhere-production-f183.up.railway.app/http://api.musixmatch.com/ws/1.1/track.search?q_track=${trackTitle}&page_size=10&page=1&s_track_rating=desc&apikey=${process.env.NEXT_PUBLIC_KEY}`
       )
       .then((res) => {
-        setData(res.data.message.body.track_list)
+        const tracklist = res.data.message.body.track_list
+        console.log(tracklist)
+        setData(tracklist)
       })
       .catch((err) => console.log(err))
   }
@@ -21,8 +23,6 @@ export default function Home() {
   useEffect(() => {
     getData()
   }, [])
-
-  console.log(data)
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -37,7 +37,7 @@ export default function Home() {
           placeholder="Track..."
           onChange={(e) => setTrackTitle(e.target.value)}
           value={trackTitle}
-          className="w-72 rounded-md border bg-slate-50 p-2 text-slate-800 ring-slate-300 transition placeholder:text-slate-500 hover:bg-slate-50 focus:border-slate-500 focus:outline-none focus:ring active:bg-slate-100"
+          className="w-72 rounded-md border bg-slate-50 p-2 text-slate-800 ring-slate-300 transition placeholder:text-slate-500 hover:bg-slate-50 focus:border-slate-500 focus:outline-none focus:ring active:bg-slate-200"
           autoComplete="off"
         />
       </form>
