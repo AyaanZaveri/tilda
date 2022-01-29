@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-center items-center gap-2 mt-3">
       <form onSubmit={handleSubmit}>
-        <input className='border rounded-md px-2 outline-none shadow-sm' onChange={(e) => setTrackTitle(e.target.value)} />
+        <input className='border rounded-md px-2 w-96 py-1 outline-none shadow-sm' onChange={(e) => setTrackTitle(e.target.value)} />
       </form>
       <Tracks data={data} />
     </div>
