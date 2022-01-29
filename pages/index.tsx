@@ -30,9 +30,16 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center gap-2 mt-3">
+    <div className="mt-3 flex flex-col items-center justify-center gap-2">
       <form onSubmit={handleSubmit}>
-        <input className='border rounded-md px-2 w-96 py-1 outline-none shadow-sm' onChange={(e) => setTrackTitle(e.target.value)} />
+        <input
+          type="text"
+          placeholder="Track..."
+          onChange={(e) => setTrackTitle(e.target.value)}
+          value={trackTitle}
+          className="w-72 rounded-md border bg-slate-50 p-2 text-slate-800 ring-slate-300 transition placeholder:text-slate-500 hover:bg-slate-50 focus:border-slate-500 focus:outline-none focus:ring active:bg-slate-100"
+          autoComplete="off"
+        />
       </form>
       <Tracks data={data} />
     </div>
