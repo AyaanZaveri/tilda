@@ -7,6 +7,7 @@ import Input from '../components/Input'
 export default function Home() {
   const [trackTitle, setTrackTitle] = useState<string>('')
   const [data, setData] = useState<any>([])
+  const [albumData, setAlbumData] = useState<any>([]);
 
   const getData = () => {
     axios
