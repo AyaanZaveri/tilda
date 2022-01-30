@@ -7,9 +7,9 @@ interface Props {
 
 const Tracks = ({ data }: Props) => {
   return (
-    <div className='flex flex-row flex-wrap justify-center items-start gap-2'>
+    <div className='flex flex-row flex-wrap'>
       {data.map((item: any) => (
-        <Track key={item.track.track_id} track={item.track} />
+        <Track key={item.id} track={item} />
       ))}
     </div>
   )

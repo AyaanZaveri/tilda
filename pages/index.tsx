@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
-import axios from 'axios'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import Tracks from '../components/Tracks'
 import Input from '../components/Input'
 
 export default function Home() {
-  const [trackTitle, setTrackTitle] = useState<string>('')
+  const [trackTitle, setTrackTitle] = useState<string>('havana')
   const [data, setData] = useState<any>([])
 
   const getData = () => {
-    axios
-      .get(
-        `https://cors-anywhere-production-f183.up.railway.app/http://api.musixmatch.com/ws/1.1/track.search?q_track=${trackTitle}&page_size=10&page=1&s_track_rating=desc&apikey=${process.env.NEXT_PUBLIC_KEY}`
-      )
-      .then((res) => {
-        const tracklist = res.data.message.body.track_list
-        console.log(tracklist)
-        setData(tracklist)
+    axios({
+      method: 'get',
+      url: `https://api.spotify.com/v1/search?q=${trackTitle}&type=track`,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY}`,
+      },
+    })
+      .then((response) => {
+        setData(response.data.tracks.items)
       })
-      .catch((err) => console.log(err))
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   useEffect(() => {
@@ -29,6 +34,8 @@ export default function Home() {
     e.preventDefault()
     getData()
   }
+
+  console.log(data)
 
   return (
     <div className="mt-3 flex flex-col items-center justify-center gap-3">
