@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { FaPlay } from 'react-icons/fa';
 
 interface Props {
   key: string
@@ -18,7 +19,8 @@ const Track = ({ key, track }: Props) => {
           src={track.album.images[0].url}
           alt=""
         />
-        <span className="font-semibold text-slate-900">{track.name}</span>
+        <FaPlay className='w-2 text-slate-800' />
+        <span className="font-semibold text-slate-800">{track.name}</span>
         <span className="font-normal text-slate-500">
           {track.artists[0].name}
         </span>

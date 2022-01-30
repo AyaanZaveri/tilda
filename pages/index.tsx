@@ -5,11 +5,11 @@ import Tracks from '../components/Tracks'
 import Input from '../components/Input'
 
 export default function Home() {
-  const [trackTitle, setTrackTitle] = useState<string>('havana')
+  const [trackTitle, setTrackTitle] = useState<string>('')
   const [data, setData] = useState<any>([])
 
   const getData = () => {
-    axios({
+    const config: AxiosRequestConfig = {
       method: 'get',
       url: `https://api.spotify.com/v1/search?q=${trackTitle}&type=track`,
       headers: {
@@ -17,7 +17,17 @@ export default function Home() {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY}`,
       },
-    })
+    }
+
+    axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data))
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+    axios(config)
       .then((response) => {
         setData(response.data.tracks.items)
       })
