@@ -1,9 +1,9 @@
 import React from 'react'
 
 interface Props {
-    handleSubmit: any,
-    trackTitle: string,
-    setTrackTitle: any,
+  handleSubmit: any
+  trackTitle: string
+  setTrackTitle: any
 }
 
 const Input = ({ handleSubmit, trackTitle, setTrackTitle }: Props) => {

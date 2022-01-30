@@ -15,17 +15,9 @@ export default function Home() {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY}`,
+        Authorization: `Bearer BQDIl_QPeuYg0yJzKkgsh9lFoBHKrEPAPwgXtXPMTn4bFsIe1CkcNGItylRJ54mRY-b4HckuIZKeVVHlMw0Qkb86HZf9OxIhCh7h9MNmhly0UJRKUlXx1LkefDqJtgZrt3pvXOpHIV4CWe1vhy9-DdW4i180YflQsrB1QuraEewitD2d8aKq`,
       },
     }
-
-    axios(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data))
-      })
-      .catch((error) => {
-        console.log(error)
-      })
 
     axios(config)
       .then((response) => {
@@ -45,15 +37,20 @@ export default function Home() {
     getData()
   }
 
-  console.log(data)
-
   return (
-    <div className="mt-3 flex flex-col items-center justify-center gap-3">
-      <Input
-        trackTitle={trackTitle}
-        setTrackTitle={setTrackTitle}
-        handleSubmit={handleSubmit}
-      />
+    <div className="mt-3 flex flex-col gap-3">
+      <div className="flex flex-col items-center">
+        <Input
+          trackTitle={trackTitle}
+          setTrackTitle={setTrackTitle}
+          handleSubmit={handleSubmit}
+        />
+      </div>
+      {data > 0 ? (
+        <h1 className="ml-3 text-sm text-slate-500">
+          Search results for: "{trackTitle}"
+        </h1>
+      ) : null}
       <Tracks data={data} />
     </div>
   )
