@@ -22,6 +22,7 @@ export default function Home() {
     axios(config)
       .then((response) => {
         setData(response.data.tracks.items)
+        console.log(response.data.tracks.items)
       })
       .catch((error) => {
         console.log(error)
