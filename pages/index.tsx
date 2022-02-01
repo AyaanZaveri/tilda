@@ -3,18 +3,11 @@ import Home from './home'
 import Login from './login'
 
 const App = () => {
-  const [code, setCode] = useState<string>()
-
-  if (typeof window !== 'undefined') {
-    const codeToken = new URLSearchParams(window.location.search).get('code')
-    useEffect(() => {
-      codeToken ? setCode(codeToken) : null
-    })
-  }
+  const [authCode, setAuthCode] = useState<string>()
 
   return (
     <div>
-      {code ? <Home /> : <Login />}
+      <Home />
     </div>
   )
 }

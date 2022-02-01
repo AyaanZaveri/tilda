@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import Head from 'next/head'
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import React, { useState } from 'react'
 import Tracks from '../components/Tracks'
 import Input from '../components/Input'
-import Login from './login'
 
 const Home = () => {
   const [trackTitle, setTrackTitle] = useState<string>('')
   const [data, setData] = useState<any>([])
-  const [code, setCode] = useState<string>()
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
