@@ -53,6 +53,7 @@ const Home = () => {
           setTrackTitle={setTrackTitle}
           handleSubmit={handleSubmit}
         />
+        <Tracks tracks={tracks} />
       </div>
     </div>
   )
