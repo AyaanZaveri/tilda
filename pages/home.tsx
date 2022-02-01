@@ -9,6 +9,7 @@ const Home = () => {
 
   const [trackTitle, setTrackTitle] = useState<string>('')
   const [userData, setUserData] = useState<any>({})
+  const [tracks, setTracks] = useState<any>([])
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -28,16 +29,21 @@ const Home = () => {
 
   spotifyApi.setAccessToken(userData.accessToken)
 
-  trackTitle
-    ? spotifyApi.searchTracks(trackTitle).then(
-        function (data) {
-          console.log(`Search by ${trackTitle}`, data.body)
-        },
-        function (err) {
-          console.error(err)
-        }
-      )
-    : null
+  useEffect(() => {
+    trackTitle
+      ? spotifyApi.searchTracks(trackTitle).then(
+          function (data) {
+            console.log(`Search by ${trackTitle}`, data.body)
+            setTracks(data.body.tracks?.items)
+          },
+          function (err) {
+            console.error(err)
+          }
+        )
+      : null
+  }, [trackTitle])
+
+  console.log(tracks)
 
   return (
     <div className="mt-3 flex flex-col gap-3">
