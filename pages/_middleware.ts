@@ -1,0 +1,16 @@
+import { getToken } from 'next-auth/jwt'
+import { NextResponse } from 'next/server'
+
+export async function middleware(req: any) {
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET! })
+
+  // If the token exists, and valid.
+  if (req.nextUrl.pathname.includes('/api/auth') || token) {
+    // Continue to the app.
+    return NextResponse.next()
+  }
+
+  if (!token && req.nextUrl.pathname !== '/login') {
+    return NextResponse.redirect('/login')
+  }
+}
