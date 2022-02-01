@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { FaPlay } from 'react-icons/fa'
+import { FaPlay, FaPause } from 'react-icons/fa'
 
 interface Props {
   track: any
 }
 
 const Track = ({ track }: Props) => {
+  const [playing, setPlaying] = useState<boolean>(false)
+
   function millisToMinutesAndSeconds(millis: number) {
     var minutes = Math.floor(millis / 60000)
     var seconds: any = ((millis % 60000) / 1000).toFixed(0)
@@ -26,8 +28,20 @@ const Track = ({ track }: Props) => {
         alt=""
       />
       <div className="flex flex-row items-center gap-3">
-        <FaPlay className="w-2 text-slate-800" />
-        {track.explicit ? <span className='mr-[-0.325rem]'>🅴</span> : null}
+        {playing ? (
+          <FaPause
+            className="w-2 text-slate-800 hover:cursor-pointer"
+            onClick={() => setPlaying(!playing)}
+          />
+        ) : (
+          <FaPlay
+            className="w-2 text-slate-800 hover:cursor-pointer"
+            onClick={() => setPlaying(!playing)}
+          />
+        )}
+        {track.explicit ? (
+          <span className="mr-[-0.325rem] text-slate-800">🅴</span>
+        ) : null}
         <span className="font-semibold text-slate-800">{track.name}</span>
         <span className="font-normal text-slate-500">
           {track.artists[0].name}

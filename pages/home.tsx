@@ -44,7 +44,8 @@ const Home = () => {
       : null
   }
 
-  //useEffect(() => getTracks(), [])
+  //Live Input
+  //useEffect(() => getTracks(), [trackTitle])
 
   console.log(tracks)
 
