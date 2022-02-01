@@ -26,7 +26,14 @@ const Home = () => {
 
   //console.log(userData.accessToken)
 
-  //spotifyApi.setAccessToken()
+  spotifyApi.setAccessToken(userData.accessToken)
+
+  spotifyApi.searchTracks('Positions')
+  .then(function(data) {
+    console.log('Search by "Positions"', data.body);
+  }, function(err) {
+    console.error(err);
+  });
 
   return (
     <div className="mt-3 flex flex-col gap-3">
