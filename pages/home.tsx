@@ -28,12 +28,16 @@ const Home = () => {
 
   spotifyApi.setAccessToken(userData.accessToken)
 
-  spotifyApi.searchTracks('Positions')
-  .then(function(data) {
-    console.log('Search by "Positions"', data.body);
-  }, function(err) {
-    console.error(err);
-  });
+  trackTitle
+    ? spotifyApi.searchTracks(trackTitle).then(
+        function (data) {
+          console.log(`Search by ${trackTitle}`, data.body)
+        },
+        function (err) {
+          console.error(err)
+        }
+      )
+    : null
 
   return (
     <div className="mt-3 flex flex-col gap-3">
