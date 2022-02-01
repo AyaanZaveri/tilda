@@ -4,11 +4,19 @@ interface Props {
   trackTitle: string
   setTrackTitle: any
 }
+import { signOut } from 'next-auth/react'
 
-const Input = ({ handleSubmit, trackTitle, setTrackTitle }: Props) => {
-
+const Nav = ({ handleSubmit, trackTitle, setTrackTitle }: Props) => {
   return (
-    <div>
+    <div className='flex flex-row gap-3'>
+      <button
+        type="button"
+        onClick={() => signOut()}
+        className="focus:ring-green inline-flex items-center rounded-md border border-green-300 bg-white px-4 py-2 text-sm  font-medium text-green-500 ring-green-300 transition hover:bg-green-50 hover:text-green-500 focus:border-green-500 focus:outline-none focus:ring active:bg-green-100 active:text-green-500"
+      >
+        Logout
+      </button>
+
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -23,4 +31,4 @@ const Input = ({ handleSubmit, trackTitle, setTrackTitle }: Props) => {
   )
 }
 
-export default Input
+export default Nav

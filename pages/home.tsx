@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Tracks from '../components/Tracks'
-import Input from '../components/Input'
-import { signOut, useSession } from 'next-auth/react'
+import Nav from '../components/Nav'
+import { useSession } from 'next-auth/react'
+import SpotifyWebApi from 'spotify-web-api-node'
 
 const Home = () => {
+  const spotifyApi = new SpotifyWebApi()
+
   const [trackTitle, setTrackTitle] = useState<string>('')
-  const [data, setData] = useState<any>([])
+  const [userData, setUserData] = useState<any>({})
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -13,26 +16,27 @@ const Home = () => {
 
   const { data: session, status } = useSession()
 
-  console.log(session, status)
+  console.log(session as any, status)
 
-  //console.log(session)
+  useEffect(() => {
+    if (session) {
+      setUserData(session.user)
+    }
+  }, [session])
+
+  //console.log(userData.accessToken)
+
+  //spotifyApi.setAccessToken()
 
   return (
     <div className="mt-3 flex flex-col gap-3">
       <div className="flex flex-col items-center gap-3">
-        <Input
+        <Nav
           trackTitle={trackTitle}
           setTrackTitle={setTrackTitle}
           handleSubmit={handleSubmit}
         />
-
       </div>
-      {data > 0 ? (
-        <h1 className="ml-3 text-sm text-slate-500">
-          Search results for: "{trackTitle}"
-        </h1>
-      ) : null}
-      <Tracks data={data} />
     </div>
   )
 }
