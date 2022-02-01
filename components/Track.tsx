@@ -3,11 +3,10 @@ import axios from 'axios'
 import { FaPlay } from 'react-icons/fa'
 
 interface Props {
-  key: string
   track: any
 }
 
-const Track = ({ key, track }: Props) => {
+const Track = ({ track }: Props) => {
   function millisToMinutesAndSeconds(millis: number) {
     var minutes = Math.floor(millis / 60000)
     var seconds: any = ((millis % 60000) / 1000).toFixed(0)
@@ -18,7 +17,7 @@ const Track = ({ key, track }: Props) => {
 
   return (
     <div
-      key={key}
+      key={track}
       className="flex h-16 w-full flex-row items-center gap-3 border bg-white px-3 text-sm shadow-sm transition hover:bg-slate-50 hover:text-slate-700"
     >
       <img

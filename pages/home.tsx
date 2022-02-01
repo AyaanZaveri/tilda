@@ -13,6 +13,7 @@ const Home = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
+    getTracks()
   }
 
   const { data: session, status } = useSession()
@@ -29,7 +30,7 @@ const Home = () => {
 
   spotifyApi.setAccessToken(userData.accessToken)
 
-  useEffect(() => {
+  const getTracks = () => {
     trackTitle
       ? spotifyApi.searchTracks(trackTitle).then(
           function (data) {
@@ -41,7 +42,9 @@ const Home = () => {
           }
         )
       : null
-  }, [trackTitle])
+  }
+
+  //useEffect(() => getTracks(), [])
 
   console.log(tracks)
 

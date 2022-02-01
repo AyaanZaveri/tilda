@@ -10,7 +10,7 @@ const Tracks = ({ tracks }: Props) => {
   return (
     <div className="flex flex-row flex-wrap">
       {tracks.map((item: any) => (
-        <Track key={item.id} track={item} />
+        <Track track={item} />
       ))}
     </div>
   )
