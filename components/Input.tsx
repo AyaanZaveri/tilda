@@ -1,5 +1,4 @@
 import React from 'react'
-
 interface Props {
   handleSubmit: any
   trackTitle: string
@@ -7,6 +6,7 @@ interface Props {
 }
 
 const Input = ({ handleSubmit, trackTitle, setTrackTitle }: Props) => {
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
