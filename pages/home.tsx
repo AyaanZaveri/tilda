@@ -56,21 +56,8 @@ const Home = () => {
     )
   }
 
-  const getPlaylist = () => {
-    spotifyApi.getPlaylist('37i9dQZEVXbMDoHDwVN2tF').then(
-      function (data) {
-        console.log('Some information about this playlist', data.body)
-        setPlaylist(data.body)
-      },
-      function (err) {
-        console.log('Something went wrong!', err)
-      }
-    )
-  }
-
   useEffect(() => {
     getMe()
-    getPlaylist()
   }, [userData])
 
   //Live Input
@@ -86,7 +73,7 @@ const Home = () => {
           handleSubmit={handleSubmit}
         />
         <Tracks tracks={tracks} />
-        <Discover playlist={playlist} />
+        <Discover spotifyApi={spotifyApi} />
       </div>
       <div className="mt-3 flex w-full items-start justify-end">
         <UserInfo
