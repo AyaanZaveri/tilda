@@ -17,6 +17,7 @@ const Home = () => {
   const [userData, setUserData] = useState<any>()
   const [me, setMe] = useState<any>({})
   const [tracks, setTracks] = useState<any>([])
+  const [playlist, setPlaylist] = useState<any>([])
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -59,6 +60,7 @@ const Home = () => {
     spotifyApi.getPlaylist('37i9dQZEVXbMDoHDwVN2tF').then(
       function (data) {
         console.log('Some information about this playlist', data.body)
+        setPlaylist(data.body)
       },
       function (err) {
         console.log('Something went wrong!', err)
@@ -84,6 +86,7 @@ const Home = () => {
           handleSubmit={handleSubmit}
         />
         <Tracks tracks={tracks} />
+        <Discover playlist={playlist} />
       </div>
       <div className="mt-3 flex w-full items-start justify-end">
         <UserInfo
@@ -91,7 +94,6 @@ const Home = () => {
           userImage={me.images ? me.images[0].url : null}
         />
       </div>
-      <Discover />
     </div>
   )
 }

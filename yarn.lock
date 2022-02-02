@@ -140,6 +140,11 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@tabler/icons@^1.53.0":
+  version "1.53.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.53.0.tgz#51536e01b343cfaf26b701df306b2c0369769e3c"
+  integrity sha512-Skk1BqXEOEhiRsXJgZBYtjFa/+4dMSFA5UyzTUW20oyyUSd3iizhEWrYt0jT87iFu771gWoqVV2/OGobBcGjgQ==
+
 "@types/body-parser@*", "@types/body-parser@^1.19.2":
   version "1.19.2"
   resolved "https://registry.npmjs.org/@types/body-parser/-/body-parser-1.19.2.tgz"
