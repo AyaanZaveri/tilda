@@ -15,7 +15,7 @@ import Document, {
       return (
         <Html>
           <Head />
-          <body className="box-border bg-gray-900">
+          <body className="box-border bg-gradient-to-br from-slate-900 to-slate-800">
             <Main />
             <NextScript />
           </body>

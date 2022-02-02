@@ -5,39 +5,33 @@ import { useSession } from 'next-auth/react'
 import SpotifyWebApi from 'spotify-web-api-node'
 import Sidebar from '../components/Sidebar'
 import UserInfo from '../components/UserInfo'
+import Discover from '../components/Discover'
 
 const Home = () => {
-  const spotifyApi = new SpotifyWebApi()
+  const spotifyApi = new SpotifyWebApi({
+    clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+    clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+  })
 
   const [trackTitle, setTrackTitle] = useState<string>('')
-  const [userData, setUserData] = useState<any>({})
+  const [userData, setUserData] = useState<any>()
   const [me, setMe] = useState<any>({})
   const [tracks, setTracks] = useState<any>([])
 
-  useEffect(() => {
-    spotifyApi.setAccessToken(userData.accessToken)
-  }, [userData])
-
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    getTracks()
+    searchTracks()
   }
 
   const { data: session, status } = useSession()
 
-  console.log(session as any, status)
+  const sessionUser = session ? session.user : null
 
-  useEffect(() => {
-    if (session) {
-      setUserData(session.user)
-    }
-  }, [session])
+  spotifyApi.setAccessToken(sessionUser ? sessionUser['accessToken'] : null)
 
-  //console.log(userData.accessToken)
-
-  const getTracks = () => {
-    trackTitle
-      ? spotifyApi.searchTracks(trackTitle).then(
+  const searchTracks = () => {
+    trackTitle && me && session
+      ? spotifyApi.searchTracks(trackTitle, { market: 'US' }).then(
           function (data) {
             console.log(`Search by ${trackTitle}`, data.body)
             setTracks(data.body.tracks?.items)
@@ -61,12 +55,24 @@ const Home = () => {
     )
   }
 
+  const getPlaylist = () => {
+    spotifyApi.getPlaylist('37i9dQZEVXbMDoHDwVN2tF').then(
+      function (data) {
+        console.log('Some information about this playlist', data.body)
+      },
+      function (err) {
+        console.log('Something went wrong!', err)
+      }
+    )
+  }
+
+  useEffect(() => {
+    getMe()
+    getPlaylist()
+  }, [userData])
+  
   //Live Input
   //useEffect(() => getTracks(), [trackTitle])
-
-  useEffect(() => getMe(), [userData])
-
-  console.log(tracks)
 
   return (
     <div className="flex flex-row gap-3">
@@ -80,10 +86,10 @@ const Home = () => {
         <Tracks tracks={tracks} />
       </div>
       <div className="mt-3 flex w-full items-start justify-end">
-          <UserInfo
-            userName={me.display_name}
-            userImage={me.images ? me.images[0].url : null}
-          />
+        <UserInfo
+          userName={me.display_name}
+          userImage={me.images ? me.images[0].url : null}
+        />
       </div>
     </div>
   )

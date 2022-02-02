@@ -1,18 +1,24 @@
 import React from 'react'
-import { HomeIcon } from '@heroicons/react/outline'
+import { HomeIcon, MusicNoteIcon } from '@heroicons/react/outline'
 
 const Sidebar = () => {
   return (
-    <div className="flex h-screen flex-col border-r-2 border-gray-800 bg-gray-900 px-28 pl-8">
-      <div className="mt-8 flex flex-col gap-5">
-        <div onClick={() => location.href="http://localhost:3000/home"} className="text-sm cursor-pointer inline-flex items-center gap-2 font-medium text-slate-50">
+    <div className="h-sull flex flex-col border-r-2 border-gray-800 bg-gradient-to-bl from-slate-900 to-slate-800 px-28 pl-8">
+      <div className="mt-5 flex flex-col gap-5">
+        <div
+          onClick={() => (location.href = 'http://localhost:3000/home')}
+          className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-slate-50"
+        >
           <HomeIcon className="h-6 w-6" />
-          Home
+          <span className="w-24">Home</span>
         </div>
 
-        <div className="text-sm inline-flex items-center gap-2 font-medium text-slate-50">
-          <HomeIcon className="h-6 w-6" />
-          Your Library
+        <div
+          onClick={() => (location.href = 'http://localhost:3000/playlists')}
+          className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-slate-50"
+        >
+          <MusicNoteIcon className="h-6 w-6" />
+          <span className="w-24">Your Library</span>
         </div>
       </div>
     </div>
