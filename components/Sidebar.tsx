@@ -12,7 +12,7 @@ const Sidebar = () => {
 
         <div className="text-sm inline-flex items-center gap-2 font-medium text-slate-50">
           <HomeIcon className="h-6 w-6" />
-          Home
+          Library
         </div>
       </div>
     </div>
