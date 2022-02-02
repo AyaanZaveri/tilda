@@ -6,7 +6,7 @@ const Sidebar = () => {
     <div className="h-screen flex flex-col border-r border-gray-800 bg-gradient-to-bl from-slate-900 to-slate-800 px-28 pl-8">
       <div className="mt-5 flex flex-col gap-5">
         <div
-          onClick={() => (location.href = 'http://localhost:3000/home')}
+          onClick={() => (location.href = 'http://localhost:3000/')}
           className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-slate-50"
         >
           <HomeIcon className="h-6 w-6" />
@@ -14,7 +14,7 @@ const Sidebar = () => {
         </div>
 
         <div
-          onClick={() => (location.href = 'http://localhost:3000/playlists')}
+          onClick={() => (location.href = 'http://localhost:3000/library')}
           className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-slate-50"
         >
           <MusicNoteIcon className="h-6 w-6" />
