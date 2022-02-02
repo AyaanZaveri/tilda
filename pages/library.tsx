@@ -1,7 +1,12 @@
-import React from 'react';
+import React from 'react'
+import Sidebar from '../components/Sidebar'
 
 const library = () => {
-  return <div></div>;
-};
+  return (
+    <div className="h-screen bg-gradient-to-br from-slate-900 to-slate-800">
+      <Sidebar />
+    </div>
+  )
+}
 
-export default library;
+export default library
