@@ -70,7 +70,7 @@ const Home = () => {
     getMe()
     getPlaylist()
   }, [userData])
-  
+
   //Live Input
   //useEffect(() => getTracks(), [trackTitle])
 
@@ -91,6 +91,7 @@ const Home = () => {
           userImage={me.images ? me.images[0].url : null}
         />
       </div>
+      <Discover />
     </div>
   )
 }

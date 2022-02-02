@@ -3,7 +3,7 @@ import { HomeIcon, MusicNoteIcon } from '@heroicons/react/outline'
 
 const Sidebar = () => {
   return (
-    <div className="h-sull flex flex-col border-r-2 border-gray-800 bg-gradient-to-bl from-slate-900 to-slate-800 px-28 pl-8">
+    <div className="h-screen flex flex-col border-r border-gray-800 bg-gradient-to-bl from-slate-900 to-slate-800 px-28 pl-8">
       <div className="mt-5 flex flex-col gap-5">
         <div
           onClick={() => (location.href = 'http://localhost:3000/home')}
