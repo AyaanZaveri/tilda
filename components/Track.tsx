@@ -20,7 +20,7 @@ const Track = ({ track }: Props) => {
   return (
     <div
       key={track}
-      className="flex h-16 w-full flex-row items-center gap-3 border bg-white px-3 text-sm shadow-sm transition hover:bg-slate-50 hover:text-slate-700"
+      className="flex h-16 w-full flex-row items-center rounded-md gap-3 px-3 text-sm shadow-sm transition hover:bg-white text-white hover:text-slate-700"
     >
       <img
         className="w-[2.5rem] rounded-md"
@@ -30,23 +30,23 @@ const Track = ({ track }: Props) => {
       <div className="flex flex-row items-center gap-3">
         {playing ? (
           <FaPause
-            className="w-2 text-slate-800 hover:cursor-pointer"
+            className="w-2  hover:cursor-pointer"
             onClick={() => setPlaying(!playing)}
           />
         ) : (
           <FaPlay
-            className="w-2 text-slate-800 hover:cursor-pointer"
+            className="w-2  hover:cursor-pointer"
             onClick={() => setPlaying(!playing)}
           />
         )}
         {track.explicit ? (
-          <span className="mr-[-0.325rem] text-slate-800">🅴</span>
+          <span className="mr-[-0.325rem] ">🅴</span>
         ) : null}
-        <span className="font-semibold text-slate-800">{track.name}</span>
-        <span className="font-normal text-slate-500">
+        <span className="font-semibold ">{track.name}</span>
+        <span className="font-normal">
           {track.artists[0].name}
         </span>
-        <span className="flex justify-end font-normal text-slate-500">
+        <span className="flex justify-end font-normal">
           {millisToMinutesAndSeconds(track.duration_ms)}
         </span>
       </div>

@@ -8,25 +8,26 @@ import { signOut } from 'next-auth/react'
 
 const Nav = ({ handleSubmit, trackTitle, setTrackTitle }: Props) => {
   return (
-    <div className='flex flex-row gap-3'>
-      <button
-        type="button"
-        onClick={() => signOut()}
-        className="focus:ring-green inline-flex items-center rounded-md border border-green-300 bg-white px-4 py-2 text-sm  font-medium text-green-500 ring-green-300 transition hover:bg-green-50 hover:text-green-500 focus:border-green-500 focus:outline-none focus:ring active:bg-green-100 active:text-green-500"
-      >
-        Logout
-      </button>
-
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Track..."
-          onChange={(e) => setTrackTitle(e.target.value)}
-          value={trackTitle}
-          className="w-72 rounded-md border bg-white p-2 text-slate-800 ring-slate-300 transition placeholder:text-slate-500 hover:bg-slate-50 focus:border-slate-500 focus:outline-none focus:ring active:bg-slate-200"
-          autoComplete="off"
-        />
-      </form>
+    <div className='flex ml-3 justify-start'>
+      <div className="flex flex-row gap-3 justify-between">
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Track..."
+            onChange={(e) => setTrackTitle(e.target.value)}
+            value={trackTitle}
+            className="w-96 flex-1 appearance-none rounded-lg border border-transparent border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600"
+            autoComplete="off"
+          />
+        </form>
+        <button
+          type="button"
+          onClick={() => signOut()}
+          className="w-full rounded-lg bg-blue-600 py-2 px-4 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2  focus:ring-offset-blue-200 "
+        >
+          Logout
+        </button>
+      </div>
     </div>
   )
 }
