@@ -4,9 +4,9 @@ import Nav from '../components/Nav'
 import { useSession } from 'next-auth/react'
 import SpotifyWebApi from 'spotify-web-api-node'
 import Sidebar from '../components/Sidebar'
-import UserInfo from '../components/UserInfo'
 import Discover from '../components/Discover'
 import CurrentPlaying from '../components/CurrentPlaying'
+import UserInfo from '../components/UserInfo'
 
 const Home = () => {
   const spotifyApi = new SpotifyWebApi({
@@ -65,24 +65,26 @@ const Home = () => {
   //useEffect(() => getTracks(), [trackTitle])
 
   return (
-    <div className="flex flex-row gap-3">
-      <Sidebar />
-      <div className="mt-3 flex flex-col gap-3">
-        <Nav
-          trackTitle={trackTitle}
-          setTrackTitle={setTrackTitle}
-          handleSubmit={handleSubmit}
-        />
-        <Tracks tracks={tracks} />
-        <Discover spotifyApi={spotifyApi} />
-      </div>
-      <CurrentPlaying spotifyApi={spotifyApi} />
-      <div className="mt-3 flex w-full items-start justify-end">
+    <div>
+      <div className="flex flex-row gap-3">
+        <Sidebar />
+        <div className="mt-3 flex flex-col gap-3">
+          <Nav
+            trackTitle={trackTitle}
+            setTrackTitle={setTrackTitle}
+            handleSubmit={handleSubmit}
+            me={me}
+          />
+          <CurrentPlaying spotifyApi={spotifyApi} />
+          <Tracks tracks={tracks} />
+          {tracks.length == 0 ? <Discover spotifyApi={spotifyApi} /> : null}
+        </div>
         <UserInfo
           userName={me.display_name}
           userImage={me.images ? me.images[0].url : null}
         />
       </div>
+      <div className="mt-3 flex w-full items-start justify-end"></div>
     </div>
   )
 }

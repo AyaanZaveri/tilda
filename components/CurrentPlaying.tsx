@@ -6,8 +6,7 @@ const CurrentPlaying = ({ spotifyApi }) => {
 
   spotifyApi.getMyCurrentPlayingTrack().then(
     function (data) {
-      console.log('Now playing: ' + data.body.item.name)
-      data.body.item ? setCurrentTrack(data.body.item.name) : null
+      data.body ? setCurrentTrack(data.body.item.name) : ''
     },
     function (err) {
       console.log('Something went wrong!', err)
@@ -15,8 +14,8 @@ const CurrentPlaying = ({ spotifyApi }) => {
   )
 
   return (
-    <div>
-      <span className='text-white'>Currently playing {currentTrack}</span>
+    <div className='w-full bg-white flex justify-end'>
+      <span className='text-black'>Currently playing {currentTrack}</span>
     </div>
   )
 }
