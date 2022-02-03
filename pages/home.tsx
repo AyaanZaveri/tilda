@@ -6,6 +6,7 @@ import SpotifyWebApi from 'spotify-web-api-node'
 import Sidebar from '../components/Sidebar'
 import UserInfo from '../components/UserInfo'
 import Discover from '../components/Discover'
+import CurrentPlaying from '../components/CurrentPlaying'
 
 const Home = () => {
   const spotifyApi = new SpotifyWebApi({
@@ -75,6 +76,7 @@ const Home = () => {
         <Tracks tracks={tracks} />
         <Discover spotifyApi={spotifyApi} />
       </div>
+      <CurrentPlaying spotifyApi={spotifyApi} />
       <div className="mt-3 flex w-full items-start justify-end">
         <UserInfo
           userName={me.display_name}
