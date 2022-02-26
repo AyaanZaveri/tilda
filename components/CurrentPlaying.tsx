@@ -27,6 +27,14 @@ const CurrentPlaying = ({ spotifyApi }) => {
     )
   }
 
+  spotifyApi.getMyDevices()
+  .then(function(data) {
+    let availableDevices = data.body.devices;
+    console.log(availableDevices);
+  }, function(err) {
+    console.log('Something went wrong!', err);
+  });
+
   useEffect(() => {
     setInterval(() => {
       getCurrentTrack()
@@ -52,11 +60,6 @@ const CurrentPlaying = ({ spotifyApi }) => {
               <span className="text-sm font-light text-white">
                 {currentTrack?.artists.map((artist) => artist.name).join(', ')}
               </span>
-            </div>
-            <div className='flex justify-center items-center'>
-              <button>Previous</button>
-              <button>Pause/Play</button>
-              <button>Next</button>
             </div>
           </div>
         </div>
