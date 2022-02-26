@@ -75,16 +75,18 @@ const Home = () => {
             handleSubmit={handleSubmit}
             me={me}
           />
-          <CurrentPlaying spotifyApi={spotifyApi} />
+
           <Tracks tracks={tracks} />
           {tracks.length == 0 ? <Discover spotifyApi={spotifyApi} /> : null}
         </div>
-        <UserInfo
+        {/* <UserInfo
           userName={me.display_name}
           userImage={me.images ? me.images[0].url : null}
-        />
+        /> */}
       </div>
-      <div className="mt-3 flex w-full items-start justify-end"></div>
+      <div className="mt-3 flex w-full items-start justify-end">
+        <CurrentPlaying spotifyApi={spotifyApi} />
+      </div>
     </div>
   )
 }
