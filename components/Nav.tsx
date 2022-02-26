@@ -6,10 +6,12 @@ interface Props {
   me: any
 }
 import { signOut } from 'next-auth/react'
+import UserInfo from './UserInfo'
 
 const Nav = ({ handleSubmit, trackTitle, setTrackTitle, me }: Props) => {
+  console.log(me)
   return (
-    <div className="flex flex-row w-full ml-3 space-x-3">
+    <div className="ml-3 flex w-full flex-row items-center space-x-3">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -27,6 +29,9 @@ const Nav = ({ handleSubmit, trackTitle, setTrackTitle, me }: Props) => {
       >
         Logout
       </button>
+      <div>
+        <UserInfo userImage={me.images ? me.images[0].url : null} userName={me.display_name ? me.display_name : null} />
+      </div>
     </div>
   )
 }

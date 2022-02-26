@@ -36,18 +36,31 @@ const CurrentPlaying = ({ spotifyApi }) => {
   console.log(currentTrack)
 
   return (
-    <div className="fixed bottom-0 w-full border-t border-gray-800 bg-slate-900 p-5">
-      <div className="flex flex-row items-center gap-3">
-        <img
-          className="w-14 rounded-lg"
-          src={currentTrack?.album.images[0].url}
-          alt=""
-        />
-        <div className='flex flex-col'>
-          <span className="text-white">{currentTrack?.name}</span>
-          <span className="text-white text-sm font-light">{currentTrack?.artists.map(artist => artist.name).join(", ")}</span>
+    <div>
+      {currentTrack ? (
+        <div className="fixed bottom-0 w-full border-t border-gray-800 bg-slate-900 p-5">
+          <div className="flex flex-row items-center gap-3">
+            <img
+              className="w-14 rounded-md"
+              src={currentTrack?.album.images[0].url}
+              alt=""
+            />
+            <div className="flex flex-col">
+              <span className="font-medium text-white">
+                {currentTrack?.name}
+              </span>
+              <span className="text-sm font-light text-white">
+                {currentTrack?.artists.map((artist) => artist.name).join(', ')}
+              </span>
+            </div>
+            <div className='flex justify-center items-center'>
+              <button>Previous</button>
+              <button>Pause/Play</button>
+              <button>Next</button>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : null}
     </div>
   )
 }
