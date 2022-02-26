@@ -27,21 +27,11 @@ const CurrentPlaying = ({ spotifyApi }) => {
     )
   }
 
-  spotifyApi.getMyDevices()
-  .then(function(data) {
-    let availableDevices = data.body.devices;
-    console.log(availableDevices);
-  }, function(err) {
-    console.log('Something went wrong!', err);
-  });
-
   useEffect(() => {
     setInterval(() => {
       getCurrentTrack()
-    }, 2000)
+    }, 5000)
   }, [])
-
-  console.log(currentTrack)
 
   return (
     <div>
@@ -57,9 +47,15 @@ const CurrentPlaying = ({ spotifyApi }) => {
               <span className="font-medium text-white">
                 {currentTrack?.name}
               </span>
-              <span className="text-sm font-light text-white">
-                {currentTrack?.artists.map((artist) => artist.name).join(', ')}
-              </span>
+
+              <div className='inline-flex items-start'>
+                {currentTrack?.artists.map((artist, idx) => ([
+                  idx > 0 ? <span className='text-white font-light text-sm'>,&nbsp;</span> : '',
+                  <span className="text-sm font-light text-white">
+                    {artist.name}
+                  </span>
+                ]))}
+              </div>
             </div>
           </div>
         </div>
