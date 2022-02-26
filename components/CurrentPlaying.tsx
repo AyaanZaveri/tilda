@@ -28,10 +28,10 @@ const CurrentPlaying = ({ spotifyApi }) => {
   }
 
   useEffect(() => {
-    setInterval(() => {
-      getCurrentTrack()
-    }, 5000)
+    getCurrentTrack()
   }, [])
+
+  console.log(currentTrack)
 
   return (
     <div>
@@ -48,13 +48,19 @@ const CurrentPlaying = ({ spotifyApi }) => {
                 {currentTrack?.name}
               </span>
 
-              <div className='inline-flex items-start'>
-                {currentTrack?.artists.map((artist, idx) => ([
-                  idx > 0 ? <span className='text-white font-light text-sm'>,&nbsp;</span> : '',
-                  <span className="text-sm font-light text-white">
+              <div className="inline-flex items-start">
+                {currentTrack?.artists.map((artist, idx) => [
+                  idx > 0 ? (
+                    <span className="text-sm font-light text-white">
+                      ,&nbsp;
+                    </span>
+                  ) : (
+                    ''
+                  ),
+                  <span className="text-sm font-light text-white transition-all hover:cursor-pointer hover:underline">
                     {artist.name}
-                  </span>
-                ]))}
+                  </span>,
+                ])}
               </div>
             </div>
           </div>
