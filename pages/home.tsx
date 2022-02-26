@@ -66,26 +66,26 @@ const Home = () => {
 
   return (
     <div>
-      <div className="flex flex-row gap-3">
+      <div className="flex flex-row">
         <Sidebar />
         <div className="mt-3 flex flex-col gap-3">
-          <Nav
-            trackTitle={trackTitle}
-            setTrackTitle={setTrackTitle}
-            handleSubmit={handleSubmit}
-            me={me}
-          />
+          <div className='flex flex-col ml-3 gap-3'>
+            <Nav
+              trackTitle={trackTitle}
+              setTrackTitle={setTrackTitle}
+              handleSubmit={handleSubmit}
+              me={me}
+            />
 
-          <Tracks tracks={tracks} />
-          {tracks.length == 0 ? <Discover spotifyApi={spotifyApi} /> : null}
+            <Tracks tracks={tracks} />
+            {tracks.length == 0 ? <Discover spotifyApi={spotifyApi} /> : null}
+          </div>
+          <CurrentPlaying spotifyApi={spotifyApi} />
         </div>
         {/* <UserInfo
           userName={me.display_name}
           userImage={me.images ? me.images[0].url : null}
         /> */}
-      </div>
-      <div className="mt-3 flex w-full items-start justify-end">
-        <CurrentPlaying spotifyApi={spotifyApi} />
       </div>
     </div>
   )
