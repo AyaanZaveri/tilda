@@ -25,21 +25,23 @@ const Discover = ({ spotifyApi, name }: any) => {
   return (
     <div className="ml-3 flex flex-col gap-5">
       <div className="inline-flex items-center gap-2 text-4xl font-bold text-slate-100">
-        Welcome Back, {name}!
+        Welcome Back, {name} 👋
       </div>
       <div className="flex flex-row flex-wrap gap-3">
         {playlists.map((playlist: any) => (
-          <div className="flex h-48 w-48 flex-col gap-3 rounded-lg bg-slate-500">
+          <div
+            className={`flex h-48 w-48 flex-col justify-end gap-3 rounded-lg`}
+          >
             <img
               src={playlist.images[0] ? playlist.images[0]?.url : null}
               alt=""
               className={`absolute h-[12rem] w-[12rem] rounded-lg ${
                 playlist.images[0]
                   ? ''
-                  : 'bg-gradient-to-r from-cyan-500 to-blue-500'
+                  : 'bg-gradient-to-tr from-cyan-500 via-sky-500 to-blue-500'
               }`}
             />
-            <span className="z-10 inline-flex h-full w-full items-end justify-center rounded-lg bg-gradient-to-t from-slate-700 p-3 font-bold text-white">
+            <span className="inline-flex z-10 w-full h-full items-end justify-center rounded-lg bg-gradient-to-t from-slate-700 p-3 text-center font-bold text-white">
               {playlist.name}
             </span>
           </div>

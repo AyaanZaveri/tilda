@@ -51,7 +51,7 @@ const CurrentPlaying = ({ spotifyApi }) => {
             </a>
             <div className="flex flex-col">
               <span className="font-medium text-white hover:cursor-pointer hover:underline">
-                <a href={`/artist/${currentTrack.album.id}`}>
+                <a href={`/album/${currentTrack.album.id}`}>
                   {currentTrack?.name}
                 </a>
               </span>
