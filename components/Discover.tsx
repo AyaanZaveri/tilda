@@ -3,7 +3,6 @@ import { IconCompass } from '@tabler/icons'
 
 const Discover = ({ spotifyApi, name }: any) => {
   const [playlists, setPlaylists] = useState<any>([])
-  const [requestCount, setRequestCount] = useState<number>(0)
 
   const getPlaylists = () => {
     spotifyApi.getUserPlaylists('vrmatmz7epknohvbr7clthcnu').then(
@@ -18,11 +17,9 @@ const Discover = ({ spotifyApi, name }: any) => {
 
   useEffect(() => {
     setTimeout(() => {
-      setRequestCount(requestCount + 1)
       getPlaylists()
     }, 1000)
-    console.log(requestCount)
-  }, [requestCount])
+  }, [])
 
   // playlists.map((playlist: any) => console.log(playlist.images[0]?.url))
 
@@ -37,6 +34,9 @@ const Discover = ({ spotifyApi, name }: any) => {
             className={`flex h-48 w-48 flex-col justify-end gap-3 rounded-lg`}
             key={playlist.id}
           >
+            <span className="z-10 inline-flex h-full w-full items-end justify-center rounded-lg bg-gradient-to-t from-slate-700 p-3 text-center font-bold text-white">
+              {playlist.name}
+            </span>
             {playlist.images[0] ? (
               <img
                 src={playlist.images[0] ? playlist.images[0]?.url : null}
@@ -45,12 +45,9 @@ const Discover = ({ spotifyApi, name }: any) => {
               />
             ) : (
               <div
-                className={`absolute h-[12rem] w-[12rem] rounded-lg bg-gradient-to-tr from-cyan-400 to-blue-500`}
+                className={`absolute h-[12rem] w-[12rem] rounded-lg bg-gradient-to-tr from-cyan-400 to-blue-500 hover:bg-gradient-to-br transition-all`}
               />
             )}
-            <span className="z-10 inline-flex h-full w-full items-end justify-center rounded-lg bg-gradient-to-t from-slate-700 p-3 text-center font-bold text-white">
-              {playlist.name}
-            </span>
           </div>
         ))}
       </div>
