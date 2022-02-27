@@ -8,7 +8,7 @@ interface Props {
 
 const UserInfo = ({ userName, userImage }: Props) => {
   return (
-    <div className="m-3">
+    <div className="">
       <button
         className="flex items-center gap-2 rounded-full bg-slate-800 p-0.5"
         type="button"

@@ -19,7 +19,7 @@ const CurrentPlaying = ({ spotifyApi }) => {
   const [currentTrack, setCurrentTrack] = useState<CurrentlyPlaying>()
 
   const getCurrentTrack = () => {
-    spotifyApi!.getMyCurrentPlayingTrack().then(
+    spotifyApi.getMyCurrentPlayingTrack().then(
       function (data) {
         data.body ? setCurrentTrack(data.body.item) : ''
       },
@@ -33,9 +33,9 @@ const CurrentPlaying = ({ spotifyApi }) => {
     setTimeout(() => {
       getCurrentTrack()
     }, 1000)
-  }, [])
+  })
 
-  console.log(currentTrack)
+  // console.log(currentTrack)
 
   return (
     <div>
@@ -50,8 +50,10 @@ const CurrentPlaying = ({ spotifyApi }) => {
               />
             </a>
             <div className="flex flex-col">
-              <span className="font-medium text-white hover:underline hover:cursor-pointer">
-                <a href={`/artist/${currentTrack.album.id}`}>{currentTrack?.name}</a>
+              <span className="font-medium text-white hover:cursor-pointer hover:underline">
+                <a href={`/artist/${currentTrack.album.id}`}>
+                  {currentTrack?.name}
+                </a>
               </span>
 
               <div className="inline-flex items-start">
