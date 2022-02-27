@@ -30,12 +30,14 @@ const CurrentPlaying = ({ spotifyApi }) => {
   }
 
   useEffect(() => {
-    setTimeout(() => {
+    setInterval(() => {
       getCurrentTrack()
-    }, 2000)
-  })
+    }, 1000)
 
-  // console.log(currentTrack)
+    return () => {
+      clearInterval()
+    }
+  }, [])
 
   return (
     <div>
@@ -59,7 +61,7 @@ const CurrentPlaying = ({ spotifyApi }) => {
               <div className="inline-flex items-start">
                 {currentTrack?.artists.map((artist, idx) => [
                   idx > 0 ? (
-                    <span className="text-sm font-light text-white">
+                    <span key={idx} className="text-sm font-light text-white">
                       ,&nbsp;
                     </span>
                   ) : (

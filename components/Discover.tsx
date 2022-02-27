@@ -3,6 +3,7 @@ import { IconCompass } from '@tabler/icons'
 
 const Discover = ({ spotifyApi, name }: any) => {
   const [playlists, setPlaylists] = useState<any>([])
+  const [requestCount, setRequestCount] = useState<number>(0)
 
   const getPlaylists = () => {
     spotifyApi.getUserPlaylists('vrmatmz7epknohvbr7clthcnu').then(
@@ -16,11 +17,14 @@ const Discover = ({ spotifyApi, name }: any) => {
   }
 
   useEffect(() => {
-    getPlaylists()
-  }, [])
+    setTimeout(() => {
+      setRequestCount(requestCount + 1)
+      getPlaylists()
+    }, 1000)
+    console.log(requestCount)
+  }, [requestCount])
 
-  console.log(playlists)
-  playlists.map((playlist: any) => console.log(playlist.images[0]?.url))
+  // playlists.map((playlist: any) => console.log(playlist.images[0]?.url))
 
   return (
     <div className="ml-3 flex flex-col gap-5">
@@ -31,6 +35,7 @@ const Discover = ({ spotifyApi, name }: any) => {
         {playlists.map((playlist: any) => (
           <div
             className={`flex h-48 w-48 flex-col justify-end gap-3 rounded-lg`}
+            key={playlist.id}
           >
             {playlist.images[0] ? (
               <img
