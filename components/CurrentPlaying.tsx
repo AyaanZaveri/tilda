@@ -32,7 +32,7 @@ const CurrentPlaying = ({ spotifyApi }) => {
   useEffect(() => {
     setTimeout(() => {
       getCurrentTrack()
-    }, 3000)
+    }, 2000)
   })
 
   // console.log(currentTrack)
