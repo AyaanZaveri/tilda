@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { FaPlay, FaPause } from 'react-icons/fa'
-import useSound from 'use-sound'
-import SpotifyWebApi from 'spotify-web-api-node'
 
 interface Props {
   track: any

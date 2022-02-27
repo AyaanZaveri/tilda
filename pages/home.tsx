@@ -67,9 +67,11 @@ const Home = () => {
   return (
     <div>
       <div className="flex flex-row">
-        <Sidebar />
+        <div className='fixed'>
+          <Sidebar />
+        </div>
         <div className="mt-3 flex flex-col gap-3">
-          <div className='flex flex-col ml-3 gap-3'>
+          <div className="ml-72 flex flex-col gap-3">
             <Nav
               trackTitle={trackTitle}
               setTrackTitle={setTrackTitle}

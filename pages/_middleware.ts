@@ -2,13 +2,7 @@ import { getToken } from 'next-auth/jwt'
 import { NextResponse } from 'next/server'
 
 export async function middleware(req: any) {
-  const token = await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET!,
-    secureCookie:
-      process.env.NEXTAUTH_URL?.startsWith('https://') ??
-      !!process.env.VERCEL_URL,
-  })
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET! })
 
   // If the token is valid.
   if (req.nextUrl.pathname.includes('/api/auth') || token) {
