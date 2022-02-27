@@ -7,7 +7,7 @@ interface Props {
 
 const Tracks = ({ tracks }: Props) => {
   return (
-    <div className="flex w-[70vw] flex-row flex-wrap">
+    <div className='w-full'>
       {tracks.map((item: any) => (
         <Track track={item} />
       ))}

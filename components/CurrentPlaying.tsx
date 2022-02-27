@@ -32,7 +32,7 @@ const CurrentPlaying = ({ spotifyApi }) => {
   useEffect(() => {
     setTimeout(() => {
       getCurrentTrack()
-    }, 1000)
+    }, 3000)
   })
 
   // console.log(currentTrack)
@@ -40,7 +40,7 @@ const CurrentPlaying = ({ spotifyApi }) => {
   return (
     <div>
       {currentTrack ? (
-        <div className="fixed bottom-0 w-full border-t border-gray-800 bg-slate-900 bg-opacity-75 p-5 backdrop-blur">
+        <div className="fixed bottom-0 left-0 w-full border-t border-gray-800 bg-slate-900 bg-opacity-75 p-5 backdrop-blur">
           <div className="flex flex-row items-center gap-3">
             <a href={`/album/${currentTrack.album.id}`}>
               <img

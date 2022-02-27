@@ -18,8 +18,8 @@ const Track = ({ track }: Props) => {
 
   return (
     <div
-      key={track}
-      className="flex h-16 w-[70vw] flex-row items-center gap-3 rounded-md from-slate-50 to-slate-300 px-3 text-sm text-white shadow-sm transition hover:bg-gradient-to-br hover:text-slate-700"
+      key={track.id}
+      className="flex h-16 w-full flex-row items-center gap-3 rounded-md from-slate-50 to-slate-300 px-3 text-sm text-white shadow-sm transition hover:bg-gradient-to-br hover:text-slate-700"
     >
       <img
         className="w-[2.5rem] rounded-md"

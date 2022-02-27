@@ -11,7 +11,7 @@ import UserInfo from './UserInfo'
 const Nav = ({ handleSubmit, trackTitle, setTrackTitle, me }: Props) => {
   console.log(me)
   return (
-    <div className="ml-3 flex w-full flex-row items-center justify-between">
+    <div className="ml-3 flex flex-row items-center justify-between">
       <div className='flex flex-row gap-3'>
         <form onSubmit={handleSubmit}>
           <input
@@ -32,10 +32,10 @@ const Nav = ({ handleSubmit, trackTitle, setTrackTitle, me }: Props) => {
         </button>
       </div>
       <div>
-        <UserInfo
+        {/* <UserInfo
           userImage={me.images ? me.images[0].url : null}
           userName={me.display_name ? me.display_name : null}
-        />
+        /> */}
       </div>
     </div>
   )
