@@ -1,5 +1,7 @@
+import { HiHeart } from 'react-icons/hi'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import Head from 'next/head'
 
 interface CurrentlyPlaying {
   name: string
@@ -17,6 +19,7 @@ interface CurrentlyPlaying {
 
 const CurrentPlaying = ({ spotifyApi }) => {
   const [currentTrack, setCurrentTrack] = useState<CurrentlyPlaying>()
+  const [favorited, setFavorited] = useState<boolean>(false)
 
   const getCurrentTrack = () => {
     spotifyApi.getMyCurrentPlayingTrack().then(
@@ -30,17 +33,39 @@ const CurrentPlaying = ({ spotifyApi }) => {
   }
 
   useEffect(() => {
-    setInterval(() => {
+    const timer = setInterval(() => {
       getCurrentTrack()
     }, 1000)
-
-    return () => {
-      clearInterval()
-    }
+    return () => clearInterval(timer)
   }, [])
+  console.log(currentTrack)
+
+  const handleFavorite = () => {
+    if (favorited) {
+      localStorage.removeItem(currentTrack?.album.id.toString())
+      setFavorited(false)
+    } else {
+      localStorage.setItem(
+        currentTrack?.album.id.toString(),
+        currentTrack?.album.id.toString()
+      )
+      setFavorited(true)
+    }
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem(currentTrack?.album.id.toString())) {
+      setFavorited(true)
+    } else {
+      setFavorited(false)
+    }
+  })
 
   return (
     <div>
+      <Head>
+        <title>{currentTrack?.name}</title>
+      </Head>
       {currentTrack ? (
         <div className="fixed bottom-0 left-0 w-full border-t border-gray-800 bg-slate-900 bg-opacity-75 p-5 backdrop-blur">
           <div className="flex flex-row items-center gap-3">
@@ -52,11 +77,21 @@ const CurrentPlaying = ({ spotifyApi }) => {
               />
             </a>
             <div className="flex flex-col">
-              <span className="font-medium text-white hover:cursor-pointer hover:underline">
-                <a href={`/album/${currentTrack.album.id}`}>
-                  {currentTrack?.name}
-                </a>
-              </span>
+              <div className='inline-flex items-center'>
+                <span className="font-medium text-white hover:cursor-pointer hover:underline">
+                  <a href={`/album/${currentTrack.album.id}`}>
+                    {currentTrack?.name}
+                  </a>
+                </span>
+                <div
+                  onClick={handleFavorite}
+                  className={`rounded-lg ml-2 ${
+                    favorited ? 'text-rose-400' : 'text-slate-100'
+                  } backdrop-blur transition-colors delay-150 hover:cursor-pointer hover:text-rose-300`}
+                >
+                  <HiHeart className="h-5 w-5" />
+                </div>
+              </div>
 
               <div className="inline-flex items-start">
                 {currentTrack?.artists.map((artist, idx) => [

@@ -34,7 +34,7 @@ const Discover = ({ spotifyApi, name }: any) => {
             className={`flex h-48 w-48 flex-col justify-end gap-3 rounded-lg`}
             key={playlist.id}
           >
-            <span className="z-10 inline-flex h-full w-full items-end justify-center rounded-lg bg-gradient-to-t from-slate-700 p-3 text-center font-bold text-white">
+            <span className="z-10 inline-flex h-full w-full items-end justify-center rounded-lg bg-gradient-to-t from-slate-800 p-3 text-center font-bold text-white">
               {playlist.name}
             </span>
             {playlist.images[0] ? (
