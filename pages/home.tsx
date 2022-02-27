@@ -69,7 +69,7 @@ const Home = () => {
         <div className="fixed">
           <Sidebar />
         </div>
-        <div className="ml-72 mt-3 flex w-9/12 flex-col gap-3">          
+        <div className="ml-72 mt-5 flex w-9/12 flex-col gap-3">          
           <Nav
             trackTitle={trackTitle}
             setTrackTitle={setTrackTitle}
