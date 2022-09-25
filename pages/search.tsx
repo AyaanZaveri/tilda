@@ -24,8 +24,6 @@ const Search = () => {
     getTracksSearch();
   }, [query.q]);
 
-  console.log(tracksSearch);
-
   return (
     <div>
       <Navbar />

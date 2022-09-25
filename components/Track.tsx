@@ -1,3 +1,5 @@
+import axios from "axios";
+import { Router } from "next/router";
 import React, { useEffect, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { HiHeart } from "react-icons/hi";
@@ -8,6 +10,7 @@ interface Props {
 
 const Track = ({ track }: Props) => {
   const [playing, setPlaying] = useState<boolean>(false);
+  const [albumData, setAlbumData] = useState<any>();
 
   function millisToMinutesAndSeconds(millis: number) {
     var minutes = Math.floor(millis / 60000);
@@ -17,9 +20,25 @@ const Track = ({ track }: Props) => {
       : minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
   }
 
+  const getTracksSearch = () => {
+    axios
+      .get(`https://tilda-api.ayaanzaveri.repl.co/album/${track?.album?.id}`)
+      .then((res: any) => {
+        setAlbumData(res.data);
+      })
+      .catch((err: any) => console.log(err));
+  };
+
+  useEffect(() => {
+    getTracksSearch();
+  }, []);
+
+  console.log(albumData);
+
   return (
     <div
       key={track.videoId}
+      //   onClick={() => router.push(`/track/${}`)}
       className="flex h-16 w-full flex-row transition-all duration-300 items-center gap-3 rounded-md px-3 text-sm text-slate-700 hover:bg-indigo-50 hover:cursor-pointer"
     >
       <img
