@@ -49,7 +49,7 @@ const Navbar = () => {
     });
   }, []);
 
-  console.log(showSuggestions);
+  // console.log(showSuggestions);
 
   return (
     <div className="fixed w-full z-10">
