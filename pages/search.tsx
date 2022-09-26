@@ -62,7 +62,7 @@ const Search = () => {
     }
   }, [searchResults]);
 
-  // console.log(currentSong);
+  console.log(currentSong);
 
   return (
     <div>

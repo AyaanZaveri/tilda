@@ -35,9 +35,13 @@ const Track = ({ track, setCurrentSong }: Props) => {
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
-        .get(`https://pipedapi.esmailelbob.xyz/streams/${query}`)
+        .get(`https://pa.mint.lgbt/streams/${query}`)
         .then((res: any) => {
-          setCurrentSong(res?.data?.audioStreams[0]?.url);
+          setCurrentSong(
+            res?.data?.audioStreams.sort((a: any, b: any) =>
+              a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
+            )[0]?.url
+          );
         })
         .catch((err: any) => console.log(err));
     } else {
