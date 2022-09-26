@@ -7,7 +7,7 @@
 @tailwind utilities;
 
 html {
-  @apply h-full overflow-hidden;
+  @apply h-full overflow-hidden font-['Inter'];
 }
 
 body {
@@ -41,4 +41,40 @@ body {
   a {
     @apply underline text-orange-600 hover:text-orange-800 visited:text-orange-900 transition-all duration-300;
   }
+
+  audio::-webkit-media-controls-panel {
+    @apply bg-white;
+  }
+
+  audio::-webkit-media-controls-current-time-display {
+    @apply font-['Inter'];
+  }
+  /* 
+
+audio::-webkit-media-controls-mute-button
+
+audio::-webkit-media-controls-play-button
+
+audio::-webkit-media-controls-timeline-container
+
+
+audio::-webkit-media-controls-time-remaining-display
+
+audio::-webkit-media-controls-timeline
+
+audio::-webkit-media-controls-volume-slider-container
+
+audio::-webkit-media-controls-volume-slider
+
+audio::-webkit-media-controls-seek-back-button
+
+audio::-webkit-media-controls-seek-forward-button
+
+audio::-webkit-media-controls-fullscreen-button
+
+audio::-webkit-media-controls-rewind-button
+
+audio::-webkit-media-controls-return-to-realtime-button
+
+audio::-webkit-media-controls-toggle-closed-captions-button */
 }

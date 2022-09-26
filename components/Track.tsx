@@ -2,6 +2,7 @@ import axios from "axios";
 import { Router, useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
+import { MdExplicit } from "react-icons/md";
 import { HiHeart } from "react-icons/hi";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
@@ -35,7 +36,7 @@ const Track = ({ track, setCurrentSong }: Props) => {
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
-        .get(`https://pa.mint.lgbt/streams/${query}`)
+        .get(`https://pipedapi.esmailelbob.xyz/streams/${query}`)
         .then((res: any) => {
           setCurrentSong(
             res?.data?.audioStreams.sort((a: any, b: any) =>
@@ -79,8 +80,9 @@ const Track = ({ track, setCurrentSong }: Props) => {
             // onClick={() => console.log(track.preview_url)}
           />
         )} */}
-            <span className="font-semibold ">{track.title}</span>
-            {track.isExplicit ? <span>🅴</span> : null}
+            <span className="font-semibold inline-flex gap-1 items-center">
+              {track.title} {track.isExplicit ? <MdExplicit /> : null}
+            </span>
           </div>
           <div>
             <span className="font-normal">

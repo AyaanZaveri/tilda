@@ -82,8 +82,15 @@ const Search = () => {
             ))}
           </div>
         </div>
-        <ReactAudioPlayer className="fixed bottom-0 w-full rounded-none" src={currentSong} autoPlay controls />
-        
+        <div className="fixed bottom-0 w-full justify-center flex items-center border-t bg-white h-20">
+          <ReactAudioPlayer
+            className="w-full justify-center flex items-center font-['Inter']"
+            src={currentSong}
+            controlsList="nodownload noplaybackrate"
+            autoPlay
+            controls
+          />
+        </div>
       </div>
     </div>
   );
