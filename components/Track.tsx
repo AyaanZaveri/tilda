@@ -4,12 +4,14 @@ import React, { useEffect, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { HiHeart } from "react-icons/hi";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
+import { titleCase } from "title-case";
 
 interface Props {
   track: any;
+  setCurrentSong: any;
 }
 
-const Track = ({ track }: Props) => {
+const Track = ({ track, setCurrentSong }: Props) => {
   const [playing, setPlaying] = useState<boolean>(false);
   const [albumData, setAlbumData] = useState<any>();
 
@@ -26,15 +28,29 @@ const Track = ({ track }: Props) => {
     getAlbumData();
   }, []);
 
-  //   console.log(albumData);
+  // console.log(track?.videoId);
 
   const router = useRouter();
+
+  const getCurrentSong = (query: string) => {
+    if (query.length > 2) {
+      axios
+        .get(`https://pipedapi.esmailelbob.xyz/streams/${query}`)
+        .then((res: any) => {
+          setCurrentSong(res?.data?.audioStreams[0]?.url);
+        })
+        .catch((err: any) => console.log(err));
+    } else {
+      setCurrentSong("");
+    }
+  };
 
   return (
     <div
       key={track.videoId}
       onClick={() =>
-        router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
+        // router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
+        getCurrentSong(track.videoId)
       }
       className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-slate-700 hover:bg-indigo-50 active:bg-indigo-100 hover:cursor-pointer"
     >
@@ -46,8 +62,9 @@ const Track = ({ track }: Props) => {
             alt=""
           />
         </div>
-        <div className="flex flex-row items-center gap-3">
-          {/* {playing ? (
+        <div className="flex flex-col justify-center">
+          <div className="flex flex-row gap-3">
+            {/* {playing ? (
           <FaPause
           className="w-2 hover:cursor-pointer"
           onClick={() => setPlaying(!playing)}
@@ -58,9 +75,15 @@ const Track = ({ track }: Props) => {
             // onClick={() => console.log(track.preview_url)}
           />
         )} */}
-          <span className="font-semibold ">{track.title}</span>
-          {track.isExplicit ? <span>🅴</span> : null}
-          <span className="font-normal">{track.artists[0].name}</span>
+            <span className="font-semibold ">{track.title}</span>
+            {track.isExplicit ? <span>🅴</span> : null}
+          </div>
+          <div>
+            <span className="font-normal">
+              {titleCase(track?.resultType)} · {track?.artists[0]?.name} &nbsp;·{" "}
+              {track?.album?.name}
+            </span>
+          </div>
         </div>
       </div>
       <span className="flex font-medium">

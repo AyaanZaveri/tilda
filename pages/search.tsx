@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Track from "../components/Track";
+import ReactAudioPlayer from "react-audio-player";
 
 const Search = () => {
   const { query } = useRouter();
@@ -13,6 +14,7 @@ const Search = () => {
   const [artists, setArtists] = useState<any>([]);
   const [albums, setAlbums] = useState<any>([]);
   const [communityPlaylists, setCommunityPlaylists] = useState<any>([]);
+  const [currentSong, setCurrentSong] = useState("");
 
   const getSearchResults = () => {
     setTopResults([]);
@@ -60,7 +62,7 @@ const Search = () => {
     }
   }, [searchResults]);
 
-  console.log(songs);
+  // console.log(currentSong);
 
   return (
     <div>
@@ -72,10 +74,16 @@ const Search = () => {
               Tracks
             </span>
             {songs?.map((track: any, index: number) => (
-              <Track track={track} key={index} />
+              <Track
+                setCurrentSong={setCurrentSong}
+                track={track}
+                key={index}
+              />
             ))}
           </div>
         </div>
+        <ReactAudioPlayer className="fixed bottom-0 w-full rounded-none" src={currentSong} autoPlay controls />
+        
       </div>
     </div>
   );
