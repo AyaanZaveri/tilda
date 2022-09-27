@@ -17,6 +17,7 @@ import {
   HiVolumeUp,
 } from "react-icons/hi";
 import { MdExplicit } from "react-icons/md";
+import { apiUrl } from "../utils/apiUrl";
 
 const Search = () => {
   const { query } = useRouter();
@@ -41,7 +42,7 @@ const Search = () => {
 
     if (query.q) {
       axios
-        .get(`https://tilda-api.ayaanzaveri.repl.co/search/all/${query.q}`)
+        .get(`${apiUrl}/search/all/${query.q}`)
         .then((res: any) => {
           setSearchResults(res.data);
         })
@@ -137,7 +138,6 @@ const Search = () => {
                 <AudioPlayer
                   autoPlay
                   src={currentSong?.url}
-                  onPlay={(e) => console.log("onPlay")}
                   customIcons={{
                     forward: <HiFastForward />,
                     rewind: <HiRewind />,
