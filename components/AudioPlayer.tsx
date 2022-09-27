@@ -46,7 +46,11 @@ const AudioPlayer = ({ url }: { url: any }) => {
   };
 
   useEffect(() => {
-    audioPlayer.current.play();
+    if (url) {
+      setIsPlaying(true);
+      audioPlayer.current.play();
+      whilePlaying();
+    }
   }, [url]);
 
   const whilePlaying = () => {
@@ -69,7 +73,7 @@ const AudioPlayer = ({ url }: { url: any }) => {
   };
 
   return (
-    <div className={styles.audioPlayer}>
+    <div className={"flex flex-row justify-center items-center w-full"}>
       <audio ref={audioPlayer} src={url}></audio>
       <button
         onClick={togglePlayPause}
@@ -85,7 +89,7 @@ const AudioPlayer = ({ url }: { url: any }) => {
       <div>
         <input
           type="range"
-          className={"progressBar"}
+          className="progressBar"
           defaultValue="0"
           ref={progressBar}
           onChange={changeRange}
