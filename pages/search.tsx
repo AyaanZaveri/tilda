@@ -70,7 +70,7 @@ const Search = () => {
   return (
     <div>
       <Navbar />
-      <div className="pt-16">
+      <div className="pt-16 pb-8">
         <div className="flex justify-center pt-2">
           <div className="flex items-center flex-col gap-4 w-full">
             <div className="w-3/4 flex justify-center flex-col gap-2">
@@ -96,14 +96,7 @@ const Search = () => {
           </div>
         </div>
         {currentSong ? (
-          <div className="fixed bottom-0 w-full justify-center flex items-center border-t bg-white h-20">
-            {/* <ReactAudioPlayer
-            className="w-full bg-white/50 justify-center flex items-center font-['Inter'] plyr-react plyr"
-            src={currentSong}
-            controlsList="nodownload noplaybackrate"
-            autoPlay
-            controls
-          /> */}
+          <div className="fixed bottom-0 w-full justify-center flex items-center bg-white/75 backdrop-blur-md h-20">
             <AudioPlayer currentSong={currentSong} />
           </div>
         ) : null}
