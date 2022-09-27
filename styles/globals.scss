@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$rhap_theme-color: #6366f1 !default; // Color of all buttons and volume/progress indicators
+$rhap_font-family: "Inter", sans-serif !default; // Font family of current time and duration
+@import "react-h5-audio-player/src/styles.scss";
+
+html {
+  @apply h-full overflow-hidden font-['Inter'];
+}
+
+body {
+  @apply h-full overflow-auto;
+}
+
+.rhap_container {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+@layer utilities {
+  /* Scroll thumb styles */
+  .scrollbar::-webkit-scrollbar {
+    @apply w-[0.2rem];
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded-lg bg-slate-200;
+  }
+  .scrollbar::-webkit-scrollbar-thumb:active {
+    @apply bg-slate-300;
+  }
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-300;
+  }
+
+  /* Scroll track styles (Background) */
+  .scrollbar::-webkit-scrollbar-track {
+    @apply bg-slate-100;
+  }
+  .scrollbar::-webkit-scrollbar-track:hover,
+  .scrollbar::-webkit-scrollbar-track:active {
+    @apply bg-slate-100;
+  }
+}

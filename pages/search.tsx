@@ -3,10 +3,20 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Track from "../components/Track";
-import AudioPlayer from "../components/AudioPlayer";
+// import AudioPlayer from "../components/AudioPlayer";
 import Artist from "../components/Artist";
 import ReactAudioPlayer from "react-audio-player";
 import "plyr-react/plyr.css";
+import AudioPlayer from "react-h5-audio-player";
+import {
+  HiFastForward,
+  HiPause,
+  HiPlay,
+  HiRewind,
+  HiVolumeOff,
+  HiVolumeUp,
+} from "react-icons/hi";
+import { MdExplicit } from "react-icons/md";
 
 const Search = () => {
   const { query } = useRouter();
@@ -17,7 +27,10 @@ const Search = () => {
   const [artists, setArtists] = useState<any>([]);
   const [albums, setAlbums] = useState<any>([]);
   const [communityPlaylists, setCommunityPlaylists] = useState<any>([]);
-  const [currentSong, setCurrentSong] = useState<object>({});
+  const [currentSong, setCurrentSong] = useState<any>({
+    url: "",
+    track: "",
+  });
 
   const getSearchResults = () => {
     setTopResults([]);
@@ -69,7 +82,6 @@ const Search = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="pt-16 pb-8">
         <div className="flex justify-center pt-2">
           <div className="flex items-center flex-col gap-4 w-full">
@@ -95,9 +107,48 @@ const Search = () => {
             </div>
           </div>
         </div>
-        {currentSong ? (
+        {currentSong?.url?.length > 0 ? (
           <div className="fixed bottom-0 w-full justify-center flex items-center bg-white/75 backdrop-blur-md h-20">
-            <AudioPlayer currentSong={currentSong} />
+            {/* <AudioPlayer currentSong={currentSong} /> */}
+            <div className="flex flex-row gap-3 items-center text-sm text-slate-700 w-full justify-center">
+              <div className="absolute left-0 flex flex-row gap-3 pl-4">
+                <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all">
+                  <img
+                    className="w-[3rem] h-[3rem]"
+                    src={currentSong?.track?.thumbnails[1]?.url}
+                    alt=""
+                  />
+                </div>
+                <div className="flex flex-col justify-center">
+                  <div className="flex flex-row gap-3">
+                    <span className="font-semibold inline-flex gap-1 items-center">
+                      {currentSong?.track?.title}{" "}
+                      {currentSong?.track?.isExplicit ? <MdExplicit /> : null}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="font-normal">
+                      {currentSong?.track?.artists[0]?.name}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="w-1/3">
+                <AudioPlayer
+                  autoPlay
+                  src={currentSong?.url}
+                  onPlay={(e) => console.log("onPlay")}
+                  customIcons={{
+                    forward: <HiFastForward />,
+                    rewind: <HiRewind />,
+                    play: <HiPlay />,
+                    pause: <HiPause />,
+                    volume: <HiVolumeUp />,
+                    volumeMute: <HiVolumeOff />,
+                  }}
+                />
+              </div>
+            </div>
           </div>
         ) : null}
       </div>

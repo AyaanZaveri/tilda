@@ -36,7 +36,7 @@ const Track = ({ track, setCurrentSong }: Props) => {
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
-        .get(`https://pipedapi.esmailelbob.xyz/streams/${query}`)
+        .get(`https://pa.mint.lgbt/streams/${query}`)
         .then((res: any) => {
           setCurrentSong({
             url: res?.data?.audioStreams.sort((a: any, b: any) =>

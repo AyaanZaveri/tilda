@@ -110,7 +110,6 @@ const AudioPlayer = ({ currentSong }: { currentSong: any }) => {
           </button>
 
           <div className="currentTime">{calculateTime(currentTime)}</div>
-
           <div className="w-1/3 flex">
             <input
               type="range"
