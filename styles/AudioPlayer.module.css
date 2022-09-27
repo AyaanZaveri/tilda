@@ -1,0 +1,8 @@
+.audioPlayer {
+  --primary: #f40082;
+  --secondary: #ffd200;
+
+  align-items: center;
+  display: flex;
+  width: 700px;
+}

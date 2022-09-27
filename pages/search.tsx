@@ -3,7 +3,10 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Track from "../components/Track";
+import AudioPlayer from "../components/AudioPlayer";
+import Artist from "../components/Artist";
 import ReactAudioPlayer from "react-audio-player";
+import "plyr-react/plyr.css";
 
 const Search = () => {
   const { query } = useRouter();
@@ -14,7 +17,7 @@ const Search = () => {
   const [artists, setArtists] = useState<any>([]);
   const [albums, setAlbums] = useState<any>([]);
   const [communityPlaylists, setCommunityPlaylists] = useState<any>([]);
-  const [currentSong, setCurrentSong] = useState("");
+  const [currentSong, setCurrentSong] = useState<string>("");
 
   const getSearchResults = () => {
     setTopResults([]);
@@ -69,27 +72,38 @@ const Search = () => {
       <Navbar />
       <div className="pt-16">
         <div className="flex justify-center pt-2">
-          <div className="w-3/4 flex justify-center flex-col gap-2">
-            <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
-              Tracks
-            </span>
-            {songs?.map((track: any, index: number) => (
-              <Track
-                setCurrentSong={setCurrentSong}
-                track={track}
-                key={index}
-              />
-            ))}
+          <div className="flex items-center flex-col gap-4 w-full">
+            <div className="w-3/4 flex justify-center flex-col gap-2">
+              <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
+                Tracks
+              </span>
+              {songs?.map((track: any, index: number) => (
+                <Track
+                  setCurrentSong={setCurrentSong}
+                  track={track}
+                  key={index}
+                />
+              ))}
+            </div>
+            <div className="w-3/4 flex justify-center flex-col gap-2">
+              <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
+                Artists
+              </span>
+              {artists?.map((artist: any, index: number) => (
+                <Artist artist={artist} key={index} />
+              ))}
+            </div>
           </div>
         </div>
-        <div className="fixed bottom-0 w-full justify-center flex items-center border-t bg-white h-20">
-          <ReactAudioPlayer
-            className="w-full justify-center flex items-center font-['Inter']"
+        <div className="fixed bottom-0 w-full justify-center flex items-center border-t bg-white/50 h-20">
+          {/* <ReactAudioPlayer
+            className="w-full bg-white/50 justify-center flex items-center font-['Inter'] plyr-react plyr"
             src={currentSong}
             controlsList="nodownload noplaybackrate"
             autoPlay
             controls
-          />
+          /> */}
+          <AudioPlayer url={currentSong} />
         </div>
       </div>
     </div>
