@@ -17,7 +17,7 @@ const Search = () => {
   const [artists, setArtists] = useState<any>([]);
   const [albums, setAlbums] = useState<any>([]);
   const [communityPlaylists, setCommunityPlaylists] = useState<any>([]);
-  const [currentSong, setCurrentSong] = useState<string>("");
+  const [currentSong, setCurrentSong] = useState<object>({});
 
   const getSearchResults = () => {
     setTopResults([]);
@@ -104,7 +104,7 @@ const Search = () => {
             autoPlay
             controls
           /> */}
-            <AudioPlayer url={currentSong} />
+            <AudioPlayer currentSong={currentSong} />
           </div>
         ) : null}
       </div>

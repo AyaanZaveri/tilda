@@ -38,15 +38,19 @@ const Track = ({ track, setCurrentSong }: Props) => {
       axios
         .get(`https://pipedapi.esmailelbob.xyz/streams/${query}`)
         .then((res: any) => {
-          setCurrentSong(
-            res?.data?.audioStreams.sort((a: any, b: any) =>
+          setCurrentSong({
+            url: res?.data?.audioStreams.sort((a: any, b: any) =>
               a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
-            )[0]?.url
-          );
+            )[0]?.url,
+            track: track,
+          });
         })
         .catch((err: any) => console.log(err));
     } else {
-      setCurrentSong("");
+      setCurrentSong({
+        url: "",
+        track: "",
+      });
     }
   };
 

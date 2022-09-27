@@ -4,7 +4,7 @@ import { BsArrowLeftShort } from "react-icons/bs";
 import { BsArrowRightShort } from "react-icons/bs";
 import { PlayIcon, PauseIcon } from "@heroicons/react/24/solid";
 
-const AudioPlayer = ({ url }: { url: any }) => {
+const AudioPlayer = ({ currentSong }: { currentSong: any }) => {
   // state
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -22,7 +22,7 @@ const AudioPlayer = ({ url }: { url: any }) => {
   }, [
     audioPlayer?.current?.loadedmetadata,
     audioPlayer?.current?.readyState,
-    url,
+    currentSong,
   ]);
 
   const calculateTime = (secs: number) => {
@@ -46,12 +46,12 @@ const AudioPlayer = ({ url }: { url: any }) => {
   };
 
   useEffect(() => {
-    if (url) {
+    if (currentSong) {
       setIsPlaying(true);
       audioPlayer.current.play();
       whilePlaying();
     }
-  }, [url]);
+  }, [currentSong]);
 
   const whilePlaying = () => {
     progressBar.current.value = audioPlayer.current.currentTime;
@@ -74,7 +74,7 @@ const AudioPlayer = ({ url }: { url: any }) => {
 
   return (
     <div className={"flex flex-row justify-center items-center w-full first-letter p-8"}>
-      <audio ref={audioPlayer} src={url}></audio>
+      <audio ref={audioPlayer} src={currentSong?.url}></audio>
       <button
         onClick={togglePlayPause}
         className="bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 transition-all ease-in-out duration-300 w-14 h-max p-3 flex justify-center items-center text-white rounded-full"
