@@ -73,11 +73,11 @@ const AudioPlayer = ({ url }: { url: any }) => {
   };
 
   return (
-    <div className={"flex flex-row justify-center items-center w-full"}>
+    <div className={"flex flex-row justify-center items-center w-full first-letter p-8"}>
       <audio ref={audioPlayer} src={url}></audio>
       <button
         onClick={togglePlayPause}
-        className="bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 transition-all ease-in-out duration-300 w-10 h-10 p-2 flex justify-center items-center text-white rounded-full"
+        className="bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 transition-all ease-in-out duration-300 w-14 h-max p-3 flex justify-center items-center text-white rounded-full"
       >
         {isPlaying ? <PauseIcon /> : <PlayIcon />}
       </button>
@@ -86,7 +86,7 @@ const AudioPlayer = ({ url }: { url: any }) => {
       <div className="currentTime">{calculateTime(currentTime)}</div>
 
       {/* progress bar */}
-      <div>
+      <div className="w-full flex">
         <input
           type="range"
           className="progressBar"

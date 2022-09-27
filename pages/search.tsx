@@ -95,16 +95,18 @@ const Search = () => {
             </div>
           </div>
         </div>
-        <div className="fixed bottom-0 w-full justify-center flex items-center border-t bg-white/50 h-20">
-          {/* <ReactAudioPlayer
+        {currentSong ? (
+          <div className="fixed bottom-0 w-full justify-center flex items-center border-t bg-white h-20">
+            {/* <ReactAudioPlayer
             className="w-full bg-white/50 justify-center flex items-center font-['Inter'] plyr-react plyr"
             src={currentSong}
             controlsList="nodownload noplaybackrate"
             autoPlay
             controls
           /> */}
-          <AudioPlayer url={currentSong} />
-        </div>
+            <AudioPlayer url={currentSong} />
+          </div>
+        ) : null}
       </div>
     </div>
   );

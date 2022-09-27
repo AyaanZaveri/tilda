@@ -44,43 +44,43 @@ body {
 
   .progressBar {
     --seek-before-width: 0;
-    @apply bg-indigo-100 appearance-none rounded-md relative w-full h-2 outline-none;
+    @apply bg-indigo-100 appearance-none rounded-md relative w-full h-1 outline-none;
   }
 
   /* progress bar - safari */
   .progressBar::-webkit-slider-runnable-track {
-    @apply bg-indigo-100 appearance-none rounded-md relative w-full h-2 outline-none mb-1;
+    @apply bg-indigo-100 appearance-none rounded-md relative w-full h-1 outline-none;
   }
 
   /* progress bar - firefox */
   .progressBar::-moz-range-track {
-    @apply bg-indigo-100 appearance-none rounded-md relative w-full h-2 outline-none;
+    @apply bg-indigo-100 appearance-none rounded-md relative w-full h-1 outline-none;
   }
 
   /* progress bar - chrome and safari */
   .progressBar::before {
     width: var(--seek-before-width);
-    @apply bg-indigo-300 cursor-pointer z-10 left-0 top-0 absolute rounded-bl-md rounded-tl-md h-3;
+    @apply bg-indigo-300 cursor-pointer z-10 left-0 top-0 absolute rounded-bl-md rounded-tl-md h-2;
   }
 
   /* progress bar - firefox */
   .progressBar::-moz-range-progress {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    height: 11px;
-    @apply bg-indigo-300;
+    height: 10px;
+    @apply bg-indigo-300 w-full;
   }
 
   /* knobby - chrome and safari */
   .progressBar::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 15px;
-    width: 15px;
+    height: 10px;
+    width: 10px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
     position: relative;
-    margin: -2px 0 0 0;
+    margin: -3px 0 0 0;
     z-index: 3;
     box-sizing: border-box;
     @apply bg-indigo-600;
