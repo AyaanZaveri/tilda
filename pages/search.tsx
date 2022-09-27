@@ -133,7 +133,7 @@ const Search = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-1/3">
+              <div className="w-2/5">
                 <AudioPlayer
                   autoPlay
                   src={currentSong?.url}
