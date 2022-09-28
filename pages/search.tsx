@@ -18,6 +18,7 @@ import {
 } from "react-icons/hi";
 import { MdExplicit } from "react-icons/md";
 import { apiUrl } from "../utils/apiUrl";
+import Album from "../components/Album";
 
 const Search = () => {
   const { query } = useRouter();
@@ -104,6 +105,14 @@ const Search = () => {
               </span>
               {artists?.map((artist: any, index: number) => (
                 <Artist artist={artist} key={index} />
+              ))}
+            </div>
+            <div className="w-3/4 flex justify-center flex-col gap-2">
+              <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
+                Albums
+              </span>
+              {albums?.map((album: any, index: number) => (
+                <Album album={album} key={index} />
               ))}
             </div>
           </div>
