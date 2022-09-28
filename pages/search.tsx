@@ -42,6 +42,7 @@ const Search = () => {
     setTopResults([]);
     setSongs([]);
     setArtists([]);
+    setVideos([]);
     setAlbums([]);
     setCommunityPlaylists([]);
 
@@ -156,7 +157,7 @@ const Search = () => {
                 <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all">
                   <img
                     className="w-[3rem] h-[3rem]"
-                    src={currentSong?.track?.thumbnails[1]?.url}
+                    src={currentSong?.track?.thumbnails[0]?.url}
                     alt=""
                   />
                 </div>
