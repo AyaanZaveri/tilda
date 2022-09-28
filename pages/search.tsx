@@ -21,6 +21,7 @@ import { apiUrl } from "../utils/apiUrl";
 import Album from "../components/Album";
 import Video from "../components/Video";
 import Marquee from "react-fast-marquee";
+import TopResult from "../components/TopResult";
 
 const Search = () => {
   const { query } = useRouter();
@@ -94,6 +95,18 @@ const Search = () => {
         <div className="flex justify-center pt-2">
           <div className="flex items-center flex-col gap-4 w-full pb-16">
             <div className="w-3/4 flex justify-center flex-col gap-2">
+              <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-full">
+                Top Result
+              </span>
+              {topResults?.map((result: any, index: number) => (
+                <TopResult
+                  result={result}
+                  key={index}
+                  setCurrentSong={setCurrentSong}
+                />
+              ))}
+            </div>
+            <div className="w-3/4 flex justify-center flex-col gap-2">
               <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
                 Tracks
               </span>
@@ -118,7 +131,11 @@ const Search = () => {
                 Videos
               </span>
               {videos?.map((video: any, index: number) => (
-                <Video video={video} key={index} />
+                <Video
+                  video={video}
+                  key={index}
+                  setCurrentSong={setCurrentSong}
+                />
               ))}
             </div>
             <div className="w-3/4 flex justify-center flex-col gap-2">

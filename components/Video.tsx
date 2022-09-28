@@ -10,23 +10,42 @@ import { apiUrl } from "../utils/apiUrl";
 
 interface Props {
   video: any;
+  setCurrentSong: any;
 }
 
-const Video = ({ video }: Props) => {
+const Video = ({ video, setCurrentSong }: Props) => {
   const router = useRouter();
+
+  const getCurrentSong = (query: string) => {
+    if (query.length > 2) {
+      axios
+        .get(`https://pa.mint.lgbt/streams/${query}`)
+        .then((res: any) => {
+          setCurrentSong({
+            url: res?.data?.audioStreams.sort((a: any, b: any) =>
+              a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
+            )[0]?.url,
+            track: video,
+          });
+        })
+        .catch((err: any) => console.log(err));
+    } else {
+      setCurrentSong({
+        url: "",
+        track: "",
+      });
+    }
+  };
 
   return (
     <div
       key={video.videoId}
       className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-slate-700 hover:bg-indigo-50 active:bg-indigo-100 hover:cursor-pointer"
+      onClick={() => getCurrentSong(video.videoId)}
     >
       <div className="flex flex-row gap-3">
         <div className="relative flex justify-center items-center overflow-hidden group transition-all bg-slate-900 rounded-md">
-          <img
-            className="w-12 h-auto"
-            src={video?.thumbnails[0]?.url}
-            alt=""
-          />
+          <img className="w-12 h-auto" src={video?.thumbnails[0]?.url} alt="" />
         </div>
         <div className="flex flex-col justify-center">
           <div className="flex flex-row gap-3">
