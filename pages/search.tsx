@@ -20,6 +20,7 @@ import { MdExplicit } from "react-icons/md";
 import { apiUrl } from "../utils/apiUrl";
 import Album from "../components/Album";
 import Video from "../components/Video";
+import Marquee from "react-fast-marquee";
 
 const Search = () => {
   const { query } = useRouter();
@@ -144,10 +145,12 @@ const Search = () => {
                 </div>
                 <div className="flex flex-col justify-center">
                   <div className="flex flex-row gap-3">
+                    {/* <Marquee gradient={false}> */}
                     <span className="font-semibold inline-flex gap-1 items-center">
                       {currentSong?.track?.title}{" "}
                       {currentSong?.track?.isExplicit ? <MdExplicit /> : null}
                     </span>
+                    {/* </Marquee> */}
                   </div>
                   <div>
                     <span className="font-normal">
@@ -167,6 +170,12 @@ const Search = () => {
                     pause: <HiPause />,
                     volume: <HiVolumeUp />,
                     volumeMute: <HiVolumeOff />,
+                    loop: (
+                      <img src="/icons/fluent_arrow-repeat-all-24-filled.svg" />
+                    ),
+                    loopOff: (
+                      <img src="/icons/fluent_arrow-repeat-all-off-24-filled.svg" />
+                    ),
                   }}
                 />
               </div>

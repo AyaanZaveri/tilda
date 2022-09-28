@@ -22,15 +22,40 @@ body {
 
 .rhap_time {
   font-size: 0.875rem;
-  color: #334155
+  color: #334155;
 }
 
 .rhap_main-controls-button {
-  color: #6366f1
+  color: #6366f1;
 }
 
 .rhap_stacked .rhap_controls-section {
   margin-top: 0px;
+}
+
+.rhap_progress-bar {
+  height: 4px;
+}
+
+.rhap_progress-indicator {
+  width: 12px;
+  height: 12px;
+  top: -4px;
+}
+
+.link_animated {
+  animation: backAndForth 5s linear infinite;
+}
+@keyframes backAndForth {
+  55% {
+    transform: translateX(calc(-100% + 200px));
+  }
+  90% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 @layer utilities {
