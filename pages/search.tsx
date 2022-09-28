@@ -19,6 +19,7 @@ import {
 import { MdExplicit } from "react-icons/md";
 import { apiUrl } from "../utils/apiUrl";
 import Album from "../components/Album";
+import Video from "../components/Video";
 
 const Search = () => {
   const { query } = useRouter();
@@ -26,8 +27,9 @@ const Search = () => {
   const [searchResults, setSearchResults] = useState<any>([]);
   const [topResults, setTopResults] = useState<any>([]);
   const [songs, setSongs] = useState<any>([]);
-  const [artists, setArtists] = useState<any>([]);
   const [albums, setAlbums] = useState<any>([]);
+  const [videos, setVideos] = useState<any>([]);
+  const [artists, setArtists] = useState<any>([]);
   const [communityPlaylists, setCommunityPlaylists] = useState<any>([]);
   const [currentSong, setCurrentSong] = useState<any>({
     url: "",
@@ -64,11 +66,14 @@ const Search = () => {
         if (result?.category == "Songs") {
           setSongs((oldSongs: any) => [...oldSongs, result]);
         }
-        if (result?.category == "Artists") {
-          setArtists((oldArists: any) => [...oldArists, result]);
-        }
         if (result?.category == "Albums") {
           setAlbums((oldAlbums: any) => [...oldAlbums, result]);
+        }
+        if (result?.category == "Videos") {
+          setVideos((oldVideos: any) => [...oldVideos, result]);
+        }
+        if (result?.category == "Artists") {
+          setArtists((oldArists: any) => [...oldArists, result]);
         }
         if (result?.category == "Community playlists") {
           setCommunityPlaylists((oldCommunityPlaylists: any) => [
@@ -101,18 +106,26 @@ const Search = () => {
             </div>
             <div className="w-3/4 flex justify-center flex-col gap-2">
               <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
-                Artists
-              </span>
-              {artists?.map((artist: any, index: number) => (
-                <Artist artist={artist} key={index} />
-              ))}
-            </div>
-            <div className="w-3/4 flex justify-center flex-col gap-2">
-              <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
                 Albums
               </span>
               {albums?.map((album: any, index: number) => (
                 <Album album={album} key={index} />
+              ))}
+            </div>
+            <div className="w-3/4 flex justify-center flex-col gap-2">
+              <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
+                Videos
+              </span>
+              {videos?.map((video: any, index: number) => (
+                <Video video={video} key={index} />
+              ))}
+            </div>
+            <div className="w-3/4 flex justify-center flex-col gap-2">
+              <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
+                Artists
+              </span>
+              {artists?.map((artist: any, index: number) => (
+                <Artist artist={artist} key={index} />
               ))}
             </div>
           </div>
