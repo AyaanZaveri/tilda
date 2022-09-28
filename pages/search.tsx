@@ -91,7 +91,7 @@ const Search = () => {
     <div>
       <div className="pt-16 pb-8">
         <div className="flex justify-center pt-2">
-          <div className="flex items-center flex-col gap-4 w-full">
+          <div className="flex items-center flex-col gap-4 w-full pb-16">
             <div className="w-3/4 flex justify-center flex-col gap-2">
               <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
                 Tracks
