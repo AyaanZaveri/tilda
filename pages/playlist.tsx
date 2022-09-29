@@ -2,6 +2,8 @@ import axios from "axios";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { MdExplicit } from "react-icons/md";
+import AlbumTrack from "../components/AlbumTrack";
 import Navbar from "../components/Navbar";
 
 const Home: NextPage = () => {
@@ -56,8 +58,8 @@ const Home: NextPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="pt-16">
-        <div className="pl-20 pt-14">
+      <div className="pt-16 pb-8">
+        <div className="px-20 pt-14">
           <div className="flex flex-row items-center gap-12">
             {albumData?.thumbnails ? (
               <img
@@ -70,13 +72,25 @@ const Home: NextPage = () => {
             ) : null}
             <div className="flex flex-col gap-4 text-slate-800">
               <span className="text-3xl font-bold">{albumData?.title}</span>
-              <div className="inline-flex gap-2">
-                <span>{isExplicit ? <span>🅴</span> : null}</span>
-                <span>
-                  {albumData?.type} · {albumData?.artists[0]?.name}
-                </span>
+              <div className="flex flex-col">
+                <div className="inline-flex gap-2 items-center">
+                  <span>{isExplicit ? <MdExplicit /> : null}</span>
+                  <span>
+                    {albumData?.type} · {albumData?.artists[0]?.name}
+                  </span>
+                </div>
+                <div className="inline-flex gap-2 items-center">
+                  <span className="text-indigo-600">
+                    {albumData?.trackCount} Songs · {albumData?.duration}
+                  </span>
+                </div>
               </div>
             </div>
+          </div>
+          <div className="mt-6">
+            {albumData?.tracks.map((track: any, index: number) => (
+              <AlbumTrack track={track} index={index} />
+            ))}
           </div>
         </div>
       </div>
