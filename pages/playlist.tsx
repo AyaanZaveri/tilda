@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { MdExplicit } from "react-icons/md";
+import { titleCase } from "title-case";
 import AlbumTrack from "../components/AlbumTrack";
 import Navbar from "../components/Navbar";
 
@@ -81,7 +82,10 @@ const Home: NextPage = () => {
                 </div>
                 <div className="inline-flex gap-2 items-center">
                   <span className="text-indigo-600">
-                    {albumData?.trackCount} Songs · {albumData?.duration}
+                    {albumData?.trackCount} Tracks ·{" "}
+                    {albumData?.duration
+                      ? titleCase(albumData?.duration)
+                      : null}
                   </span>
                 </div>
               </div>

@@ -14,9 +14,9 @@ const Navbar = () => {
   // console.log(search);
 
   const getSearchSuggestions = (query: string) => {
-    if (query.length > 2) {
+    if (query.length > 1) {
       axios
-        .get(`https://inv.riverside.rocks/api/v1/search/suggestions?q=${query}`)
+        .get(`https://pa.mint.lgbt/suggestions/?query=${query}`)
         .then((res: any) => {
           setSearchRes(res.data);
         })
@@ -79,21 +79,19 @@ const Navbar = () => {
         <div ref={searchSuggestionsRef} className={`w-6/12`}>
           {searchRes && showSuggestions ? (
             <div className="flex flex-col w-full py-2 gap-1 rounded-lg border border-slate-300 select-none bg-white shadow-sm shadow-slate-100 overflow-hidden">
-              {searchRes?.suggestions
-                ?.slice(0, 8)
-                ?.map((track: any, index: any) => (
-                  <div
-                    onClick={() => {
-                      setShowSuggestions(false);
-                      router.push(`/search?q=${track}`);
-                    }}
-                    key={index}
-                  >
-                    <span className="inline-flex w-full text-sm hover:bg-indigo-50 py-2 px-4 cursor-pointer transition active:bg-indigo-100">
-                      {track}
-                    </span>
-                  </div>
-                ))}
+              {searchRes?.slice(0, 8)?.map((track: any, index: any) => (
+                <div
+                  onClick={() => {
+                    setShowSuggestions(false);
+                    router.push(`/search?q=${track}`);
+                  }}
+                  key={index}
+                >
+                  <span className="inline-flex w-full text-sm hover:bg-indigo-50 py-2 px-4 cursor-pointer transition active:bg-indigo-100">
+                    {track}
+                  </span>
+                </div>
+              ))}
             </div>
           ) : null}
         </div>
