@@ -36,12 +36,14 @@ const Track = ({ track, setCurrentSong }: Props) => {
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
-        .get(`https://pa.mint.lgbt/streams/${query}`)
+        .get(`https://pa.il.ax/streams/${query}`)
         .then((res: any) => {
           setCurrentSong({
-            url: res?.data?.audioStreams.sort((a: any, b: any) =>
-              a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
-            )[0]?.url,
+            url: res?.data?.audioStreams
+              .filter((stream: any) => stream?.mimeType == "audio/mp4")
+              .sort((a: any, b: any) =>
+                a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
+              )[0]?.url,
             track: track,
           });
         })

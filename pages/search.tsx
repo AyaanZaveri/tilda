@@ -60,6 +60,8 @@ const Search = () => {
     getSearchResults();
   }, [query.q]);
 
+  console.log(currentSong?.url);
+
   useEffect(() => {
     if (searchResults) {
       searchResults?.map((result: any) => {
