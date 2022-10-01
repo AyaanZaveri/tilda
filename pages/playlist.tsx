@@ -87,7 +87,7 @@ const Home: NextPage = () => {
                 </div>
                 <div className="inline-flex gap-2 items-center">
                   {albumData ? (
-                    <span className="text-indigo-600">
+                    <span className="text-indigo-400">
                       {albumData?.trackCount} Tracks ·{" "}
                       {albumData?.duration
                         ? titleCase(albumData?.duration)
@@ -110,7 +110,7 @@ const Home: NextPage = () => {
                         />
                         <button
                           onClick={() => setShowMore(false)}
-                          className="text-indigo-800 hover:text-indigo-600 transition-colors duration-300 text-sm"
+                          className="text-indigo-500 hover:text-indigo-600 transition-colors duration-300 text-sm"
                         >
                           Show Less
                         </button>
@@ -132,7 +132,7 @@ const Home: NextPage = () => {
                         />
                         <button
                           onClick={() => setShowMore(true)}
-                          className="text-indigo-600 hover:text-indigo-800 transition-colors ease-in-out duration-300 text-sm"
+                          className="text-indigo-500 hover:text-indigo-600 transition-colors ease-in-out duration-300 text-sm"
                         >
                           Show More
                         </button>
