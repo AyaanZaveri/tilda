@@ -74,7 +74,7 @@ const Home: NextPage = () => {
                 alt=""
               />
             ) : null}
-            <div className="flex flex-col pt-4 gap-4 text-slate-800">
+            <div className="flex flex-col pt-4 gap-4 text-white">
               <span className="text-3xl font-bold">{albumData?.title}</span>
               <div className="flex flex-col">
                 <div className="inline-flex gap-2 items-center">
@@ -100,7 +100,7 @@ const Home: NextPage = () => {
                     {albumData?.description ? (
                       <div>
                         <div
-                          className="mt-3 text-slate-800"
+                          className="mt-3 text-white"
                           dangerouslySetInnerHTML={{
                             __html: albumData?.description?.replaceAll(
                               /\n/g,
@@ -122,7 +122,7 @@ const Home: NextPage = () => {
                     {albumData?.description ? (
                       <div>
                         <div
-                          className="mt-3 text-slate-800 line-clamp-3"
+                          className="mt-3 text-white line-clamp-3"
                           dangerouslySetInnerHTML={{
                             __html: albumData?.description?.replaceAll(
                               /\n/g,

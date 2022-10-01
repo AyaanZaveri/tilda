@@ -64,7 +64,7 @@ const Track = ({ track, setCurrentSong }: Props) => {
         // router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
         getCurrentSong(track.videoId)
       }
-      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-slate-700 hover:bg-indigo-50 active:bg-indigo-100 hover:cursor-pointer"
+      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-white hover:bg-indigo-500 active:bg-indigo-600 hover:cursor-pointer"
     >
       <div className="flex flex-row gap-3">
         <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all">

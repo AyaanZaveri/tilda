@@ -31,7 +31,7 @@ export default class MyDoc extends Document {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/plyr@3.7.2/dist/plyr.css"
         />
-        <body className="box-border">
+        <body className="box-border bg-slate-900">
           <Main />
           <NextScript />
         </body>

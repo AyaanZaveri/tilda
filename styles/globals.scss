@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-$rhap_theme-color: #334155 !default; // Color of all buttons and volume/progress indicators
+$rhap_theme-color: #6366f1 !default; // Color of all buttons and volume/progress indicators
 $rhap_font-family: "Inter", sans-serif !default; // Font family of current time and duration
 @import "react-h5-audio-player/src/styles.scss";
 
@@ -22,7 +22,7 @@ body {
 
 .rhap_time {
   font-size: 0.875rem;
-  color: #334155;
+  color: white;
 }
 
 .rhap_main-controls-button {

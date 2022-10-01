@@ -98,7 +98,7 @@ const Search = () => {
         <div className="flex justify-center pt-2">
           <div className="flex items-center flex-col gap-4 w-full pb-16">
             <div className="w-3/4 flex justify-center flex-col gap-2">
-              <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-full">
+              <span className="justify-start items-start font-semibold text-2xl text-white w-full">
                 Top Result
               </span>
               {topResults?.map((result: any, index: number) => (
@@ -110,7 +110,7 @@ const Search = () => {
               ))}
             </div>
             <div className="w-3/4 flex justify-center flex-col gap-2">
-              <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
+              <span className="justify-start items-start font-semibold text-2xl text-white w-min">
                 Tracks
               </span>
               {songs?.map((track: any, index: number) => (
@@ -122,7 +122,7 @@ const Search = () => {
               ))}
             </div>
             <div className="w-3/4 flex justify-center flex-col gap-2">
-              <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
+              <span className="justify-start items-start font-semibold text-2xl text-white w-min">
                 Albums
               </span>
               {albums?.map((album: any, index: number) => (
@@ -130,7 +130,7 @@ const Search = () => {
               ))}
             </div>
             <div className="w-3/4 flex justify-center flex-col gap-2">
-              <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
+              <span className="justify-start items-start font-semibold text-2xl text-white w-min">
                 Videos
               </span>
               {videos?.map((video: any, index: number) => (
@@ -142,7 +142,7 @@ const Search = () => {
               ))}
             </div>
             <div className="w-3/4 flex justify-center flex-col gap-2">
-              <span className="justify-start items-start font-semibold text-2xl text-slate-800 w-min">
+              <span className="justify-start items-start font-semibold text-2xl text-white w-min">
                 Artists
               </span>
               {artists?.map((artist: any, index: number) => (
@@ -152,13 +152,13 @@ const Search = () => {
           </div>
         </div>
         {currentSong?.url?.length > 0 ? (
-          <div className="fixed bottom-0 w-full justify-center flex items-center bg-white/75 backdrop-blur-md h-20">
+          <div className="fixed bottom-0 w-full justify-center flex items-center bg-slate-900/75 backdrop-blur-md h-20">
             {/* <AudioPlayer currentSong={currentSong} /> */}
-            <div className="flex flex-row gap-3 items-center text-sm text-slate-700 w-full justify-center">
+            <div className="flex flex-row gap-3 items-center text-sm text-white w-full justify-center">
               <div className="absolute left-0 flex flex-row gap-3 pl-4">
                 <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all">
                   <img
-                    className="w-[3rem] h-[3rem]"
+                    className="w-[3rem]"
                     src={currentSong?.track?.thumbnails[0]?.url}
                     alt=""
                   />

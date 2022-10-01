@@ -40,12 +40,12 @@ const Video = ({ video, setCurrentSong }: Props) => {
   return (
     <div
       key={video.videoId}
-      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-slate-700 hover:bg-indigo-50 active:bg-indigo-100 hover:cursor-pointer"
+      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-white hover:bg-indigo-500 active:bg-indigo-600 hover:cursor-pointer"
       onClick={() => getCurrentSong(video.videoId)}
     >
       <div className="flex flex-row gap-3">
         <div className="relative flex justify-center items-center overflow-hidden group transition-all bg-slate-900 rounded-md">
-          <img className="w-12 h-auto" src={video?.thumbnails[0]?.url} alt="" />
+          <img className="w-12 h-min rounded-sm" src={video?.thumbnails[0]?.url} alt="" />
         </div>
         <div className="flex flex-col justify-center">
           <div className="flex flex-row gap-3">
