@@ -6,6 +6,7 @@ import { MdExplicit } from "react-icons/md";
 import { HiHeart } from "react-icons/hi";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
+import { apiUrl } from "../utils/apiUrl";
 
 interface Props {
   track: any;
@@ -18,7 +19,7 @@ const Track = ({ track, setCurrentSong }: Props) => {
 
   const getAlbumData = () => {
     axios
-      .get(`https://tilda-api.ayaanzaveri.repl.co/album/${track?.album?.id}`)
+      .get(`${apiUrl}/album/${track?.album?.id}`)
       .then((res: any) => {
         setAlbumData(res.data);
       })
