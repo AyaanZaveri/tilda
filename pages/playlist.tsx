@@ -87,7 +87,7 @@ const Home: NextPage = () => {
                 </div>
                 <div className="inline-flex gap-2 items-center">
                   {albumData ? (
-                    <span className="text-indigo-400">
+                    <span className="text-sky-400">
                       {albumData?.trackCount} Tracks ·{" "}
                       {albumData?.duration
                         ? titleCase(albumData?.duration)
@@ -110,7 +110,7 @@ const Home: NextPage = () => {
                         />
                         <button
                           onClick={() => setShowMore(false)}
-                          className="text-indigo-500 hover:text-indigo-600 transition-colors duration-300 text-sm"
+                          className="text-sky-400 hover:text-sky-500 transition-colors duration-300 text-sm"
                         >
                           Show Less
                         </button>
@@ -132,7 +132,7 @@ const Home: NextPage = () => {
                         />
                         <button
                           onClick={() => setShowMore(true)}
-                          className="text-indigo-500 hover:text-indigo-600 transition-colors ease-in-out duration-300 text-sm"
+                          className="text-sky-400 hover:text-sky-500 transition-colors ease-in-out duration-300 text-sm"
                         >
                           Show More
                         </button>
@@ -143,7 +143,7 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className="mt-6">
+          <div className="mt-6 flex flex-col gap-1">
             {albumData?.tracks.map((track: any, index: number) => (
               <AlbumTrack track={track} index={index} />
             ))}

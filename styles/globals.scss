@@ -64,13 +64,13 @@ body {
     @apply w-[0.5rem];
   }
   .scrollbar::-webkit-scrollbar-thumb {
-    @apply rounded-lg bg-indigo-800;
+    @apply rounded-lg bg-sky-800;
   }
   .scrollbar::-webkit-scrollbar-thumb:active {
     @apply bg-slate-800;
   }
   .scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-indigo-900;
+    @apply bg-sky-900;
   }
 
   /* Scroll track styles (Background) */

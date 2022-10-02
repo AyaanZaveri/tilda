@@ -18,10 +18,12 @@ const AlbumTrack = ({ track, index }: Props) => {
   return (
     <div
       key={track.videoId}
-      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-white hover:bg-indigo-500 active:bg-indigo-600 hover:cursor-pointer"
+      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center group gap-3 rounded-md px-3 text-sm text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-lg hover:shadow-sky-500/25 hover:cursor-pointer"
     >
       <div className="flex flex-row gap-5 items-center">
-        <span className="text-slate-400">{index + 1}</span>
+        <span className="text-slate-400 group-hover:text-white transition-all ease-in-out duration-300">
+          {index + 1}
+        </span>
         <div className="flex flex-col justify-center">
           <div className="flex flex-row gap-3">
             {/* {playing ? (
