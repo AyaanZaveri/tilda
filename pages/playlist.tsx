@@ -81,7 +81,8 @@ const Home: NextPage = () => {
                   <span>{isExplicit ? <MdExplicit /> : null}</span>
                   {albumData ? (
                     <span>
-                      {albumData?.type} · {albumData?.artists[0]?.name}
+                      {albumData?.type} · {albumData?.artists[0]?.name} ·{" "}
+                      {albumData?.year}
                     </span>
                   ) : null}
                 </div>

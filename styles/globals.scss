@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-$rhap_theme-color: #6366f1 !default; // Color of all buttons and volume/progress indicators
+$rhap_theme-color: #0ea5e9 !default; // Color of all buttons and volume/progress indicators
 $rhap_font-family: "Inter", sans-serif !default; // Font family of current time and duration
 @import "react-h5-audio-player/src/styles.scss";
 
@@ -26,7 +26,7 @@ body {
 }
 
 .rhap_main-controls-button {
-  color: #6366f1;
+  color: #0ea5e9;
 }
 
 .rhap_stacked .rhap_controls-section {
@@ -77,8 +77,4 @@ body {
   .scrollbar::-webkit-scrollbar-track {
     @apply bg-slate-900;
   }
-
-  // .rhap_time {
-  //   @apply "text-sm";
-  // }
 }
