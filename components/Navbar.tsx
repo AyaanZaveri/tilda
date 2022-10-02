@@ -54,7 +54,7 @@ const Navbar = () => {
   return (
     <div className="fixed w-full z-10">
       <div className="flex items-center justify-center flex-col">
-        <div className="bg-slate-900/75 backdrop-blur-md relative w-full h-16 flex items-center justify-center flex-row">
+        <div className="bg-slate-900/50 backdrop-blur-md relative w-full h-16 flex items-center justify-center flex-row">
           <img
             draggable="false"
             onClick={() => router.push("/")}
@@ -68,7 +68,7 @@ const Navbar = () => {
             </div>
             <form onSubmit={(e) => handleSearch(e)}>
               <input
-                className="focus:ring-indigo-400/90 text-white bg-slate-700 placeholder:text-slate-100 focus:ring focus:border-indigo-700 border active:bg-slate-800 w-full pl-8 pr-12 sm:text-sm border-slate-600 rounded-md transition ease-in-out duration-300"
+                className="focus:ring-indigo-400/90 text-white bg-slate-800 placeholder:text-slate-100 focus:ring focus:border-indigo-700 border active:bg-slate-900 w-full pl-8 pr-12 sm:text-sm border-slate-700 rounded-md transition ease-in-out duration-300"
                 type="text"
                 placeholder="Search"
                 onChange={(e) => setSearch(e.target.value)}
@@ -78,7 +78,7 @@ const Navbar = () => {
         </div>
         <div ref={searchSuggestionsRef} className={`w-6/12`}>
           {searchRes && showSuggestions ? (
-            <div className="flex flex-col w-full py-2 gap-1 rounded-lg border border-slate-900 select-none bg-slate-700/75 backdrop-blur-md text-white shadow-sm overflow-hidden">
+            <div className="flex flex-col w-full py-2 gap-1 rounded-lg border border-slate-700/50 select-none bg-slate-800/50 backdrop-blur-md text-white shadow-sm overflow-hidden">
               {searchRes?.slice(0, 8)?.map((track: any, index: any) => (
                 <div
                   onClick={() => {
