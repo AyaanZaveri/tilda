@@ -8,7 +8,7 @@ import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
 import { apiUrl } from "../utils/apiUrl";
 import { useRecoilState } from "recoil";
-import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
+import { currentTrackState, isPlayingState } from "../atoms/songAtom";
 
 interface Props {
   track: any;
@@ -18,8 +18,8 @@ const Track = ({ track }: Props) => {
   const [playing, setPlaying] = useState<boolean>(false);
   const [albumData, setAlbumData] = useState<any>();
 
-  const [currentTrackId, setCurrentTrackId] =
-    useRecoilState(currentTrackIdState);
+  const [currentTrack, setCurrentTrack] =
+    useRecoilState(currentTrackState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
 
   const getAlbumData = () => {
@@ -36,7 +36,7 @@ const Track = ({ track }: Props) => {
       axios
         .get(`https://pa.mint.lgbt/streams/${query}`)
         .then((res: any) => {
-          setCurrentTrackId({
+          setCurrentTrack({
             url: res?.data?.audioStreams
               .filter((stream: any) => stream?.mimeType == "audio/mp4")
               .sort((a: any, b: any) =>
@@ -47,7 +47,7 @@ const Track = ({ track }: Props) => {
         })
         .catch((err: any) => console.log(err));
     } else {
-      setCurrentTrackId({
+      setCurrentTrack({
         url: "",
         track: "",
       });

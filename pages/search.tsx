@@ -23,7 +23,7 @@ import Video from "../components/Video";
 import Marquee from "react-fast-marquee";
 import TopResult from "../components/TopResult";
 import { useRecoilState } from "recoil";
-import { currentTrackIdState } from "../atoms/songAtom";
+import { currentTrackState } from "../atoms/songAtom";
 
 const Search = () => {
   const { query } = useRouter();
@@ -62,10 +62,10 @@ const Search = () => {
     getSearchResults();
   }, [query.q]);
 
-  const [currentTrackId, setCurrentTrackId] =
-    useRecoilState(currentTrackIdState);
+  const [currentTrack, setCurrentTrack] =
+    useRecoilState(currentTrackState);
 
-  console.log(currentTrackId);
+  console.log(currentTrack);
 
   useEffect(() => {
     if (searchResults) {
@@ -106,11 +106,7 @@ const Search = () => {
                   Top Result
                 </span>
                 {topResults?.map((result: any, index: number) => (
-                  <TopResult
-                    result={result}
-                    key={index}
-                    setCurrentSong={setCurrentSong}
-                  />
+                  <TopResult result={result} key={index} />
                 ))}
               </div>
             ) : null}
@@ -140,11 +136,7 @@ const Search = () => {
                   Videos
                 </span>
                 {videos?.map((video: any, index: number) => (
-                  <Video
-                    video={video}
-                    key={index}
-                    setCurrentSong={setCurrentSong}
-                  />
+                  <Video video={video} key={index} />
                 ))}
               </div>
             ) : null}

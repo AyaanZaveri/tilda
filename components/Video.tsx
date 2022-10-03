@@ -7,21 +7,24 @@ import { HiHeart } from "react-icons/hi";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
 import { apiUrl } from "../utils/apiUrl";
+import { useRecoilState } from "recoil";
+import { currentTrackState } from "../atoms/songAtom";
 
 interface Props {
   video: any;
-  setCurrentSong: any;
 }
 
-const Video = ({ video, setCurrentSong }: Props) => {
+const Video = ({ video }: Props) => {
   const router = useRouter();
+  const [currentTrack, setCurrentTrack] =
+    useRecoilState(currentTrackState);
 
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
         .get(`https://pa.mint.lgbt/streams/${query}`)
         .then((res: any) => {
-          setCurrentSong({
+          setCurrentTrack({
             url: res?.data?.audioStreams.sort((a: any, b: any) =>
               a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
             )[0]?.url,
@@ -30,7 +33,7 @@ const Video = ({ video, setCurrentSong }: Props) => {
         })
         .catch((err: any) => console.log(err));
     } else {
-      setCurrentSong({
+      setCurrentTrack({
         url: "",
         track: "",
       });
