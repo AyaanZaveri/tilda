@@ -22,7 +22,6 @@ import Album from "../components/Album";
 import Video from "../components/Video";
 import Marquee from "react-fast-marquee";
 import TopResult from "../components/TopResult";
-import BAudioPlayer from "../components/BAudioPlayer";
 import { useRecoilState } from "recoil";
 import { currentTrackIdState } from "../atoms/songAtom";
 
@@ -121,12 +120,7 @@ const Search = () => {
                   Tracks
                 </span>
                 {songs?.map((track: any, index: number) => (
-                  <Track
-                    setCurrentSong={setCurrentSong}
-                    track={track}
-                    key={index}
-                    currentSong={currentSong}
-                  />
+                  <Track track={track} key={index} />
                 ))}
               </div>
             ) : null}
@@ -166,7 +160,6 @@ const Search = () => {
             ) : null}
           </div>
         </div>
-        <BAudioPlayer currentSong={currentSong} />
       </div>
     </div>
   );

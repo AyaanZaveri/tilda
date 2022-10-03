@@ -12,22 +12,15 @@ import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
 
 interface Props {
   track: any;
-  setCurrentSong: any;
-  currentSong: any;
 }
 
-const Track = ({ track, setCurrentSong, currentSong }: Props) => {
+const Track = ({ track }: Props) => {
   const [playing, setPlaying] = useState<boolean>(false);
   const [albumData, setAlbumData] = useState<any>();
 
   const [currentTrackId, setCurrentTrackId] =
     useRecoilState(currentTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
-
-  // useEffect(() => {
-  //   setCurrentTrackId(currentSong)
-  //   setIsPlaying(true)
-  // }, [currentSong])
 
   const getAlbumData = () => {
     axios

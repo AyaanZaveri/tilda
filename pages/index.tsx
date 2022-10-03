@@ -13,7 +13,6 @@ import AudioPlayer from "react-h5-audio-player";
 import { MdExplicit } from "react-icons/md";
 import { useRecoilState } from "recoil";
 import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
-import BAudioPlayer from "../components/BAudioPlayer";
 
 const Home: NextPage = () => {
   const [currentTrackId, setCurrentTrackId] =
@@ -21,11 +20,7 @@ const Home: NextPage = () => {
 
   console.log(currentTrackId);
 
-  return (
-    <div>
-      <BAudioPlayer currentSong={currentTrackId} />
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Home;

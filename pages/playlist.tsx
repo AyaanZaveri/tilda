@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { MdExplicit } from "react-icons/md";
 import { titleCase } from "title-case";
 import AlbumTrack from "../components/AlbumTrack";
-import BAudioPlayer from "../components/BAudioPlayer";
 import Navbar from "../components/Navbar";
 import { apiUrl } from "../utils/apiUrl";
 
@@ -162,7 +161,6 @@ const Home: NextPage = () => {
             ))}
           </div>
         </div>
-        <BAudioPlayer thumbnail={thumbnail} currentSong={currentSong} />
       </div>
     </div>
   );
