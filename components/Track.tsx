@@ -7,15 +7,27 @@ import { HiHeart } from "react-icons/hi";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
 import { apiUrl } from "../utils/apiUrl";
+import { useRecoilState } from "recoil";
+import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
 
 interface Props {
   track: any;
   setCurrentSong: any;
+  currentSong: any;
 }
 
-const Track = ({ track, setCurrentSong }: Props) => {
+const Track = ({ track, setCurrentSong, currentSong }: Props) => {
   const [playing, setPlaying] = useState<boolean>(false);
   const [albumData, setAlbumData] = useState<any>();
+
+  const [currentTrackId, setCurrentTrackId] =
+    useRecoilState(currentTrackIdState);
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
+
+  // useEffect(() => {
+  //   setCurrentTrackId(currentSong)
+  //   setIsPlaying(true)
+  // }, [currentSong])
 
   const getAlbumData = () => {
     axios
@@ -26,20 +38,12 @@ const Track = ({ track, setCurrentSong }: Props) => {
       .catch((err: any) => console.log(err));
   };
 
-  useEffect(() => {
-    getAlbumData();
-  }, []);
-
-  // console.log(track?.videoId);
-
-  const router = useRouter();
-
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
         .get(`https://pa.mint.lgbt/streams/${query}`)
         .then((res: any) => {
-          setCurrentSong({
+          setCurrentTrackId({
             url: res?.data?.audioStreams
               .filter((stream: any) => stream?.mimeType == "audio/mp4")
               .sort((a: any, b: any) =>
@@ -50,12 +54,18 @@ const Track = ({ track, setCurrentSong }: Props) => {
         })
         .catch((err: any) => console.log(err));
     } else {
-      setCurrentSong({
+      setCurrentTrackId({
         url: "",
         track: "",
       });
     }
   };
+
+  useEffect(() => {
+    getAlbumData();
+  }, []);
+
+  const router = useRouter();
 
   return (
     <div
@@ -93,8 +103,11 @@ const Track = ({ track, setCurrentSong }: Props) => {
           </div>
           <div>
             <span className="font-normal">
-              {titleCase(track?.resultType)} · {track?.artists[0]?.name} &nbsp;·{" "}
-              {track?.album?.name}
+              {titleCase(track?.resultType)} ·{" "}
+              {track?.artists.map((artist: any, index: number) => (
+                <span>{(index ? ", " : "") + artist?.name}</span>
+              ))}{" "}
+              &nbsp;· {track?.album?.name}
             </span>
           </div>
         </div>

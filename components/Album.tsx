@@ -33,7 +33,9 @@ const Album = ({ album }: Props) => {
   return (
     <div
       key={album.videoId}
-      onClick={() => router.push(`/playlist?list=${albumData?.audioPlaylistId}`)}
+      onClick={() =>
+        router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
+      }
       className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-lg hover:shadow-sky-500/25 hover:cursor-pointer"
     >
       <div className="flex flex-row gap-3">
@@ -52,7 +54,10 @@ const Album = ({ album }: Props) => {
           </div>
           <div>
             <span className="font-normal">
-              {titleCase(album?.resultType)} · {album?.artists[0]?.name}
+              {titleCase(album?.resultType)} ·{" "}
+              {album?.artists.map((artist: any, index: number) => (
+                <span>{(index ? ", " : "") + artist?.name}</span>
+              ))}
             </span>
           </div>
         </div>

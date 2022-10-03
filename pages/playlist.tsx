@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { MdExplicit } from "react-icons/md";
 import { titleCase } from "title-case";
 import AlbumTrack from "../components/AlbumTrack";
+import BAudioPlayer from "../components/BAudioPlayer";
 import Navbar from "../components/Navbar";
 import { apiUrl } from "../utils/apiUrl";
 
@@ -15,6 +16,9 @@ const Home: NextPage = () => {
   const [albumData, setAlbumData] = useState<any>();
   const [isExplicit, setIsExplicit] = useState<boolean>();
   const [showMore, setShowMore] = useState<boolean>(false);
+  const [thumbnail, setThumbnail] = useState<any>();
+
+  const [currentSong, setCurrentSong] = useState<any>();
 
   const getAlbumBrowseId = () => {
     axios
@@ -53,10 +57,11 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (albumData) {
       checkIsExplicit();
+      setThumbnail(albumData?.thumbnails);
     }
   }, [albumData]);
 
-  console.log(isExplicit);
+  console.log(thumbnail);
 
   return (
     <div>
@@ -81,8 +86,11 @@ const Home: NextPage = () => {
                   <span>{isExplicit ? <MdExplicit /> : null}</span>
                   {albumData ? (
                     <span>
-                      {albumData?.type} · {albumData?.artists[0]?.name} ·{" "}
-                      {albumData?.year}
+                      {albumData?.type} ·{" "}
+                      {albumData?.artists.map((artist: any, index: number) => (
+                        <span>{(index ? ", " : "") + artist?.name}</span>
+                      ))}{" "}
+                      · {albumData?.year}
                     </span>
                   ) : null}
                 </div>
@@ -146,10 +154,15 @@ const Home: NextPage = () => {
           </div>
           <div className="mt-6 flex flex-col gap-1">
             {albumData?.tracks.map((track: any, index: number) => (
-              <AlbumTrack track={track} index={index} />
+              <AlbumTrack
+                setCurrentSong={setCurrentSong}
+                track={track}
+                index={index}
+              />
             ))}
           </div>
         </div>
+        <BAudioPlayer thumbnail={thumbnail} currentSong={currentSong} />
       </div>
     </div>
   );

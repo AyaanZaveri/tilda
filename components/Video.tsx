@@ -45,7 +45,11 @@ const Video = ({ video, setCurrentSong }: Props) => {
     >
       <div className="flex flex-row gap-3">
         <div className="relative flex justify-center items-center overflow-hidden group transition-all bg-slate-900 rounded-md">
-          <img className="w-12 h-min rounded-sm" src={video?.thumbnails[0]?.url} alt="" />
+          <img
+            className="w-12 h-min rounded-sm"
+            src={video?.thumbnails[0]?.url}
+            alt=""
+          />
         </div>
         <div className="flex flex-col justify-center">
           <div className="flex flex-row gap-3">
@@ -55,7 +59,10 @@ const Video = ({ video, setCurrentSong }: Props) => {
           </div>
           <div>
             <span className="font-normal">
-              {titleCase(video?.resultType)} · {video?.artists[0]?.name}
+              {titleCase(video?.resultType)} ·{" "}
+              {video?.artists.map((artist: any, index: number) => (
+                <span>{(index ? ", " : "") + artist?.name}</span>
+              ))}
             </span>
           </div>
         </div>

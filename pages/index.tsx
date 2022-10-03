@@ -11,9 +11,21 @@ import {
 import Navbar from "../components/Navbar";
 import AudioPlayer from "react-h5-audio-player";
 import { MdExplicit } from "react-icons/md";
+import { useRecoilState } from "recoil";
+import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
+import BAudioPlayer from "../components/BAudioPlayer";
 
 const Home: NextPage = () => {
-  return <div></div>;
+  const [currentTrackId, setCurrentTrackId] =
+    useRecoilState(currentTrackIdState);
+
+  console.log(currentTrackId);
+
+  return (
+    <div>
+      <BAudioPlayer currentSong={currentTrackId} />
+    </div>
+  );
 };
 
 export default Home;

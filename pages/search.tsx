@@ -22,6 +22,9 @@ import Album from "../components/Album";
 import Video from "../components/Video";
 import Marquee from "react-fast-marquee";
 import TopResult from "../components/TopResult";
+import BAudioPlayer from "../components/BAudioPlayer";
+import { useRecoilState } from "recoil";
+import { currentTrackIdState } from "../atoms/songAtom";
 
 const Search = () => {
   const { query } = useRouter();
@@ -60,7 +63,10 @@ const Search = () => {
     getSearchResults();
   }, [query.q]);
 
-  console.log(currentSong?.url);
+  const [currentTrackId, setCurrentTrackId] =
+    useRecoilState(currentTrackIdState);
+
+  console.log(currentTrackId);
 
   useEffect(() => {
     if (searchResults) {
@@ -90,118 +96,77 @@ const Search = () => {
     }
   }, [searchResults]);
 
-  console.log(currentSong);
-
   return (
     <div>
       <div className="pt-16 pb-8">
         <div className="flex justify-center pt-2">
           <div className="flex items-center flex-col gap-4 w-full pb-16">
-            <div className="w-3/4 flex justify-center flex-col gap-2">
-              <span className="justify-start items-start font-semibold text-2xl text-white w-full">
-                Top Result
-              </span>
-              {topResults?.map((result: any, index: number) => (
-                <TopResult
-                  result={result}
-                  key={index}
-                  setCurrentSong={setCurrentSong}
-                />
-              ))}
-            </div>
-            <div className="w-3/4 flex justify-center flex-col gap-2">
-              <span className="justify-start items-start font-semibold text-2xl text-white w-min">
-                Tracks
-              </span>
-              {songs?.map((track: any, index: number) => (
-                <Track
-                  setCurrentSong={setCurrentSong}
-                  track={track}
-                  key={index}
-                />
-              ))}
-            </div>
-            <div className="w-3/4 flex justify-center flex-col gap-2">
-              <span className="justify-start items-start font-semibold text-2xl text-white w-min">
-                Albums
-              </span>
-              {albums?.map((album: any, index: number) => (
-                <Album album={album} key={index} />
-              ))}
-            </div>
-            <div className="w-3/4 flex justify-center flex-col gap-2">
-              <span className="justify-start items-start font-semibold text-2xl text-white w-min">
-                Videos
-              </span>
-              {videos?.map((video: any, index: number) => (
-                <Video
-                  video={video}
-                  key={index}
-                  setCurrentSong={setCurrentSong}
-                />
-              ))}
-            </div>
-            <div className="w-3/4 flex justify-center flex-col gap-2">
-              <span className="justify-start items-start font-semibold text-2xl text-white w-min">
-                Artists
-              </span>
-              {artists?.map((artist: any, index: number) => (
-                <Artist artist={artist} key={index} />
-              ))}
-            </div>
+            {topResults.length > 0 ? (
+              <div className="w-3/4 flex justify-center flex-col gap-2">
+                <span className="justify-start items-start font-semibold text-2xl text-white w-full">
+                  Top Result
+                </span>
+                {topResults?.map((result: any, index: number) => (
+                  <TopResult
+                    result={result}
+                    key={index}
+                    setCurrentSong={setCurrentSong}
+                  />
+                ))}
+              </div>
+            ) : null}
+            {songs.length > 0 ? (
+              <div className="w-3/4 flex justify-center flex-col gap-2">
+                <span className="justify-start items-start font-semibold text-2xl text-white w-min">
+                  Tracks
+                </span>
+                {songs?.map((track: any, index: number) => (
+                  <Track
+                    setCurrentSong={setCurrentSong}
+                    track={track}
+                    key={index}
+                    currentSong={currentSong}
+                  />
+                ))}
+              </div>
+            ) : null}
+            {albums.length > 0 ? (
+              <div className="w-3/4 flex justify-center flex-col gap-2">
+                <span className="justify-start items-start font-semibold text-2xl text-white w-min">
+                  Albums
+                </span>
+                {albums?.map((album: any, index: number) => (
+                  <Album album={album} key={index} />
+                ))}
+              </div>
+            ) : null}
+            {videos.length > 0 ? (
+              <div className="w-3/4 flex justify-center flex-col gap-2">
+                <span className="justify-start items-start font-semibold text-2xl text-white w-min">
+                  Videos
+                </span>
+                {videos?.map((video: any, index: number) => (
+                  <Video
+                    video={video}
+                    key={index}
+                    setCurrentSong={setCurrentSong}
+                  />
+                ))}
+              </div>
+            ) : null}
+            {artists.length > 0 ? (
+              <div className="w-3/4 flex justify-center flex-col gap-2">
+                <span className="justify-start items-start font-semibold text-2xl text-white w-min">
+                  Artists
+                </span>
+                {artists?.map((artist: any, index: number) => (
+                  <Artist artist={artist} key={index} />
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
-        {currentSong?.url?.length > 0 ? (
-          <div className="fixed bottom-0 w-full justify-center flex items-center bg-slate-900/75 backdrop-blur-md h-20">
-            {/* <AudioPlayer currentSong={currentSong} /> */}
-            <div className="flex flex-row gap-3 items-center text-sm text-white w-full justify-center">
-              <div className="absolute left-0 flex flex-row gap-3 pl-4">
-                <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all">
-                  <img
-                    className="w-[3rem]"
-                    src={currentSong?.track?.thumbnails[0]?.url}
-                    alt=""
-                  />
-                </div>
-                <div className="flex flex-col justify-center">
-                  <div className="flex flex-row gap-3">
-                    {/* <Marquee gradient={false}> */}
-                    <span className="font-semibold inline-flex gap-1 items-center">
-                      {currentSong?.track?.title}{" "}
-                      {currentSong?.track?.isExplicit ? <MdExplicit /> : null}
-                    </span>
-                    {/* </Marquee> */}
-                  </div>
-                  <div>
-                    <span className="font-normal">
-                      {currentSong?.track?.artists[0]?.name}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="w-2/5">
-                <AudioPlayer
-                  autoPlay
-                  src={currentSong?.url}
-                  customIcons={{
-                    forward: <HiFastForward />,
-                    rewind: <HiRewind />,
-                    play: <HiPlay />,
-                    pause: <HiPause />,
-                    volume: <HiVolumeUp />,
-                    volumeMute: <HiVolumeOff />,
-                    loop: (
-                      <img src="/icons/fluent_arrow-repeat-all-24-filled.svg" />
-                    ),
-                    loopOff: (
-                      <img src="/icons/fluent_arrow-repeat-all-off-24-filled.svg" />
-                    ),
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        ) : null}
+        <BAudioPlayer currentSong={currentSong} />
       </div>
     </div>
   );

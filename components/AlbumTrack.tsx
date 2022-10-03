@@ -10,15 +10,40 @@ import { titleCase } from "title-case";
 interface Props {
   track: any;
   index: number;
+  setCurrentSong: any;
 }
 
-const AlbumTrack = ({ track, index }: Props) => {
+const AlbumTrack = ({ track, index, setCurrentSong }: Props) => {
   const router = useRouter();
+
+  const getCurrentSong = (query: string) => {
+    if (query.length > 2) {
+      axios
+        .get(`https://pa.mint.lgbt/streams/${query}`)
+        .then((res: any) => {
+          setCurrentSong({
+            url: res?.data?.audioStreams
+              .filter((stream: any) => stream?.mimeType == "audio/mp4")
+              .sort((a: any, b: any) =>
+                a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
+              )[0]?.url,
+            track: track,
+          });
+        })
+        .catch((err: any) => console.log(err));
+    } else {
+      setCurrentSong({
+        url: "",
+        track: "",
+      });
+    }
+  };
 
   return (
     <div
       key={track.videoId}
-      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center group gap-3 rounded-md px-3 text-sm text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-lg hover:shadow-sky-500/25 hover:cursor-pointer"
+      className="flex h-12 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center group gap-3 rounded-md px-3 text-sm text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-lg hover:shadow-sky-500/25 hover:cursor-pointer"
+      onClick={() => getCurrentSong(track.videoId)}
     >
       <div className="flex flex-row gap-5 items-center">
         <span className="text-slate-400 group-hover:text-white transition-all ease-in-out duration-300">
@@ -26,24 +51,15 @@ const AlbumTrack = ({ track, index }: Props) => {
         </span>
         <div className="flex flex-col justify-center">
           <div className="flex flex-row gap-3">
-            {/* {playing ? (
-          <FaPause
-          className="w-2 hover:cursor-pointer"
-          onClick={() => setPlaying(!playing)}
-          />
-          ) : (
-              <FaPlay
-            className="w-2 hover:cursor-pointer"
-            // onClick={() => console.log(track.preview_url)}
-          />
-        )} */}
             <span className="font-semibold inline-flex gap-1 items-center">
               {track.title} {track.isExplicit ? <MdExplicit /> : null}
             </span>
           </div>
           <div>
             <span className="font-normal">
-              {track?.artists[0]?.name}
+              {/* {track?.artists.map((artist: any, index: number) => (
+                <span>{(index ? ", " : "") + artist?.name}</span>
+              ))} */}
               {track?.album?.name}
             </span>
           </div>
