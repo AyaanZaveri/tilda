@@ -6,7 +6,7 @@ const Sidebar = () => {
   const router = useRouter();
 
   return (
-    <div className="flex items-center ml-3 h-full rounded-xl w-56 fixed">
+    <div className="flex items-center ml-3 h-full rounded-xl w-56 fixed select-none">
       <div className="bg-slate-800 rounded-xl w-56 h-[97vh] flex flex-col justify-start items-start shadow-2xl shadow-sky-500/5">
         <img
           draggable={false}
