@@ -4,8 +4,3 @@ export const currentTrackState = atom({
   key: "currentTrackState",
   default: {} as any,
 });
-
-export const isPlayingState = atom({
-  key: "isPlayingState",
-  default: false,
-});

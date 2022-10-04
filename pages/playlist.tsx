@@ -79,10 +79,10 @@ const Home: NextPage = () => {
               <span className="text-3xl font-bold">{albumData?.title}</span>
               <div className="flex flex-col">
                 <div className="inline-flex gap-2 items-center">
-                  <span>{isExplicit ? <MdExplicit /> : null}</span>
+                  {isExplicit ? <MdExplicit /> : null}
                   {albumData ? (
                     <span>
-                      {albumData?.type} ·{" "}
+                      {albumData?.type.trim()} ·{" "}
                       {albumData?.artists.map((artist: any, index: number) => (
                         <span>{(index ? ", " : "") + artist?.name}</span>
                       ))}{" "}

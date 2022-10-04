@@ -8,7 +8,7 @@ import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
 import { apiUrl } from "../utils/apiUrl";
 import { useRecoilState } from "recoil";
-import { currentTrackState, isPlayingState } from "../atoms/songAtom";
+import { currentTrackState } from "../atoms/songAtom";
 
 interface Props {
   track: any;
@@ -18,9 +18,7 @@ const Track = ({ track }: Props) => {
   const [playing, setPlaying] = useState<boolean>(false);
   const [albumData, setAlbumData] = useState<any>();
 
-  const [currentTrack, setCurrentTrack] =
-    useRecoilState(currentTrackState);
-  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
+  const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
 
   const getAlbumData = () => {
     axios

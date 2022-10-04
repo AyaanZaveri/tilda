@@ -9,7 +9,7 @@ import {
 } from "react-icons/hi";
 import { MdExplicit } from "react-icons/md";
 import AudioPlayer from "react-h5-audio-player";
-import { currentTrackState, isPlayingState } from "../atoms/songAtom";
+import { currentTrackState } from "../atoms/songAtom";
 import { useRecoilState } from "recoil";
 import {
   FastForward20Filled,
