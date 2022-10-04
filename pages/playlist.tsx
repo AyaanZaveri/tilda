@@ -61,7 +61,7 @@ const Home: NextPage = () => {
   }, [albumData]);
 
   return (
-    <div className="pl-64 ml-3 pr-12">
+    <div className="pl-64 ml-3 pr-12 pb-16">
       <div className="pt-[4.5rem] pb-8">
         <div className="pt-8">
           <div className="flex flex-row items-start gap-12">
