@@ -46,10 +46,10 @@ const Video = ({ video }: Props) => {
       onClick={() => getCurrentSong(video.videoId)}
     >
       <div className="flex flex-row gap-3">
-        <div className="relative flex justify-center items-center overflow-hidden group transition-all bg-slate-900 rounded-md">
+        <div className="relative flex justify-center items-center overflow-hidden group transition-all bg-slate-800 rounded-md">
           <img
             draggable={false}
-            className="w-12 h-min rounded-sm"
+            className="w-12 h-min"
             src={video?.thumbnails[0]?.url}
             alt=""
           />
