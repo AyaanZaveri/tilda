@@ -1,5 +1,6 @@
 import React from "react";
 import Album from "./Album";
+import Artist from "./Artist";
 import Track from "./Track";
 import Video from "./Video";
 
@@ -12,6 +13,8 @@ const TopResult = ({ result }: { result: any }) => {
         <Track track={result} />
       ) : result?.resultType == "video" ? (
         <Video video={result} />
+      ) : result?.resultType == "artist" ? (
+        <Artist artist={result} />
       ) : null}
     </div>
   );
