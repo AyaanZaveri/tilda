@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { HomeIcon } from '@heroicons/react/24/solid'
+import { HomeIcon } from "@heroicons/react/24/solid";
 
 const Sidebar = () => {
   const router = useRouter();
@@ -15,8 +15,8 @@ const Sidebar = () => {
           onClick={() => router.push("/")}
         />
         <div className="px-2 pt-2 w-full">
-          <div className="relative inline-flex w-full items-center justify-between break-all rounded-md hover:bg-sky-800 p-1 px-3 transition duration-500 ease-in-out hover:cursor-pointer active:bg-sky-900">
-            <span className="text-white inline-flex gap-2 items-center">
+          <div className="relative inline-flex w-full text-white items-center hover:text-sky-400 active:text-sky-500 justify-between break-all rounded-md px-2 transition duration-300 ease-in-out hover:cursor-pointer">
+            <span className="inline-flex gap-2 items-center">
               Home
               <HomeIcon className="w-4 h-4" />
             </span>
