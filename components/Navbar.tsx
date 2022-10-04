@@ -16,7 +16,7 @@ const Navbar = () => {
   const getSearchSuggestions = (query: string) => {
     if (query.length > 2) {
       axios
-        .get(`https://pa.mint.lgbt/suggestions/?query=${query}`)
+        .get(`https://pa.il.ax/suggestions/?query=${query}`)
         .then((res: any) => {
           setSearchRes(res.data);
         })

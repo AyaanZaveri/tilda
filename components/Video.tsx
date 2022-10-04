@@ -22,7 +22,7 @@ const Video = ({ video }: Props) => {
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
-        .get(`https://pa.mint.lgbt/streams/${query}`)
+        .get(`https://pa.il.ax/streams/${query}`)
         .then((res: any) => {
           setCurrentTrack({
             url: res?.data?.audioStreams.sort((a: any, b: any) =>
