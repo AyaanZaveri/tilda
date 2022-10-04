@@ -6,33 +6,40 @@ import { MdExplicit } from "react-icons/md";
 import { HiHeart } from "react-icons/hi";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
+import { useRecoilState } from "recoil";
+import { currentTrackState } from "../atoms/songAtom";
 
 interface Props {
   track: any;
   index: number;
-  setCurrentSong: any;
+  thumbnails: string;
 }
 
-const AlbumTrack = ({ track, index, setCurrentSong }: Props) => {
+const AlbumTrack = ({ track, index, thumbnails }: Props) => {
   const router = useRouter();
+
+  const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
 
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
         .get(`https://pa.mint.lgbt/streams/${query}`)
         .then((res: any) => {
-          setCurrentSong({
+          setCurrentTrack({
             url: res?.data?.audioStreams
               .filter((stream: any) => stream?.mimeType == "audio/mp4")
               .sort((a: any, b: any) =>
                 a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
               )[0]?.url,
-            track: track,
+            track: {
+              ...track,
+              thumbnails: thumbnails,
+            },
           });
         })
         .catch((err: any) => console.log(err));
     } else {
-      setCurrentSong({
+      setCurrentTrack({
         url: "",
         track: "",
       });

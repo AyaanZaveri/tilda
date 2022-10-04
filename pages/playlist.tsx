@@ -3,7 +3,9 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { MdExplicit } from "react-icons/md";
+import { useRecoilState } from "recoil";
 import { titleCase } from "title-case";
+import { currentTrackState } from "../atoms/songAtom";
 import AlbumTrack from "../components/AlbumTrack";
 import Navbar from "../components/Navbar";
 import { apiUrl } from "../utils/apiUrl";
@@ -15,9 +17,8 @@ const Home: NextPage = () => {
   const [albumData, setAlbumData] = useState<any>();
   const [isExplicit, setIsExplicit] = useState<boolean>();
   const [showMore, setShowMore] = useState<boolean>(false);
-  const [thumbnail, setThumbnail] = useState<any>();
 
-  const [currentSong, setCurrentSong] = useState<any>();
+  const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
 
   const getAlbumBrowseId = () => {
     axios
@@ -56,11 +57,8 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (albumData) {
       checkIsExplicit();
-      setThumbnail(albumData?.thumbnails);
     }
   }, [albumData]);
-
-  console.log(thumbnail);
 
   return (
     <div>
@@ -154,7 +152,7 @@ const Home: NextPage = () => {
           <div className="mt-6 flex flex-col gap-1">
             {albumData?.tracks.map((track: any, index: number) => (
               <AlbumTrack
-                setCurrentSong={setCurrentSong}
+                thumbnails={albumData?.thumbnails}
                 track={track}
                 index={index}
               />

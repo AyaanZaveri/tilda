@@ -22,8 +22,9 @@ import {
   Rewind24Filled,
 } from "@fluentui/react-icons";
 
-const BAudioPlayer = (currentSong?: any, thumbnail?: any) => {
+const BAudioPlayer = () => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
+  console.log(currentTrack.track);
 
   return (
     <div>
@@ -36,9 +37,11 @@ const BAudioPlayer = (currentSong?: any, thumbnail?: any) => {
                 <img
                   className="w-[3rem]"
                   src={
-                    thumbnail.length?.url > 3
-                      ? thumbnail?.url
-                      : currentTrack?.track?.thumbnails[0]?.url
+                    currentTrack?.track?.thumbnails
+                      ? currentTrack?.track?.thumbnails[0]?.url
+                      : currentTrack?.thumbnails
+                      ? currentTrack?.thumbnails[0]?.url
+                      : ""
                   }
                   alt=""
                 />
