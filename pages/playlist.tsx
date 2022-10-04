@@ -67,8 +67,8 @@ const Home: NextPage = () => {
           <div className="flex flex-row items-start gap-12">
             {albumData?.thumbnails ? (
               <img
-                className="w-[16.5rem] h-[16.5rem] rounded-md select-none shadow-2xl shadow-sky-500/5"
                 draggable={false}
+                className="w-[16.5rem] h-[16.5rem] rounded-md select-none shadow-2xl shadow-sky-500/5"
                 src={
                   albumData?.thumbnails[albumData?.thumbnails.length - 1]?.url
                 }

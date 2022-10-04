@@ -16,8 +16,7 @@ interface Props {
 
 const Video = ({ video }: Props) => {
   const router = useRouter();
-  const [currentTrack, setCurrentTrack] =
-    useRecoilState(currentTrackState);
+  const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
 
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
@@ -49,6 +48,7 @@ const Video = ({ video }: Props) => {
       <div className="flex flex-row gap-3">
         <div className="relative flex justify-center items-center overflow-hidden group transition-all bg-slate-900 rounded-md">
           <img
+            draggable={false}
             className="w-12 h-min rounded-sm"
             src={video?.thumbnails[0]?.url}
             alt=""

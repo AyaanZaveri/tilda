@@ -17,6 +17,7 @@ const Artist = ({ artist }: Props) => {
       <div className="flex flex-row gap-3">
         <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all">
           <img
+            draggable={false}
             className="w-[2.5rem] h-[2.5rem]"
             src={artist?.thumbnails[1]?.url}
             alt=""
@@ -29,9 +30,7 @@ const Artist = ({ artist }: Props) => {
             </span>
           </div>
           <div>
-            <span className="font-normal">
-              {titleCase(artist?.resultType)}
-            </span>
+            <span className="font-normal">{titleCase(artist?.resultType)}</span>
           </div>
         </div>
       </div>

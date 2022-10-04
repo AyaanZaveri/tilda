@@ -75,15 +75,29 @@ const BAudioPlayer = () => {
                   rewind: <Rewind24Filled />,
                   play: <Play24Filled />,
                   pause: <Pause24Filled />,
-                  volume: <img src="/icons/fluent_speaker-2-24-filled.svg" />,
+                  volume: (
+                    <img
+                      draggable={false}
+                      src="/icons/fluent_speaker-2-24-filled.svg"
+                    />
+                  ),
                   volumeMute: (
-                    <img src="/icons/fluent_speaker-mute-24-filled.svg" />
+                    <img
+                      draggable={false}
+                      src="/icons/fluent_speaker-mute-24-filled.svg"
+                    />
                   ),
                   loop: (
-                    <img src="/icons/fluent_arrow-repeat-all-24-filled.svg" />
+                    <img
+                      draggable={false}
+                      src="/icons/fluent_arrow-repeat-all-24-filled.svg"
+                    />
                   ),
                   loopOff: (
-                    <img src="/icons/fluent_arrow-repeat-all-off-24-filled.svg" />
+                    <img
+                      draggable={false}
+                      src="/icons/fluent_arrow-repeat-all-off-24-filled.svg"
+                    />
                   ),
                 }}
               />
