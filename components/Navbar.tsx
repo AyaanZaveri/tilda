@@ -61,7 +61,7 @@ const Navbar = () => {
             </div>
             <form onSubmit={(e) => handleSearch(e)}>
               <input
-                className="focus:ring-sky-400/90 hover:shadow-2xl hover:shadow-sky-500/20 text-white bg-slate-800 placeholder:text-slate-100 focus:ring focus:border-sky-700 border active:bg-slate-900 w-full pl-8 pr-12 sm:text-sm border-slate-700 rounded-md transition ease-in-out duration-300"
+                className="focus:ring-sky-400/90 hover:shadow-sky-500/20 shadow-2xl shadow-sky-500/10 text-white bg-slate-800 placeholder:text-slate-100 focus:ring focus:border-sky-700 border active:bg-slate-900 w-full pl-8 pr-12 sm:text-sm border-slate-700 rounded-md transition ease-in-out duration-300"
                 type="text"
                 placeholder="Search"
                 onChange={(e) => setSearch(e.target.value)}
