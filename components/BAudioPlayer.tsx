@@ -21,16 +21,16 @@ import {
   Rewind20Filled,
   Rewind24Filled,
 } from "@fluentui/react-icons";
+import Marquee from "react-fast-marquee";
 
 const BAudioPlayer = () => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
   console.log(currentTrack.track);
 
   return (
-    <div>
+    <div className="z-20">
       {currentTrack?.url?.length > 0 ? (
         <div className="fixed bottom-0 w-full justify-center flex items-center bg-slate-900/75 backdrop-blur-md h-20">
-          {/* <AudioPlayer currentTrack={currentTrack} /> */}
           <div className="flex flex-row gap-3 items-center text-sm text-white w-full justify-center">
             <div className="absolute left-0 flex flex-row gap-3 pl-4">
               <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all">
@@ -48,12 +48,10 @@ const BAudioPlayer = () => {
               </div>
               <div className="flex flex-col justify-center">
                 <div className="flex flex-row gap-3">
-                  {/* <Marquee gradient={false}> */}
                   <span className="font-semibold inline-flex gap-1 items-center">
                     {currentTrack?.track?.title}{" "}
                     {currentTrack?.track?.isExplicit ? <MdExplicit /> : null}
                   </span>
-                  {/* </Marquee> */}
                 </div>
                 <div>
                   <span className="font-normal">

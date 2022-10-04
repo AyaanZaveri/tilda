@@ -52,16 +52,9 @@ const Navbar = () => {
   // console.log(showSuggestions);
 
   return (
-    <div className="fixed w-full z-10">
-      <div className="flex items-center justify-center flex-col">
-        <div className="bg-slate-900/50 backdrop-blur-md relative w-full h-16 flex items-center justify-center flex-row">
-          <img
-            draggable="false"
-            onClick={() => router.push("/")}
-            src="/TildaLogo.svg"
-            className="p-4 h-16 hover:cursor-pointer select-none absolute left-0"
-            alt=""
-          />
+    <div className="fixed w-full z-10 pl-56">
+      <div className="flex flex-col">
+        <div className="bg-slate-900/50 backdrop-blur-md relative w-full h-[4.5rem] flex items-center flex-row pl-8">
           <div className="relative rounded-md shadow-sm w-6/12">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <HiOutlineSearch className="text-slate-100 sm:text-sm" />
@@ -76,24 +69,26 @@ const Navbar = () => {
             </form>
           </div>
         </div>
-        <div ref={searchSuggestionsRef} className={`w-6/12`}>
-          {searchRes && showSuggestions ? (
-            <div className="flex flex-col shadow-2xl shadow-sky-500/10 w-full py-2 gap-1 rounded-lg border border-slate-700/50 select-none bg-slate-800/50 backdrop-blur-md text-white overflow-hidden">
-              {searchRes?.slice(0, 8)?.map((track: any, index: any) => (
-                <div
-                  onClick={() => {
-                    setShowSuggestions(false);
-                    router.push(`/search?q=${track}`);
-                  }}
-                  key={index}
-                >
-                  <span className="inline-flex w-full text-sm hover:bg-sky-500 active:bg-sky-600 hover:shadow-lg hover:shadow-sky-500/25 py-2 px-4 cursor-pointer transition">
-                    {track}
-                  </span>
-                </div>
-              ))}
-            </div>
-          ) : null}
+        <div className="pl-8">
+          <div ref={searchSuggestionsRef} className="w-6/12">
+            {searchRes && showSuggestions ? (
+              <div className="flex flex-col shadow-2xl shadow-sky-500/10 w-full py-2 gap-1 rounded-lg border border-slate-700/50 select-none bg-slate-800/50 backdrop-blur-md text-white overflow-hidden">
+                {searchRes?.slice(0, 8)?.map((track: any, index: any) => (
+                  <div
+                    onClick={() => {
+                      setShowSuggestions(false);
+                      router.push(`/search?q=${track}`);
+                    }}
+                    key={index}
+                  >
+                    <span className="inline-flex w-full text-sm hover:bg-sky-500 active:bg-sky-600 hover:shadow-lg hover:shadow-sky-500/25 py-2 px-4 cursor-pointer transition">
+                      {track}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>

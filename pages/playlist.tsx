@@ -61,10 +61,9 @@ const Home: NextPage = () => {
   }, [albumData]);
 
   return (
-    <div>
-      <Navbar />
-      <div className="pt-16 pb-8">
-        <div className="px-20 pt-14">
+    <div className="pl-64 pr-12">
+      <div className="pt-[4.5rem] pb-8">
+        <div className="pt-14">
           <div className="flex flex-row items-start gap-12">
             {albumData?.thumbnails ? (
               <img

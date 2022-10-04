@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Navbar from "./Navbar";
 import BAudioPlayer from "./BAudioPlayer";
+import Sidebar from "./Sidebar";
 
 type Props = {
   children: ReactNode;
@@ -12,6 +13,7 @@ type Props = {
 const Layout = ({ children }: Props) => (
   <>
     <Navbar />
+    <Sidebar />
     <main>{children}</main>
     <BAudioPlayer />
   </>
