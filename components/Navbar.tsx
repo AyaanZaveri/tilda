@@ -52,7 +52,7 @@ const Navbar = () => {
   // console.log(showSuggestions);
 
   return (
-    <div className="fixed w-full z-10 pl-56">
+    <div className="fixed w-full z-10 pl-56 ml-3">
       <div className="flex flex-col">
         <div className="bg-slate-900/50 backdrop-blur-md relative w-full h-[4.5rem] flex items-center flex-row pl-8">
           <div className="relative rounded-md shadow-sm w-6/12">

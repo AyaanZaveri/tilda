@@ -97,7 +97,7 @@ const Search = () => {
   return (
     <div>
       <div className="pt-[4.5rem] pb-8">
-        <div className="flex pl-64 justify-center pt-2">
+        <div className="flex pl-64 ml-3 justify-center pt-2">
           <div className="flex flex-col gap-4 w-full pb-16">
             {topResults.length > 0 ? (
               <div className="w-3/4 flex justify-center flex-col gap-2">
