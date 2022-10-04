@@ -11,7 +11,16 @@ import { MdExplicit } from "react-icons/md";
 import AudioPlayer from "react-h5-audio-player";
 import { currentTrackState, isPlayingState } from "../atoms/songAtom";
 import { useRecoilState } from "recoil";
-import { FastForward20Filled, FastForward24Filled, Pause20Filled, Pause24Filled, Play20Filled, Play24Filled, Rewind20Filled, Rewind24Filled } from "@fluentui/react-icons";
+import {
+  FastForward20Filled,
+  FastForward24Filled,
+  Pause20Filled,
+  Pause24Filled,
+  Play20Filled,
+  Play24Filled,
+  Rewind20Filled,
+  Rewind24Filled,
+} from "@fluentui/react-icons";
 
 const BAudioPlayer = (currentSong?: any, thumbnail?: any) => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
@@ -58,6 +67,7 @@ const BAudioPlayer = (currentSong?: any, thumbnail?: any) => {
               <AudioPlayer
                 autoPlay
                 src={currentTrack?.url}
+                className="outline-none"
                 customIcons={{
                   forward: <FastForward24Filled />,
                   rewind: <Rewind24Filled />,
