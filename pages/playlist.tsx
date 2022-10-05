@@ -1,3 +1,4 @@
+import { PlayIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -75,7 +76,7 @@ const Playlist: NextPage = () => {
                 alt=""
               />
             ) : null}
-            <div className="flex flex-col pt-6 gap-4 text-white">
+            <div className="flex flex-col pt-3 gap-4 text-white">
               <span className="text-4xl font-semibold">{albumData?.title}</span>
               <div className="flex flex-col">
                 <div className="inline-flex gap-2 items-center">
@@ -127,7 +128,7 @@ const Playlist: NextPage = () => {
                     {albumData?.description ? (
                       <div>
                         <div
-                          className="mt-3 text-white line-clamp-3"
+                          className="mt-3 text-white line-clamp-2"
                           dangerouslySetInnerHTML={{
                             __html: albumData?.description?.replaceAll(
                               /\n/g,
@@ -145,6 +146,12 @@ const Playlist: NextPage = () => {
                     ) : null}
                   </div>
                 )}
+                <div className="mt-3">
+                  <button className="px-4 py-1 bg-sky-500 inline-flex gap-2 items-center hover:bg-sky-600 active:bg-sky-700 rounded transition ease-in-out duration-300">
+                    <PlayIcon className="w-4 h-4" />
+                    Play
+                    </button>
+                </div>
               </div>
             </div>
           </div>
