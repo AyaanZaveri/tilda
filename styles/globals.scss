@@ -65,7 +65,7 @@ body {
 @layer utilities {
   /* Scroll thumb styles */
   .scrollbar::-webkit-scrollbar {
-    @apply w-[0.5rem];
+    @apply w-[0.3rem];
   }
   .scrollbar::-webkit-scrollbar-thumb {
     @apply rounded-lg bg-sky-800;

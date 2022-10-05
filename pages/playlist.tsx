@@ -69,7 +69,7 @@ const Playlist: NextPage = () => {
             {albumData?.thumbnails ? (
               <img
                 draggable={false}
-                className="w-[16.5rem] h-[16.5rem] rounded-md select-none shadow-2xl shadow-sky-500/5"
+                className="w-[16.5rem] h-[16.5rem] rounded-md select-none shadow-2xl shadow-sky-500/20"
                 src={
                   albumData?.thumbnails[albumData?.thumbnails.length - 1]?.url
                 }
@@ -148,7 +148,7 @@ const Playlist: NextPage = () => {
                 )}
                 {albumData?.tracks ? (
                   <div className="mt-3">
-                    <button className="px-4 py-1 bg-sky-500 inline-flex gap-2 items-center hover:bg-sky-600 active:bg-sky-700 rounded transition ease-in-out duration-300">
+                    <button className="px-4 py-1 shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded transition ease-in-out duration-300">
                       <PlayIcon className="w-4 h-4" />
                       Play
                     </button>

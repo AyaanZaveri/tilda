@@ -18,8 +18,8 @@ const Sidebar = () => {
         <div className="px-2 pt-2 w-full">
           <div className="relative inline-flex w-full text-white items-center hover:text-sky-300 active:text-sky-400 justify-between break-all rounded-md px-2 transition duration-300 ease-in-out hover:cursor-pointer">
             <span className="inline-flex gap-2 items-center">
-              Home
               <HomeIcon className="w-4 h-4" />
+              Home
             </span>
           </div>
         </div>
