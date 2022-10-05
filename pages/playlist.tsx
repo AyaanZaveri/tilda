@@ -150,7 +150,7 @@ const Playlist: NextPage = () => {
                   <button className="px-4 py-1 bg-sky-500 inline-flex gap-2 items-center hover:bg-sky-600 active:bg-sky-700 rounded transition ease-in-out duration-300">
                     <PlayIcon className="w-4 h-4" />
                     Play
-                    </button>
+                  </button>
                 </div>
               </div>
             </div>

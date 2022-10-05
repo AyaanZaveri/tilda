@@ -16,7 +16,7 @@ const Navbar = () => {
   const getSearchSuggestions = (query: string) => {
     if (query.length > 2) {
       axios
-        .get(`https://watchapi.whatever.social/suggestions/?query=${query}`)
+        .get(`https://pipedapi.tokhmi.xyz/suggestions/?query=${query}`)
         .then((res: any) => {
           setSearchRes(res.data);
         })

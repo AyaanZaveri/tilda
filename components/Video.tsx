@@ -21,7 +21,7 @@ const Video = ({ video }: Props) => {
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
-        .get(`https://watchapi.whatever.social/streams/${query}`)
+        .get(`https://pipedapi.tokhmi.xyz/streams/${query}`)
         .then((res: any) => {
           setCurrentTrack({
             url: res?.data?.audioStreams.sort((a: any, b: any) =>
