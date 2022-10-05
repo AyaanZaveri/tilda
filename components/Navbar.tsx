@@ -52,9 +52,16 @@ const Navbar = () => {
   // console.log(showSuggestions);
 
   return (
-    <div className="fixed w-full z-10 pl-56 ml-3">
+    <div className="fixed w-full z-10 ml-3">
       <div className="flex flex-col">
-        <div className="bg-slate-900/50 backdrop-blur-md relative w-full h-[4.5rem] flex items-center flex-row pl-8">
+        <div className="bg-slate-900/50 backdrop-blur-md relative w-full h-[4.5rem] flex items-center flex-row pl-64">
+          <img
+            draggable="false"
+            onClick={() => router.push("/")}
+            src="/TildaLogo.svg"
+            className="h-16 py-4 pl-2 hover:cursor-pointer select-none absolute left-0"
+            alt=""
+          />
           <div className="relative rounded-md shadow-sm w-6/12">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <HiOutlineSearch className="text-slate-100 sm:text-sm" />
@@ -69,7 +76,7 @@ const Navbar = () => {
             </form>
           </div>
         </div>
-        <div className="pl-8">
+        <div className="pl-64">
           <div ref={searchSuggestionsRef} className="w-6/12">
             {searchRes && showSuggestions ? (
               <div className="flex flex-col shadow-2xl shadow-sky-500/5 w-full py-2 gap-1 rounded-lg border border-slate-700/50 select-none bg-slate-800/90 backdrop-blur-md text-white overflow-hidden">
