@@ -23,7 +23,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
-        .get(`https://pipedapi.tokhmi.xyz/streams/${query}`)
+        .get(`https://pipedapi.kavin.rocks/streams/${query}`)
         .then((res: any) => {
           setCurrentTrack({
             url: res?.data?.audioStreams
