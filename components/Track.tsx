@@ -16,18 +16,8 @@ interface Props {
 
 const Track = ({ track }: Props) => {
   const [playing, setPlaying] = useState<boolean>(false);
-  const [albumData, setAlbumData] = useState<any>();
 
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
-
-  const getAlbumData = () => {
-    axios
-      .get(`${apiUrl}/album/${track?.album?.id}`)
-      .then((res: any) => {
-        setAlbumData(res.data);
-      })
-      .catch((err: any) => console.log(err));
-  };
 
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
@@ -51,10 +41,6 @@ const Track = ({ track }: Props) => {
       });
     }
   };
-
-  useEffect(() => {
-    getAlbumData();
-  }, []);
 
   const router = useRouter();
 
