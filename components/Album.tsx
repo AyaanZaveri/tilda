@@ -36,7 +36,7 @@ const Album = ({ album }: Props) => {
       onClick={() =>
         router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
       }
-      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-lg hover:shadow-sky-500/25 hover:cursor-pointer"
+      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 hover:cursor-pointer"
     >
       <div className="flex flex-row gap-3">
         <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all">

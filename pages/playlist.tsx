@@ -75,8 +75,8 @@ const Home: NextPage = () => {
                 alt=""
               />
             ) : null}
-            <div className="flex flex-col pt-4 gap-4 text-white">
-              <span className="text-4xl font-bold">{albumData?.title}</span>
+            <div className="flex flex-col pt-6 gap-4 text-white">
+              <span className="text-4xl font-semibold">{albumData?.title}</span>
               <div className="flex flex-col">
                 <div className="inline-flex gap-2 items-center">
                   {isExplicit ? <MdExplicit /> : null}
