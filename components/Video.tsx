@@ -49,7 +49,7 @@ const Video = ({ video }: Props) => {
         <div className="relative flex justify-center items-center overflow-hidden group transition-all bg-slate-800 rounded-md">
           <img
             draggable={false}
-            className="w-12 h-min"
+            className="w-12 h-auto"
             src={video?.thumbnails[0]?.url}
             alt=""
           />
