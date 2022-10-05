@@ -30,7 +30,7 @@ const BAudioPlayer = () => {
   return (
     <div className="z-20 select-none">
       {currentTrack?.url?.length > 0 ? (
-        <div className="fixed bottom-0 w-full justify-center flex items-center bg-gradient-to-b from-slate-900/75 to-sky-900/40 backdrop-blur-md h-20">
+        <div className="fixed bottom-0 w-full justify-center flex items-center bg-gradient-to-b from-slate-900/75 to-sky-900/30 backdrop-blur-md h-20">
           <div className="flex flex-row gap-3 items-center text-sm text-white w-full justify-center">
             <div className="absolute left-0 flex flex-row gap-3 pl-4">
               <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all">
