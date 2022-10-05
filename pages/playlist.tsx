@@ -10,7 +10,7 @@ import AlbumTrack from "../components/AlbumTrack";
 import Navbar from "../components/Navbar";
 import { apiUrl } from "../utils/apiUrl";
 
-const Home: NextPage = () => {
+const Playlist: NextPage = () => {
   const { query } = useRouter();
   const listId = query.list;
   const [albumBrowseId, setAlbumBrowseId] = useState<number>();
@@ -163,4 +163,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Playlist;
