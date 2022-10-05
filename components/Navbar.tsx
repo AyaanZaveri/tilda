@@ -72,7 +72,7 @@ const Navbar = () => {
         <div className="pl-8">
           <div ref={searchSuggestionsRef} className="w-6/12">
             {searchRes && showSuggestions ? (
-              <div className="flex flex-col shadow-2xl shadow-sky-500/5 w-full py-2 gap-1 rounded-lg border border-slate-700/50 select-none bg-slate-800/80 backdrop-blur-md text-white overflow-hidden">
+              <div className="flex flex-col shadow-2xl shadow-sky-500/5 w-full py-2 gap-1 rounded-lg border border-slate-700/50 select-none bg-slate-800/90 backdrop-blur-md text-white overflow-hidden">
                 {searchRes?.slice(0, 8)?.map((track: any, index: any) => (
                   <div
                     onClick={() => {
