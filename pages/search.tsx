@@ -35,10 +35,6 @@ const Search = () => {
   const [videos, setVideos] = useState<any>([]);
   const [artists, setArtists] = useState<any>([]);
   const [communityPlaylists, setCommunityPlaylists] = useState<any>([]);
-  const [currentSong, setCurrentSong] = useState<any>({
-    url: "",
-    track: "",
-  });
 
   const getSearchResults = () => {
     setTopResults([]);
@@ -98,7 +94,11 @@ const Search = () => {
     <div>
       <div className="pt-[4.5rem] pb-8">
         <div className="flex pl-64 ml-3 justify-center pt-2">
-          <div className="flex flex-col gap-4 w-full pb-16">
+          <div
+            className={`flex flex-col gap-4 w-full ${
+              currentTrack?.url?.length > 3 ? "pb-16" : ""
+            }`}
+          >
             {topResults.length > 0 ? (
               <div className="w-3/4 flex justify-center flex-col gap-2">
                 <span className="justify-start items-start font-semibold text-2xl text-white w-full">
