@@ -1,4 +1,4 @@
-const tildaApiUrl = "https://tilda-api.ayaanzaveri.repl.co/";
-const pipedApiUrl = "https://pa.il.ax/";
+const tildaApiUrl = "https://tilda-api.deta.dev/";
+const pipedApiUrl = "https://pipedapi.kavin.rocks/";
 
 export { tildaApiUrl, pipedApiUrl };
