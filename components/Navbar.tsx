@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { HiOutlineSearch } from "react-icons/hi";
-import { tildaApiUrl } from "../utils/apiUrl";
+import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
 import { useRouter } from "next/router";
 
 const Navbar = () => {
