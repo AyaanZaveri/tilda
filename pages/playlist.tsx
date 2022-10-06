@@ -148,7 +148,7 @@ const Playlist: NextPage = () => {
                 )}
                 {albumData?.tracks ? (
                   <div className="mt-3">
-                    <button className="px-4 py-1 shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded transition ease-in-out duration-300">
+                    <button className="px-6 py-1 shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded transition ease-in-out duration-300">
                       <PlayIcon className="w-4 h-4" />
                       Play
                     </button>
