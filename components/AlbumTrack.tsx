@@ -8,6 +8,7 @@ import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
 import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
+import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
 
 interface Props {
   track: any;
@@ -23,7 +24,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
-        .get(`https://pipedapi.kavin.rocks/streams/${query}`)
+        .get(`${pipedApiUrl}/streams/${query}`)
         .then((res: any) => {
           setCurrentTrack({
             url: res?.data?.audioStreams
@@ -49,7 +50,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
   return (
     <div
       key={track.videoId}
-      className="flex h-12 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center group gap-3 rounded-md px-3 text-sm text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 hover:cursor-pointer"
+      className="flex py-3 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center group gap-3 rounded-md px-3 text-sm text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 hover:cursor-pointer"
       onClick={() => getCurrentSong(track.videoId)}
     >
       <div className="flex flex-row gap-5 items-center">

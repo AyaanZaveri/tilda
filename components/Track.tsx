@@ -6,7 +6,7 @@ import { MdExplicit } from "react-icons/md";
 import { HiHeart } from "react-icons/hi";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
-import { apiUrl } from "../utils/apiUrl";
+import { pipedApiUrl } from "../utils/apiUrl";
 import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
 
@@ -22,7 +22,7 @@ const Track = ({ track }: Props) => {
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
-        .get(`https://pipedapi.kavin.rocks/streams/${query}`)
+        .get(`${pipedApiUrl}/streams/${query}`)
         .then((res: any) => {
           setCurrentTrack({
             url: res?.data?.audioStreams

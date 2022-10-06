@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { HiOutlineSearch } from "react-icons/hi";
-import { apiUrl } from "../utils/apiUrl";
+import { tildaApiUrl } from "../utils/apiUrl";
 import { useRouter } from "next/router";
 
 const Navbar = () => {
@@ -16,7 +16,7 @@ const Navbar = () => {
   const getSearchSuggestions = (query: string) => {
     if (query.length > 2) {
       axios
-        .get(`https://pipedapi.kavin.rocks/suggestions/?query=${query}`)
+        .get(`${pipedApiUrl}/suggestions/?query=${query}`)
         .then((res: any) => {
           setSearchRes(res.data);
         })

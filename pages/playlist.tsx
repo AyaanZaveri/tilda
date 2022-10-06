@@ -9,7 +9,7 @@ import { titleCase } from "title-case";
 import { currentTrackState } from "../atoms/songAtom";
 import AlbumTrack from "../components/AlbumTrack";
 import Navbar from "../components/Navbar";
-import { apiUrl } from "../utils/apiUrl";
+import { tildaApiUrl } from "../utils/apiUrl";
 
 const Playlist: NextPage = () => {
   const { query } = useRouter();
@@ -23,7 +23,7 @@ const Playlist: NextPage = () => {
 
   const getAlbumBrowseId = () => {
     axios
-      .get(`${apiUrl}/albumBrowse/${listId}`)
+      .get(`${tildaApiUrl}/albumBrowse/${listId}`)
       .then((res: any) => {
         setAlbumBrowseId(res.data);
       })
@@ -32,7 +32,7 @@ const Playlist: NextPage = () => {
 
   const getAlbumData = () => {
     axios
-      .get(`${apiUrl}/album/${albumBrowseId}`)
+      .get(`${tildaApiUrl}/album/${albumBrowseId}`)
       .then((res: any) => {
         setAlbumData(res.data);
       })
@@ -69,7 +69,11 @@ const Playlist: NextPage = () => {
             {albumData?.thumbnails ? (
               <img
                 draggable={false}
-                className="w-[16.5rem] h-[16.5rem] rounded-md select-none shadow-2xl shadow-sky-500/20"
+                className="w-[16.5rem] h-[16.5rem] rounded-md select-none shadow-2xl shadow-sky-500/20 hover:shadow-sky-900 hover:scale-[1.03] ease-in-out duration-1000"
+                style={{
+                  transition:
+                    "transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1.8)",
+                }}
                 src={
                   albumData?.thumbnails[albumData?.thumbnails.length - 1]?.url
                 }

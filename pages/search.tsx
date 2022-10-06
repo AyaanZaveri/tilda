@@ -17,7 +17,7 @@ import {
   HiVolumeUp,
 } from "react-icons/hi";
 import { MdExplicit } from "react-icons/md";
-import { apiUrl } from "../utils/apiUrl";
+import { tildaApiUrl } from "../utils/apiUrl";
 import Album from "../components/Album";
 import Video from "../components/Video";
 import Marquee from "react-fast-marquee";
@@ -50,7 +50,7 @@ const Search = () => {
 
     if (query.q) {
       axios
-        .get(`${apiUrl}/search/all/${query.q}`)
+        .get(`${tildaApiUrl}/search/all/${query.q}`)
         .then((res: any) => {
           setSearchResults(res.data);
         })

@@ -6,7 +6,7 @@ import { MdExplicit } from "react-icons/md";
 import { HiHeart } from "react-icons/hi";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
-import { apiUrl } from "../utils/apiUrl";
+import { tildaApiUrl } from "../utils/apiUrl";
 
 interface Props {
   album: any;
@@ -17,7 +17,7 @@ const Album = ({ album }: Props) => {
 
   const getAlbumData = () => {
     axios
-      .get(`${apiUrl}/album/${album?.browseId}`)
+      .get(`${tildaApiUrl}/album/${album?.browseId}`)
       .then((res: any) => {
         setAlbumData(res.data);
       })
