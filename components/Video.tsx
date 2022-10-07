@@ -44,6 +44,7 @@ const Video = ({ video }: Props) => {
       key={video.videoId}
       className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-slate-700 hover:text-white dark:text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 hover:cursor-pointer"
       onClick={() => getCurrentSong(video.videoId)}
+      id={video.videoId}
     >
       <div className="flex flex-row gap-3">
         <div className="relative flex justify-center items-center overflow-hidden group transition-all bg-slate-800 rounded-md">
