@@ -7,7 +7,6 @@ import { MdExplicit } from "react-icons/md";
 import { useRecoilState } from "recoil";
 import { titleCase } from "title-case";
 import { currentTrackState } from "../atoms/songAtom";
-import { currentThemeState } from "../atoms/themeAtom";
 import AlbumTrack from "../components/AlbumTrack";
 import Navbar from "../components/Navbar";
 import { tildaApiUrl } from "../utils/apiUrl";
@@ -21,7 +20,6 @@ const Playlist: NextPage = () => {
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
-  const [currentTheme, setCurrentTheme] = useRecoilState(currentThemeState);
 
   const getAlbumBrowseId = () => {
     axios
@@ -67,7 +65,7 @@ const Playlist: NextPage = () => {
     <div
       className={`pl-64 ml-3 pr-12 ${
         currentTrack?.url?.length > 3 ? "pb-16" : ""
-      } ${currentTheme == "dark" ? "dark" : null}`}
+      }`}
     >
       <div className="pt-[4.5rem] pb-8">
         <div className="pt-8">

@@ -9,7 +9,6 @@ import {
   SunIcon,
 } from "@heroicons/react/24/solid";
 import { useRecoilState } from "recoil";
-import { currentThemeState } from "../atoms/themeAtom";
 import { useTheme } from "next-themes";
 
 const Navbar = () => {
@@ -101,7 +100,7 @@ const Navbar = () => {
             </div>
             <form onSubmit={(e) => handleSearch(e)}>
               <input
-                className="focus:ring-sky-200 border-none bg-slate-100 active:bg-slate-100 focus:ring focus:border-sky-500 dark:focus:ring-sky-400/90 hover:shadow-sky-500/50 shadow-2xl shadow-sky-500/30 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-100 dark:focus:border-sky-700 dark:active:bg-slate-900 w-full pl-8 pr-12 sm:text-sm rounded-md transition ease-in-out duration-300"
+                className="focus:ring-sky-200 border-none bg-slate-100 active:bg-slate-100 focus:ring dark:focus:ring-sky-400/90 hover:shadow-sky-500/50 shadow-2xl shadow-sky-500/30 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-100 dark:active:bg-slate-900 w-full pl-8 pr-12 sm:text-sm rounded-md transition ease-in-out duration-300"
                 type="text"
                 placeholder="Search"
                 onChange={(e) => setSearch(e.target.value)}
@@ -124,7 +123,7 @@ const Navbar = () => {
                 : resolvedTheme == "dark"
                 ? "bg-slate-800 hover:bg-slate-700 active:bg-slate-600"
                 : "bg-slate-100 hover:bg-slate-200 active:bg-slate-300"
-            } transition ease-in-out duration-300 rounded-full`}
+            } transition ease-in-out duration-300 rounded-full hover:shadow-sky-500/20 shadow-xl shadow-sky-500/10`}
           >
             {theme == "light" ? (
               <SunIcon className="h-full p-2 w-full text-slate-700" />
@@ -148,7 +147,7 @@ const Navbar = () => {
         <div className="pl-64">
           <div ref={searchSuggestionsRef} className="w-6/12">
             {searchRes && showSuggestions ? (
-              <div className="flex flex-col shadow-2xl shadow-sky-500/5 w-full py-2 gap-1 rounded-lg select-none bg-slate-800/90 backdrop-blur-md text-white overflow-hidden">
+              <div className="flex flex-col shadow-2xl hover:shadow-sky-500/50 shadow-sky-500/30 w-full py-2 gap-1 rounded-lg select-none bg-slate-800/90 backdrop-blur-md text-white overflow-hidden">
                 {searchRes?.slice(0, 8)?.map((track: any, index: any) => (
                   <div
                     onClick={() => {

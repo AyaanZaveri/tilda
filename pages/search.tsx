@@ -24,7 +24,6 @@ import Marquee from "react-fast-marquee";
 import TopResult from "../components/TopResult";
 import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
-import { currentThemeState } from "../atoms/themeAtom";
 
 const Search = () => {
   const { query } = useRouter();
@@ -60,7 +59,6 @@ const Search = () => {
   }, [query.q]);
 
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
-  const [currentTheme, setCurrentTheme] = useRecoilState(currentThemeState);
 
   console.log(currentTrack);
 
