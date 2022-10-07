@@ -24,6 +24,7 @@ import Marquee from "react-fast-marquee";
 import TopResult from "../components/TopResult";
 import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
+import { currentThemeState } from "../atoms/themeAtom";
 
 const Search = () => {
   const { query } = useRouter();
@@ -59,6 +60,7 @@ const Search = () => {
   }, [query.q]);
 
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
+  const [currentTheme, setCurrentTheme] = useRecoilState(currentThemeState);
 
   console.log(currentTrack);
 
@@ -101,7 +103,7 @@ const Search = () => {
           >
             {topResults.length > 0 ? (
               <div className="w-3/4 flex justify-center flex-col gap-2">
-                <span className="justify-start items-start font-semibold text-2xl text-white w-full">
+                <span className="justify-start items-start font-semibold text-2xl text-slate-700 dark:text-white w-full">
                   Top Result
                 </span>
                 {topResults?.map((result: any, index: number) => (
@@ -111,7 +113,7 @@ const Search = () => {
             ) : null}
             {songs.length > 0 ? (
               <div className="w-3/4 flex justify-center flex-col gap-2">
-                <span className="justify-start items-start font-semibold text-2xl text-white w-min">
+                <span className="justify-start items-start font-semibold text-2xl text-slate-700 dark:text-white w-min">
                   Tracks
                 </span>
                 {songs?.map((track: any, index: number) => (
@@ -121,7 +123,7 @@ const Search = () => {
             ) : null}
             {albums.length > 0 ? (
               <div className="w-3/4 flex justify-center flex-col gap-2">
-                <span className="justify-start items-start font-semibold text-2xl text-white w-min">
+                <span className="justify-start items-start font-semibold text-2xl text-slate-700 dark:text-white w-min">
                   Albums
                 </span>
                 {albums?.map((album: any, index: number) => (
@@ -131,7 +133,7 @@ const Search = () => {
             ) : null}
             {videos.length > 0 ? (
               <div className="w-3/4 flex justify-center flex-col gap-2">
-                <span className="justify-start items-start font-semibold text-2xl text-white w-min">
+                <span className="justify-start items-start font-semibold text-2xl text-slate-700 dark:text-white w-min">
                   Videos
                 </span>
                 {videos?.map((video: any, index: number) => (
@@ -141,7 +143,7 @@ const Search = () => {
             ) : null}
             {artists.length > 0 ? (
               <div className="w-3/4 flex justify-center flex-col gap-2">
-                <span className="justify-start items-start font-semibold text-2xl text-white w-min">
+                <span className="justify-start items-start font-semibold text-2xl text-slate-700 dark:text-white w-min">
                   Artists
                 </span>
                 {artists?.map((artist: any, index: number) => (

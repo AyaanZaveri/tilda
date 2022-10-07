@@ -13,6 +13,7 @@
     "axios": "^0.27.2",
     "firebase": "^9.10.0",
     "next": "latest",
+    "next-themes": "^0.2.1",
     "plyr-react": "^5.1.0",
     "react": "18.1.0",
     "react-audio-player": "^0.17.0",

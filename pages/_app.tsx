@@ -4,14 +4,17 @@ import Navbar from "../components/Navbar";
 import Layout from "../components/Layout";
 import { RecoilRoot, useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
+import { ThemeProvider } from "next-themes";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div className="font-['Poppins']">
       <RecoilRoot>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <ThemeProvider attribute="class">
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
       </RecoilRoot>
     </div>
   );

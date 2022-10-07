@@ -18,15 +18,25 @@ body {
   background-color: transparent;
   box-shadow: none;
   padding: 0px;
+  margin-top: 8px;
 }
 
 .rhap_play-pause-button {
   margin-bottom: 3px;
 }
 
-.rhap_time {
-  font-size: 0.875rem;
-  color: white;
+@media (prefers-color-scheme: light) {
+  .rhap_time {
+    font-size: 0.875rem;
+    color: #334155;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .rhap_time {
+    font-size: 0.875rem;
+    color: white;
+  }
 }
 
 .rhap_main-controls-button {
@@ -45,6 +55,10 @@ body {
   width: 12px;
   height: 12px;
   top: -4px;
+}
+
+.rhap_play-pause-button {
+  width: 40px;
 }
 
 .link_animated {
@@ -79,6 +93,6 @@ body {
 
   /* Scroll track styles (Background) */
   .scrollbar::-webkit-scrollbar-track {
-    @apply bg-slate-900;
+    @apply bg-transparent;
   }
 }
