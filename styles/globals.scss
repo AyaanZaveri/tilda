@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 $rhap_theme-color: #0ea5e9 !default; // Color of all buttons and volume/progress indicators
-$rhap_font-family: "Inter", sans-serif !default; // Font family of current time and duration
+$rhap_font-family: "Poppins", sans-serif !default; // Font family of current time and duration
 @import "react-h5-audio-player/src/styles.scss";
 
 html {
@@ -25,18 +25,17 @@ body {
   margin-bottom: 3px;
 }
 
-@media (prefers-color-scheme: light) {
-  .rhap_time {
-    font-size: 0.875rem;
-    color: #334155;
-  }
+[data-theme="light"] {
+  --timeColour: #334155;
 }
 
-@media (prefers-color-scheme: dark) {
-  .rhap_time {
-    font-size: 0.875rem;
-    color: white;
-  }
+[data-theme="dark"] {
+  --timeColour: white;
+}
+
+.rhap_time {
+  font-size: 0.875rem;
+  color: var(--timeColour);
 }
 
 .rhap_main-controls-button {

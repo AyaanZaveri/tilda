@@ -50,7 +50,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
   return (
     <div
       key={track.videoId}
-      className="flex py-3 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center group gap-3 rounded-md px-3 text-sm text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 hover:cursor-pointer"
+      className="flex py-3 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center group gap-3 rounded-md px-3 text-sm text-slate-700 dark:text-white hover:text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 hover:cursor-pointer"
       onClick={() => getCurrentSong(track.videoId)}
     >
       <div className="flex flex-row gap-5 items-center">
