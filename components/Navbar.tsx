@@ -147,7 +147,7 @@ const Navbar = () => {
         <div className="pl-64">
           <div ref={searchSuggestionsRef} className="w-6/12">
             {searchRes && showSuggestions ? (
-              <div className="flex flex-col shadow-2xl hover:shadow-sky-500/50 shadow-sky-500/30 w-full py-2 gap-1 rounded-lg select-none bg-slate-800/90 backdrop-blur-md text-white overflow-hidden">
+              <div className="flex flex-col shadow-2xl hover:shadow-sky-500/20 shadow-sky-500/10 w-full py-2 gap-1 rounded-lg select-none bg-slate-100/90 dark:bg-slate-800/90 backdrop-blur-md text-slate-700 dark:text-white overflow-hidden transition ease-in-out duration-300">
                 {searchRes?.slice(0, 8)?.map((track: any, index: any) => (
                   <div
                     onClick={() => {
@@ -156,7 +156,7 @@ const Navbar = () => {
                     }}
                     key={index}
                   >
-                    <span className="inline-flex w-full text-sm hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 py-2 px-4 cursor-pointer transition">
+                    <span className="inline-flex w-full hover:text-white text-sm hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 py-2 px-4 cursor-pointer transition">
                       {track}
                     </span>
                   </div>

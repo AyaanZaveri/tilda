@@ -73,10 +73,10 @@ const Playlist: NextPage = () => {
             {albumData?.thumbnails ? (
               <img
                 draggable={false}
-                className="w-[16.5rem] h-[16.5rem] rounded-md select-none shadow-2xl shadow-sky-500/20 hover:shadow-sky-900 hover:scale-[1.03] ease-in-out duration-1000"
+                className="w-[16.5rem] h-[16.5rem] rounded-md select-none shadow-2xl shadow-sky-500/20 hover:scale-[1.03]"
                 style={{
                   transition:
-                    "transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1.8)",
+                    "transform 2s cubic-bezier(0.34, 1.56, 0.64, 1.8)",
                 }}
                 src={
                   albumData?.thumbnails[albumData?.thumbnails.length - 1]?.url
@@ -114,7 +114,7 @@ const Playlist: NextPage = () => {
                     {albumData?.description ? (
                       <div>
                         <div
-                          className="mt-3 text-slate-700 dark:text-whitetext-white"
+                          className="mt-3 text-slate-700 dark:text-white"
                           dangerouslySetInnerHTML={{
                             __html: albumData?.description?.replaceAll(
                               /\n/g,
@@ -156,7 +156,7 @@ const Playlist: NextPage = () => {
                 )}
                 {albumData?.tracks ? (
                   <div className="mt-3">
-                    <button className="px-6 py-1 shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded transition ease-in-out duration-300">
+                    <button className="px-6 py-1 text-white shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded transition ease-in-out duration-300">
                       <PlayIcon className="w-4 h-4" />
                       Play
                     </button>
