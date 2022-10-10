@@ -100,7 +100,7 @@ const Navbar = () => {
             </div>
             <form onSubmit={(e) => handleSearch(e)}>
               <input
-                className="focus:ring-sky-200 border-none bg-slate-100 active:bg-slate-100 focus:ring dark:focus:ring-sky-400/90 hover:shadow-sky-500/50 shadow-2xl shadow-sky-500/30 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-100 dark:active:bg-slate-900 w-full pl-8 pr-12 sm:text-sm rounded-md transition ease-in-out duration-300"
+                className="focus:ring-sky-200 border-none bg-slate-100 active:bg-slate-200 focus:ring dark:focus:ring-sky-400/90 hover:shadow-sky-500/50 shadow-2xl shadow-sky-500/30 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-100 dark:active:bg-slate-900 w-full pl-8 pr-12 sm:text-sm rounded-md transition ease-in-out duration-300"
                 type="text"
                 placeholder="Search"
                 onChange={(e) => setSearch(e.target.value)}
