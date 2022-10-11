@@ -25,7 +25,7 @@ import Marquee from "react-fast-marquee";
 
 const BAudioPlayer = () => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
-  console.log(currentTrack.track);
+  // console.log(currentTrack.track);
 
   return (
     <div className="z-20 select-none">

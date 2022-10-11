@@ -6,10 +6,11 @@ import { useEffect, useState } from "react";
 import { MdExplicit } from "react-icons/md";
 import { useRecoilState } from "recoil";
 import { titleCase } from "title-case";
+import { currentPlaylistState } from "../atoms/playlistAtom";
 import { currentTrackState } from "../atoms/songAtom";
 import AlbumTrack from "../components/AlbumTrack";
 import Navbar from "../components/Navbar";
-import { tildaApiUrl } from "../utils/apiUrl";
+import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
 
 const Playlist: NextPage = () => {
   const { query } = useRouter();
@@ -20,6 +21,8 @@ const Playlist: NextPage = () => {
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
+  const [currentPlaylist, setCurrentPlaylist] =
+    useRecoilState(currentPlaylistState);
 
   const getAlbumBrowseId = () => {
     axios
@@ -60,6 +63,49 @@ const Playlist: NextPage = () => {
       checkIsExplicit();
     }
   }, [albumData]);
+
+  const [songUrls, setSongUrls] = useState<any>([]);
+
+  useEffect(() => {
+    albumData?.tracks?.map((track: any) => {
+      axios
+        .get(`${pipedApiUrl}/streams/${track?.videoId}`)
+        .then((res: any) => {
+          setSongUrls((oldSongUrls: any) => [
+            ...oldSongUrls,
+            res?.data?.audioStreams
+              .filter((stream: any) => stream?.mimeType == "audio/mp4")
+              .sort((a: any, b: any) =>
+                a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
+              )[0]?.url,
+          ]);
+        })
+        .catch((err: any) => console.log(err));
+    });
+  }, [albumData?.tracks]);
+
+  useEffect(() => {
+    if (songUrls && albumData) {
+      albumData?.tracks?.forEach((track: any, idx: number) => {
+        if (songUrls[idx]?.length > 2 && albumData) {
+          setCurrentPlaylist((oldCurrentPlaylist: any) => [
+            ...oldCurrentPlaylist,
+            {
+              track: {
+                ...track,
+                thumbnails: albumData?.thumbnails,
+              },
+              videoId: track?.videoId,
+              url: songUrls[idx],
+            },
+          ]);
+        }
+      });
+    }
+  }, [songUrls]);
+
+  console.log(songUrls);
+  console.log(currentPlaylist);
 
   return (
     <div

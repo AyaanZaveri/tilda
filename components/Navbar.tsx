@@ -75,7 +75,7 @@ const Navbar = () => {
 
   const { theme, setTheme, resolvedTheme } = useTheme();
 
-  console.log(resolvedTheme);
+  // console.log(resolvedTheme);
 
   return (
     <div className="fixed w-full z-10 px-3">

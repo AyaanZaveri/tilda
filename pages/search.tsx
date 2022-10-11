@@ -24,6 +24,7 @@ import Marquee from "react-fast-marquee";
 import TopResult from "../components/TopResult";
 import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
+import { currentPlaylistState } from "../atoms/playlistAtom";
 
 const Search = () => {
   const { query } = useRouter();
@@ -59,8 +60,10 @@ const Search = () => {
   }, [query.q]);
 
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
+  const [currentPlaylist, setCurrentPlaylist] =
+    useRecoilState(currentPlaylistState);
 
-  console.log(currentTrack);
+  console.log(currentPlaylist);
 
   useEffect(() => {
     if (searchResults) {
