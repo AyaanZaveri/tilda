@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   HiFastForward,
   HiPause,
@@ -22,14 +22,51 @@ import {
   Rewind24Filled,
 } from "@fluentui/react-icons";
 import Marquee from "react-fast-marquee";
+import { currentPlaylistState } from "../atoms/playlistAtom";
+import { BsSkipEndFill, BsSkipStartFill } from "react-icons/bs";
 
 const BAudioPlayer = () => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
+  const [currentPlaylist, setCurrentPlaylist] =
+    useRecoilState(currentPlaylistState);
   // console.log(currentTrack.track);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState<any>(0);
+  const [playingSong, setPlayingSong] = useState<any>();
+
+  useEffect(() => {
+    setPlayingSong(currentTrack);
+  }, [currentTrack]);
+
+  console.log(currentTrackIndex);
+
+  const handleClickNext = () => {
+    // console.log("click next");
+    setCurrentTrackIndex((currentTrack: any) =>
+      currentTrack < currentPlaylist?.length - 1 ? currentTrack + 1 : 0
+    );
+  };
+
+  const handleClickPrevious = () => {
+    // console.log("click previous");
+    setCurrentTrackIndex((currentTrack: any) =>
+      currentTrack < currentPlaylist?.length + 1 ? currentTrack - 1 : 0
+    );
+  };
+
+  const handleEnd = () => {
+    // console.log("end");
+    setCurrentTrackIndex((currentTrack: any) =>
+      currentTrack < currentPlaylist?.length - 1 ? currentTrack + 1 : 0
+    );
+  };
+
+  useEffect(() => {
+    setPlayingSong(currentPlaylist[currentTrackIndex]);
+  }, [currentPlaylist, currentTrackIndex]);
 
   return (
     <div className="z-20 select-none">
-      {currentTrack?.url?.length > 0 ? (
+      {playingSong?.url?.length > 0 ? (
         <div className="fixed bottom-0 w-full justify-center flex items-center bg-white/75 dark:bg-slate-900/75 backdrop-blur-md h-20">
           <div className="flex flex-row gap-3 items-center text-sm text-slate-700 dark:text-white w-full justify-center">
             <div className="absolute left-0 flex flex-row gap-3 pl-4">
@@ -38,10 +75,10 @@ const BAudioPlayer = () => {
                   draggable={false}
                   className="w-[3rem]"
                   src={
-                    currentTrack?.track?.thumbnails
-                      ? currentTrack?.track?.thumbnails[0]?.url
-                      : currentTrack?.thumbnails
-                      ? currentTrack?.thumbnails[0]?.url
+                    playingSong?.track?.thumbnails
+                      ? playingSong?.track?.thumbnails[0]?.url
+                      : playingSong?.thumbnails
+                      ? playingSong?.thumbnails[0]?.url
                       : ""
                   }
                   alt=""
@@ -50,13 +87,13 @@ const BAudioPlayer = () => {
               <div className="flex flex-col justify-center">
                 <div className="flex flex-row gap-3">
                   <span className="font-semibold inline-flex gap-1 items-center">
-                    {currentTrack?.track?.title}{" "}
-                    {currentTrack?.track?.isExplicit ? <MdExplicit /> : null}
+                    {playingSong?.track?.title}{" "}
+                    {playingSong?.track?.isExplicit ? <MdExplicit /> : null}
                   </span>
                 </div>
                 <div>
                   <span className="font-normal">
-                    {currentTrack?.track?.artists.map(
+                    {playingSong?.track?.artists?.map(
                       (artist: any, index: number) => (
                         <span>{(index ? ", " : "") + artist?.name}</span>
                       )
@@ -68,13 +105,19 @@ const BAudioPlayer = () => {
             <div className="w-2/5">
               <AudioPlayer
                 autoPlay
-                src={currentTrack?.url}
+                showSkipControls
+                src={playingSong?.url}
+                onEnded={handleEnd}
+                onClickNext={handleClickNext}
+                onClickPrevious={handleClickPrevious}
                 className="outline-none"
                 customIcons={{
                   forward: <FastForward24Filled />,
                   rewind: <Rewind24Filled />,
                   play: <Play24Filled />,
                   pause: <Pause24Filled />,
+                  next: <BsSkipEndFill />,
+                  previous: <BsSkipStartFill />,
                   volume: (
                     <img
                       draggable={false}

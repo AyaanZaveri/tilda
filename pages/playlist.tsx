@@ -11,6 +11,8 @@ import { currentTrackState } from "../atoms/songAtom";
 import AlbumTrack from "../components/AlbumTrack";
 import Navbar from "../components/Navbar";
 import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
+import { fancyTimeFormat } from "../utils/fancyTimeFormat";
+import { axiosReq } from "../utils/axiosReq";
 
 const Playlist: NextPage = () => {
   const { query } = useRouter();
@@ -24,13 +26,18 @@ const Playlist: NextPage = () => {
   const [currentPlaylist, setCurrentPlaylist] =
     useRecoilState(currentPlaylistState);
 
+  const [curPlay, setCurPlay] = useState<any>();
+
   const getAlbumBrowseId = () => {
     axios
       .get(`${tildaApiUrl}/albumBrowse/${listId}`)
       .then((res: any) => {
         setAlbumBrowseId(res.data);
       })
-      .catch((err: any) => console.log(err));
+      .catch(
+        (err: any) => {}
+        // console.log(err)
+      );
   };
 
   const getAlbumData = () => {
@@ -64,35 +71,61 @@ const Playlist: NextPage = () => {
     }
   }, [albumData]);
 
-  // console.log(albumData?.tracks);
-
-  const getPlaylistSongs = async () => {
-    await setCurrentPlaylist([]);
-    await albumData?.tracks?.forEach((track: any) => {
-      axios
-        .get(`${pipedApiUrl}/streams/${track?.videoId}`)
-        .then((res: any) => {
-          setCurrentPlaylist((oldCurrentPlaylist: any) => [
-            ...oldCurrentPlaylist,
-            {
-              track: {
-                ...track,
-                thumbnails: albumData?.thumbnails,
-                videoId: track?.videoId,
-                url: res?.data?.audioStreams
-                  .filter((stream: any) => stream?.mimeType == "audio/mp4")
-                  .sort((a: any, b: any) =>
-                    a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
-                  )[0]?.url,
-              },
-            },
-          ]);
-        })
-        .catch((err: any) => console.log(err));
-    });
+  const getAudioFromSong = async (videoId: string) => {
+    const response = await axios.get(`${pipedApiUrl}/streams/${videoId}`);
+    const data = response.data;
+    return data?.audioStreams
+      .filter((stream: any) => stream?.mimeType == "audio/mp4")
+      .sort((a: any, b: any) =>
+        a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
+      )[0]?.url;
   };
 
-  console.log(currentPlaylist);
+  const getPlaylistSongs = async () => {
+    setCurPlay([]);
+    if (albumData?.tracks?.length >= 1) {
+      await albumData?.tracks?.map(async (track: any, idx: number) => {
+        const songUrl = await getAudioFromSong(track?.videoId);
+        // await setCurPlay((oldCurPlay: any) => [...oldCurPlay, idx]);
+        await setCurPlay((oldPlaylist: any) => [
+          ...oldPlaylist,
+          {
+            ...track,
+            track: {
+              title: track?.title,
+              thumbnails: albumData?.thumbnails,
+              isExplicit: track?.isExplicit,
+              artists: track?.artists,
+            },
+            trackNum: idx,
+            url: songUrl,
+          },
+        ]);
+      });
+    }
+  };
+
+  useEffect(() => {
+    getPlaylistSongs();
+  }, [albumData?.tracks]);
+
+  const setPlaylistSongs = () => {
+    getPlaylistSongs();
+    setCurrentPlaylist(
+      curPlay?.sort((a: any, b: any) =>
+        a.trackNum > b.trackNum ? 1 : b.trackNum > a.trackNum ? -1 : 0
+      )
+    );
+  };
+
+  // curPlay?.sort((a: any, b: any) =>
+  // a.duration_seconds > b.duration_seconds
+  //   ? 1
+  //   : b.duration_seconds > a.duration_seconds
+  //   ? -1
+  //   : 0
+
+  // console.log(curPlay);
 
   return (
     <div
@@ -190,7 +223,7 @@ const Playlist: NextPage = () => {
                 {albumData?.tracks ? (
                   <div className="mt-3">
                     <button
-                      onClick={getPlaylistSongs}
+                      onClick={setPlaylistSongs}
                       className="px-6 py-1 text-white shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded transition ease-in-out duration-300"
                     >
                       <PlayIcon className="w-4 h-4" />
