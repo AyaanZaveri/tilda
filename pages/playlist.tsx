@@ -64,47 +64,34 @@ const Playlist: NextPage = () => {
     }
   }, [albumData]);
 
-  const [songUrls, setSongUrls] = useState<any>([]);
+  // console.log(albumData?.tracks);
 
-  useEffect(() => {
-    albumData?.tracks?.map((track: any) => {
+  const getPlaylistSongs = async () => {
+    await setCurrentPlaylist([]);
+    await albumData?.tracks?.forEach((track: any) => {
       axios
         .get(`${pipedApiUrl}/streams/${track?.videoId}`)
         .then((res: any) => {
-          setSongUrls((oldSongUrls: any) => [
-            ...oldSongUrls,
-            res?.data?.audioStreams
-              .filter((stream: any) => stream?.mimeType == "audio/mp4")
-              .sort((a: any, b: any) =>
-                a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
-              )[0]?.url,
-          ]);
-        })
-        .catch((err: any) => console.log(err));
-    });
-  }, [albumData?.tracks]);
-
-  useEffect(() => {
-    if (songUrls && albumData) {
-      albumData?.tracks?.forEach((track: any, idx: number) => {
-        if (songUrls[idx]?.length > 2 && albumData) {
           setCurrentPlaylist((oldCurrentPlaylist: any) => [
             ...oldCurrentPlaylist,
             {
               track: {
                 ...track,
                 thumbnails: albumData?.thumbnails,
+                videoId: track?.videoId,
+                url: res?.data?.audioStreams
+                  .filter((stream: any) => stream?.mimeType == "audio/mp4")
+                  .sort((a: any, b: any) =>
+                    a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
+                  )[0]?.url,
               },
-              videoId: track?.videoId,
-              url: songUrls[idx],
             },
           ]);
-        }
-      });
-    }
-  }, [songUrls]);
+        })
+        .catch((err: any) => console.log(err));
+    });
+  };
 
-  console.log(songUrls);
   console.log(currentPlaylist);
 
   return (
@@ -202,7 +189,10 @@ const Playlist: NextPage = () => {
                 )}
                 {albumData?.tracks ? (
                   <div className="mt-3">
-                    <button className="px-6 py-1 text-white shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded transition ease-in-out duration-300">
+                    <button
+                      onClick={getPlaylistSongs}
+                      className="px-6 py-1 text-white shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded transition ease-in-out duration-300"
+                    >
                       <PlayIcon className="w-4 h-4" />
                       Play
                     </button>
