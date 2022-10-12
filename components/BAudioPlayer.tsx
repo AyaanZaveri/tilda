@@ -116,8 +116,8 @@ const BAudioPlayer = () => {
                   rewind: <Rewind24Filled />,
                   play: <Play24Filled />,
                   pause: <Pause24Filled />,
-                  next: <BsSkipEndFill />,
-                  previous: <BsSkipStartFill />,
+                  next: <BsSkipEndFill className="w-7" />,
+                  previous: <BsSkipStartFill className="w-7" />,
                   volume: (
                     <img
                       draggable={false}
