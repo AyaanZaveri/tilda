@@ -78,7 +78,7 @@ const Navbar = () => {
   // console.log(resolvedTheme);
 
   return (
-    <div className="fixed w-full z-10 px-3">
+    <div className="fixed w-full z-10 px-3 select-none">
       <div className="flex flex-col">
         <div className="bg-white/75 relative dark:bg-slate-900/50 backdrop-blur-md w-full h-[4.5rem] flex items-center flex-row pl-64">
           <img
@@ -156,7 +156,7 @@ const Navbar = () => {
                     }}
                     key={index}
                   >
-                    <span className="inline-flex w-full hover:text-white text-sm hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 py-2 px-4 cursor-pointer transition">
+                    <span className="inline-flex w-full hover:text-white active:text-white text-sm hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 py-2 px-4 cursor-pointer transition">
                       {track}
                     </span>
                   </div>

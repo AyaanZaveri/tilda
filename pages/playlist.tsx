@@ -169,7 +169,7 @@ const Playlist: NextPage = () => {
                 alt=""
               />
             ) : null}
-            <div className="flex flex-col pt-3 gap-4 text-slate-700 dark:text-white">
+            <div className="flex flex-col pt-3 gap-4 select-none text-slate-700 dark:text-white">
               <span className="text-4xl font-semibold">{albumData?.title}</span>
               <div className="flex flex-col">
                 <div className="inline-flex gap-2 items-center">
