@@ -83,7 +83,7 @@ const Playlist: NextPage = () => {
       )[0]?.url;
   };
 
-  const getPlaylistSongs = async () => {
+  const getPlaylistSongs = async (playSong: boolean) => {
     setCurPlay([]);
     if (albumData?.tracks?.length >= 1) {
       await albumData?.tracks?.map(async (track: any, idx: number) => {
@@ -101,6 +101,7 @@ const Playlist: NextPage = () => {
             },
             trackNum: idx,
             url: songUrl,
+            play: playSong,
           },
         ]);
       });
@@ -108,25 +109,29 @@ const Playlist: NextPage = () => {
   };
 
   const setPlaylistSongs = () => {
-    getPlaylistSongs();
-    setCurrentPlaylist(
-      curPlay?.sort((a: any, b: any) =>
-        a.trackNum > b.trackNum ? 1 : b.trackNum > a.trackNum ? -1 : 0
-      )
-    );
+    getPlaylistSongs(true);
+    try {
+      setCurrentPlaylist(
+        curPlay?.sort((a: any, b: any) =>
+          a.trackNum > b.trackNum ? 1 : b.trackNum > a.trackNum ? -1 : 0
+        )
+      );
+    } catch (error) {}
   };
 
   useEffect(() => {
-    getPlaylistSongs();
+    getPlaylistSongs(false);
   }, [albumData]);
 
   useEffect(() => {
     if (curPlay && curPlay != "undefined") {
-      setCurrentPlaylist(
-        [...curPlay]?.sort((a: any, b: any) =>
-          a.trackNum > b.trackNum ? 1 : b.trackNum > a.trackNum ? -1 : 0
-        )
-      );
+      try {
+        setCurrentPlaylist(
+          curPlay?.sort((a: any, b: any) =>
+            a.trackNum > b.trackNum ? 1 : b.trackNum > a.trackNum ? -1 : 0
+          )
+        );
+      } catch (error) {}
     }
   }, [curPlay]);
 

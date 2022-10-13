@@ -37,11 +37,16 @@ const BAudioPlayer = () => {
 
   useEffect(() => {
     setPlayingSong(currentTrack);
-    setCurrentTrackIndex(currentTrack?.trackNum);
+    currentTrack?.trackNum
+      ? setCurrentTrackIndex(currentTrack?.trackNum)
+      : null;
   }, [currentTrack]);
 
   useEffect(() => {
-    currentPlaylist?.length >= 1 ? setPlayingSong(currentPlaylist[0]) : null;
+    console.log(currentPlaylist[0]?.play);
+    currentPlaylist?.length >= 1 && currentPlaylist[0]?.play
+      ? setPlayingSong(currentPlaylist[0])
+      : null;
   }, [currentPlaylist]);
 
   useEffect(() => {
@@ -58,27 +63,33 @@ const BAudioPlayer = () => {
 
   const handleClickNext = () => {
     // console.log("click next");
-    setCurrentTrackIndex((currentTrackIndex: any) =>
-      currentTrackIndex < currentPlaylist?.length - 1
-        ? currentTrackIndex + 1
-        : 0
-    );
+    if (playingSong?.trackNum >= 0) {
+      setCurrentTrackIndex((currentTrackIndex: any) =>
+        currentTrackIndex < currentPlaylist?.length - 1
+          ? currentTrackIndex + 1
+          : 0
+      );
+    }
   };
 
   const handleClickPrevious = () => {
     // console.log("click previous");
-    setCurrentTrackIndex((currentTrackIndex: any) =>
-      currentTrackIndex > 0 ? currentTrackIndex - 1 : 0
-    );
+    if (playingSong?.trackNum >= 0) {
+      setCurrentTrackIndex((currentTrackIndex: any) =>
+        currentTrackIndex > 0 ? currentTrackIndex - 1 : 0
+      );
+    }
   };
 
   const handleEnd = () => {
     // console.log("end");
-    setCurrentTrackIndex((currentTrackIndex: any) =>
-      currentTrackIndex < currentPlaylist?.length - 1
-        ? currentTrackIndex + 1
-        : 0
-    );
+    if (playingSong?.trackNum >= 0) {
+      setCurrentTrackIndex((currentTrackIndex: any) =>
+        currentTrackIndex < currentPlaylist?.length - 1
+          ? currentTrackIndex + 1
+          : 0
+      );
+    }
   };
 
   return (
