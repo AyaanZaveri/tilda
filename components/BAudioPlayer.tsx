@@ -42,14 +42,20 @@ const BAudioPlayer = () => {
       : null;
   }, [currentTrack]);
 
+  const handlePlayButton = () => {
+    setPlayingSong(currentPlaylist[0]);
+    setCurrentTrackIndex(0);
+  };
+
   useEffect(() => {
     console.log(currentPlaylist[0]?.play);
     currentPlaylist?.length >= 1 && currentPlaylist[0]?.play
-      ? setPlayingSong(currentPlaylist[0])
+      ? handlePlayButton()
       : null;
   }, [currentPlaylist]);
 
   useEffect(() => {
+    console.log(currentTrackIndex);
     currentPlaylist?.length >= 1
       ? setPlayingSong(currentPlaylist[currentTrackIndex])
       : null;
