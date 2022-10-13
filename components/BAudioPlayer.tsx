@@ -24,12 +24,14 @@ import {
 import Marquee from "react-fast-marquee";
 import { currentPlaylistState } from "../atoms/playlistAtom";
 import { BsSkipEndFill, BsSkipStartFill } from "react-icons/bs";
+import { playingTrackState } from "../atoms/playingTrack";
 
 const BAudioPlayer = () => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
   const [currentPlaylist, setCurrentPlaylist] =
     useRecoilState(currentPlaylistState);
-  // console.log(currentTrack.track);
+  const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
+
   const [currentTrackIndex, setCurrentTrackIndex] = useState<any>(0);
   const [playingSong, setPlayingSong] = useState<any>();
 
@@ -47,6 +49,10 @@ const BAudioPlayer = () => {
       ? setPlayingSong(currentPlaylist[currentTrackIndex])
       : null;
   }, [currentTrackIndex]);
+
+  useEffect(() => {
+    setPlayingTrack(playingSong);
+  }, [playingSong]);
 
   console.log(currentTrackIndex);
 
@@ -74,10 +80,6 @@ const BAudioPlayer = () => {
         : 0
     );
   };
-
-  useEffect(() => {
-    console.log(currentPlaylist)
-  }, [currentPlaylist]);
 
   return (
     <div className="z-20 select-none">

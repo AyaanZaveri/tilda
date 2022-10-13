@@ -13,6 +13,7 @@ import Navbar from "../components/Navbar";
 import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { axiosReq } from "../utils/axiosReq";
+import { playingTrackState } from "../atoms/playingTrack";
 
 const Playlist: NextPage = () => {
   const { query } = useRouter();
@@ -25,6 +26,7 @@ const Playlist: NextPage = () => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
   const [currentPlaylist, setCurrentPlaylist] =
     useRecoilState(currentPlaylistState);
+  const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
   const [curPlay, setCurPlay] = useState<any>();
 
@@ -142,7 +144,7 @@ const Playlist: NextPage = () => {
   return (
     <div
       className={`pl-64 ml-3 pr-12 ${
-        currentTrack?.url?.length > 3 ? "pb-16" : ""
+        playingTrack?.url?.length > 3 ? "pb-16" : ""
       }`}
     >
       <div className="pt-[4.5rem] pb-8">
@@ -236,7 +238,7 @@ const Playlist: NextPage = () => {
                   <div className="mt-3">
                     <button
                       onClick={setPlaylistSongs}
-                      className="px-6 py-1 text-white shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded transition ease-in-out duration-300"
+                      className="px-5 py-1.5 text-sm text-white shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded-md transition ease-in-out duration-300"
                     >
                       <PlayIcon className="w-4 h-4" />
                       Play

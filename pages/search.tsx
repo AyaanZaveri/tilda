@@ -25,6 +25,7 @@ import TopResult from "../components/TopResult";
 import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
 import { currentPlaylistState } from "../atoms/playlistAtom";
+import { playingTrackState } from "../atoms/playingTrack";
 
 const Search = () => {
   const { query } = useRouter();
@@ -36,6 +37,7 @@ const Search = () => {
   const [videos, setVideos] = useState<any>([]);
   const [artists, setArtists] = useState<any>([]);
   const [communityPlaylists, setCommunityPlaylists] = useState<any>([]);
+  const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
   const getSearchResults = () => {
     setTopResults([]);
@@ -99,7 +101,7 @@ const Search = () => {
         <div className="flex pl-64 ml-3 justify-center pt-2">
           <div
             className={`flex flex-col gap-4 w-full ${
-              currentTrack?.url?.length > 3 ? "pb-16" : ""
+              playingTrack?.url?.length > 3 ? "pb-16" : ""
             }`}
           >
             {topResults.length > 0 ? (
