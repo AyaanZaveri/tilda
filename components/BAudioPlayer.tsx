@@ -35,34 +35,49 @@ const BAudioPlayer = () => {
 
   useEffect(() => {
     setPlayingSong(currentTrack);
+    setCurrentTrackIndex(currentTrack?.trackNum);
   }, [currentTrack]);
+
+  useEffect(() => {
+    currentPlaylist?.length >= 1 ? setPlayingSong(currentPlaylist[0]) : null;
+  }, [currentPlaylist]);
+
+  useEffect(() => {
+    currentPlaylist?.length >= 1
+      ? setPlayingSong(currentPlaylist[currentTrackIndex])
+      : null;
+  }, [currentTrackIndex]);
 
   console.log(currentTrackIndex);
 
   const handleClickNext = () => {
     // console.log("click next");
     setCurrentTrackIndex((currentTrackIndex: any) =>
-    currentTrackIndex < currentPlaylist?.length - 1 ? currentTrackIndex + 1 : 0
+      currentTrackIndex < currentPlaylist?.length - 1
+        ? currentTrackIndex + 1
+        : 0
     );
   };
 
   const handleClickPrevious = () => {
     // console.log("click previous");
     setCurrentTrackIndex((currentTrackIndex: any) =>
-    currentTrackIndex > 0 ? currentTrackIndex - 1 : 0
+      currentTrackIndex > 0 ? currentTrackIndex - 1 : 0
     );
   };
 
   const handleEnd = () => {
     // console.log("end");
     setCurrentTrackIndex((currentTrackIndex: any) =>
-    currentTrackIndex < currentPlaylist?.length - 1 ? currentTrackIndex + 1 : 0
+      currentTrackIndex < currentPlaylist?.length - 1
+        ? currentTrackIndex + 1
+        : 0
     );
   };
 
   useEffect(() => {
-    setPlayingSong(currentPlaylist[currentTrackIndex]);
-  }, [currentPlaylist, currentTrackIndex]);
+    console.log(currentPlaylist)
+  }, [currentPlaylist]);
 
   return (
     <div className="z-20 select-none">

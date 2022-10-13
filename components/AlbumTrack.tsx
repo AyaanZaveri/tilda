@@ -36,6 +36,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
               ...track,
               thumbnails: thumbnails,
             },
+            trackNum: index,
           });
         })
         .catch((err: any) => console.log(err));

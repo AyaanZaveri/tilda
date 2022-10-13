@@ -94,7 +94,7 @@ const Navbar = () => {
             className="h-16 py-4 block pl-2 hover:cursor-pointer select-none absolute left-0"
             alt=""
           />
-          <div className="relative rounded-md shadow-sm w-6/12">
+          <div className="relative rounded-md w-6/12">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <HiOutlineSearch className="text-gray-500 dark:text-slate-100 sm:text-sm" />
             </div>

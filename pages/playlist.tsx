@@ -105,10 +105,6 @@ const Playlist: NextPage = () => {
     }
   };
 
-  useEffect(() => {
-    getPlaylistSongs();
-  }, [albumData?.tracks]);
-
   const setPlaylistSongs = () => {
     getPlaylistSongs();
     setCurrentPlaylist(
@@ -117,6 +113,22 @@ const Playlist: NextPage = () => {
       )
     );
   };
+
+  useEffect(() => {
+    getPlaylistSongs();
+  }, [albumData]);
+
+  useEffect(() => {
+    if (curPlay && curPlay != "undefined") {
+      setCurrentPlaylist(
+        [...curPlay]?.sort((a: any, b: any) =>
+          a.trackNum > b.trackNum ? 1 : b.trackNum > a.trackNum ? -1 : 0
+        )
+      );
+    }
+  }, [curPlay]);
+
+  console.log();
 
   // curPlay?.sort((a: any, b: any) =>
   // a.duration_seconds > b.duration_seconds
@@ -139,7 +151,7 @@ const Playlist: NextPage = () => {
             {albumData?.thumbnails ? (
               <img
                 draggable={false}
-                className="w-[16.5rem] h-[16.5rem] rounded-md select-none shadow-2xl shadow-sky-500/20 hover:scale-[1.03]"
+                className="w-[16.5rem] h-[16.5rem] rounded-xl select-none shadow-2xl shadow-sky-500/20 hover:scale-[1.03]"
                 style={{
                   transition:
                     "transform 2s cubic-bezier(0.34, 1.56, 0.64, 1.8)",
