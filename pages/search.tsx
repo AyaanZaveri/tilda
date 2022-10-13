@@ -97,7 +97,7 @@ const Search = () => {
 
   return (
     <div>
-      <div className="pt-[4.5rem] pb-8">
+      <div className="pt-[4.5rem] pb-8 select-none">
         <div className="flex pl-64 ml-3 justify-center pt-2">
           <div
             className={`flex flex-col gap-4 w-full ${
