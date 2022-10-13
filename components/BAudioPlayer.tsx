@@ -41,22 +41,22 @@ const BAudioPlayer = () => {
 
   const handleClickNext = () => {
     // console.log("click next");
-    setCurrentTrackIndex((currentTrack: any) =>
-      currentTrack < currentPlaylist?.length - 1 ? currentTrack + 1 : 0
+    setCurrentTrackIndex((currentTrackIndex: any) =>
+    currentTrackIndex < currentPlaylist?.length - 1 ? currentTrackIndex + 1 : 0
     );
   };
 
   const handleClickPrevious = () => {
     // console.log("click previous");
-    setCurrentTrackIndex((currentTrack: any) =>
-      currentTrack < currentPlaylist?.length + 1 ? currentTrack - 1 : 0
+    setCurrentTrackIndex((currentTrackIndex: any) =>
+    currentTrackIndex > 0 ? currentTrackIndex - 1 : 0
     );
   };
 
   const handleEnd = () => {
     // console.log("end");
-    setCurrentTrackIndex((currentTrack: any) =>
-      currentTrack < currentPlaylist?.length - 1 ? currentTrack + 1 : 0
+    setCurrentTrackIndex((currentTrackIndex: any) =>
+    currentTrackIndex < currentPlaylist?.length - 1 ? currentTrackIndex + 1 : 0
     );
   };
 
