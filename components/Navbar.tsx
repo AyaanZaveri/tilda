@@ -41,9 +41,7 @@ const Navbar = () => {
         .then((res: any) => {
           setSearchRes(res.data);
         })
-        .catch(
-          (err: any) => {}
-        );
+        .catch((err: any) => {});
     } else {
       setSearchRes("");
     }
@@ -105,7 +103,7 @@ const Navbar = () => {
             </div>
             <form onSubmit={(e) => handleSearch(e)}>
               <input
-                className="focus:ring-sky-200 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 focus:border-sky-500 bg-slate-100 active:bg-slate-200 focus:ring dark:focus:ring-sky-400/90 hover:shadow-sky-500/50 shadow-2xl shadow-sky-500/30 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-100 dark:active:bg-slate-900 w-full pl-8 pr-12 sm:text-sm rounded-md transition ease-in-out duration-300"
+                className="focus:ring-sky-200 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 focus:border-sky-500 dark:focus:border-sky-700 bg-slate-100 active:bg-slate-200 focus:ring dark:focus:ring-sky-400/90 hover:shadow-sky-500/50 shadow-2xl shadow-sky-500/30 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-100 dark:active:bg-slate-900 w-full pl-8 pr-12 sm:text-sm rounded-md transition ease-in-out duration-300"
                 type="text"
                 placeholder="Search"
                 onChange={(e) => setSearch(e.target.value)}
@@ -114,14 +112,14 @@ const Navbar = () => {
           </div>
           {user?.photoURL && user?.displayName ? (
             <button
-              onClick={() => signOut(auth)}
-              className={`absolute inline-flex items-center justify-center right-10 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 h-8 ${
+              // onClick={() => signOut(auth)}
+              className={`absolute inline-flex items-center justify-center right-10 border border-slate-200 hover:border-slate-300 active:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 h-8 ${
                 resolvedTheme == "light"
                   ? "bg-slate-100 active:bg-slate-300"
                   : resolvedTheme == "dark"
-                  ? "bg-slate-800 active:bg-slate-600"
+                  ? "bg-slate-800 active:bg-slate-700"
                   : "bg-slate-100 active:bg-slate-300"
-              } transition ease-in-out gap-2 text-slate-800 dark:text-white px-3 overflow-hidden rounded-full duration-300 hover:shadow-sky-500/10 shadow-xl shadow-sky-500/5`}
+              } transition ease-in-out gap-2 text-slate-800 dark:text-white px-3 overflow-hidden rounded-full duration-300 hover:shadow-sky-500/10 dark:active:border-slate-600 shadow-xl shadow-sky-500/5`}
             >
               <span className="text-[0.75rem]">{user?.displayName}</span>
               <img
@@ -134,11 +132,11 @@ const Navbar = () => {
           ) : (
             <button
               onClick={() => signInWithPopup(auth, provider)}
-              className={`absolute right-10 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 w-8 h-8 ${
+              className={`absolute right-10 border border-slate-200 hover:border-slate-300 active:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 dark:active:border-slate-600 m-3 mr-4 w-8 h-8 ${
                 resolvedTheme == "light"
                   ? "bg-slate-100 active:bg-slate-300"
                   : resolvedTheme == "dark"
-                  ? "bg-slate-800 active:bg-slate-600"
+                  ? "bg-slate-800 active:bg-slate-700"
                   : "bg-slate-100 active:bg-slate-300"
               } transition ease-in-out p-2 duration-300 rounded-full hover:shadow-sky-300/20 shadow-xl shadow-sky-500/10`}
             >
@@ -158,7 +156,7 @@ const Navbar = () => {
                 ? setTheme("light")
                 : ""
             }
-            className={`absolute right-0 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 h-8 ${
+            className={`absolute right-0 border border-slate-200 hover:border-slate-300 active:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 dark:active:border-slate-600 m-3 mr-4 h-8 ${
               resolvedTheme == "light"
                 ? "bg-slate-100 active:bg-slate-300"
                 : resolvedTheme == "dark"
