@@ -17,8 +17,6 @@ import { currentTrackState } from "../atoms/songAtom";
 const Home: NextPage = () => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
 
-  // console.log(currentTrack);
-
   return <div></div>;
 };
 
