@@ -10,10 +10,13 @@ import {
 } from "@heroicons/react/24/solid";
 import { useRecoilState } from "recoil";
 import { useTheme } from "next-themes";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, provider } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Navbar = () => {
+  const [user] = useAuthState(auth);
+
   const [search, setSearch] = useState<string>("");
   const [searchRes, setSearchRes] = useState<any>();
   const [showSuggestions, setShowSuggestions] = useState<any>(false);
@@ -109,21 +112,42 @@ const Navbar = () => {
               />
             </form>
           </div>
-          <button
-            onClick={() => signInWithPopup(auth, provider)}
-            className={`absolute right-12 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 w-10 h-10 ${
-              resolvedTheme == "light"
-                ? "bg-slate-100 active:bg-slate-300"
-                : resolvedTheme == "dark"
-                ? "bg-slate-800 active:bg-slate-600"
-                : "bg-slate-100 active:bg-slate-300"
-            } transition ease-in-out p-2.5 duration-300 rounded-full hover:shadow-sky-300/20 shadow-xl shadow-sky-500/10`}
-          >
-            <img
-              src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/google-icon.svg"
-              alt=""
-            />
-          </button>
+          {user?.photoURL && user?.displayName ? (
+            <button
+              onClick={() => signOut(auth)}
+              className={`absolute inline-flex items-center justify-center right-12 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 h-8 ${
+                resolvedTheme == "light"
+                  ? "bg-slate-100 active:bg-slate-300"
+                  : resolvedTheme == "dark"
+                  ? "bg-slate-800 active:bg-slate-600"
+                  : "bg-slate-100 active:bg-slate-300"
+              } transition ease-in-out gap-2 text-slate-800 px-3 overflow-hidden rounded-full duration-300 hover:shadow-sky-300/20 shadow-xl shadow-sky-500/10`}
+            >
+              <span className="text-[0.75rem]">{user?.displayName}</span>
+              <img
+                draggable={false}
+                className="rounded-full h-4"
+                src={user?.photoURL}
+                alt=""
+              />
+            </button>
+          ) : (
+            <button
+              onClick={() => signInWithPopup(auth, provider)}
+              className={`absolute right-12 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 w-10 h-10 ${
+                resolvedTheme == "light"
+                  ? "bg-slate-100 active:bg-slate-300"
+                  : resolvedTheme == "dark"
+                  ? "bg-slate-800 active:bg-slate-600"
+                  : "bg-slate-100 active:bg-slate-300"
+              } transition ease-in-out p-2.5 duration-300 rounded-full hover:shadow-sky-300/20 shadow-xl shadow-sky-500/10`}
+            >
+              <img
+                src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/google-icon.svg"
+                alt=""
+              />
+            </button>
+          )}
           <button
             onClick={() =>
               theme == "light"
