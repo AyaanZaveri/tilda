@@ -63,7 +63,6 @@ const BAudioPlayer = () => {
     setPlayingTrack(playingSong);
   }, [playingSong]);
 
-
   const handleClickNext = () => {
     if (playingSong?.trackNum >= 0) {
       setCurrentTrackIndex((currentTrackIndex: any) =>
