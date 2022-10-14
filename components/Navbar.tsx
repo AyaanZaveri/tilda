@@ -10,6 +10,8 @@ import {
 } from "@heroicons/react/24/solid";
 import { useRecoilState } from "recoil";
 import { useTheme } from "next-themes";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../firebase";
 
 const Navbar = () => {
   const [search, setSearch] = useState<string>("");
@@ -107,6 +109,21 @@ const Navbar = () => {
               />
             </form>
           </div>
+          <button
+            onClick={() => signInWithPopup(auth, provider)}
+            className={`absolute right-12 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 w-10 h-10 ${
+              resolvedTheme == "light"
+                ? "bg-slate-100 active:bg-slate-300"
+                : resolvedTheme == "dark"
+                ? "bg-slate-800 active:bg-slate-600"
+                : "bg-slate-100 active:bg-slate-300"
+            } transition ease-in-out p-2.5 duration-300 rounded-full hover:shadow-sky-300/20 shadow-xl shadow-sky-500/10`}
+          >
+            <img
+              src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/google-icon.svg"
+              alt=""
+            />
+          </button>
           <button
             onClick={() =>
               theme == "light"

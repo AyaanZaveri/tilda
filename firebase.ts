@@ -3,13 +3,13 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCmGWuA1N7MtsJViN5RM0OxK9eG6rCSKG4",
-  authDomain: "tilda-c198e.firebaseapp.com",
-  projectId: "tilda-c198e",
-  storageBucket: "tilda-c198e.appspot.com",
-  messagingSenderId: "527334118102",
-  appId: "1:527334118102:web:639fcf72449c11a286ef77",
-  measurementId: "G-1F3VL8Q9WW",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FNEXT_PUBLIC_IREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FNEXT_PUBLIC_IREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 const firebaseApp = !getApps().length
