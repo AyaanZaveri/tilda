@@ -243,7 +243,7 @@ const Playlist: NextPage = () => {
                   <div className="mt-3">
                     <button
                       onClick={setPlaylistSongs}
-                      className="px-5 py-1.5 text-sm text-white shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded-md transition ease-in-out duration-300"
+                      className="px-4 py-1.5 text-sm text-white shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded-md transition ease-in-out duration-300"
                     >
                       <PlayIcon className="w-4 h-4" />
                       Play

@@ -100,7 +100,7 @@ const Navbar = () => {
             </div>
             <form onSubmit={(e) => handleSearch(e)}>
               <input
-                className="focus:ring-sky-200 border-none bg-slate-100 active:bg-slate-200 focus:ring dark:focus:ring-sky-400/90 hover:shadow-sky-500/50 shadow-2xl shadow-sky-500/30 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-100 dark:active:bg-slate-900 w-full pl-8 pr-12 sm:text-sm rounded-md transition ease-in-out duration-300"
+                className="focus:ring-sky-200 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 focus:border-sky-500 bg-slate-100 active:bg-slate-200 focus:ring dark:focus:ring-sky-400/90 hover:shadow-sky-500/50 shadow-2xl shadow-sky-500/30 dark:text-white dark:bg-slate-800 dark:placeholder:text-slate-100 dark:active:bg-slate-900 w-full pl-8 pr-12 sm:text-sm rounded-md transition ease-in-out duration-300"
                 type="text"
                 placeholder="Search"
                 onChange={(e) => setSearch(e.target.value)}
@@ -117,13 +117,13 @@ const Navbar = () => {
                 ? setTheme("light")
                 : ""
             }
-            className={`absolute right-0 m-3 mr-4 w-10 h-10 ${
+            className={`absolute right-0 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 w-10 h-10 ${
               resolvedTheme == "light"
-                ? "bg-slate-100 hover:bg-slate-200 active:bg-slate-300"
+                ? "bg-slate-100 active:bg-slate-300"
                 : resolvedTheme == "dark"
-                ? "bg-slate-800 hover:bg-slate-700 active:bg-slate-600"
-                : "bg-slate-100 hover:bg-slate-200 active:bg-slate-300"
-            } transition ease-in-out duration-300 rounded-full hover:shadow-sky-500/20 shadow-xl shadow-sky-500/10`}
+                ? "bg-slate-800 active:bg-slate-600"
+                : "bg-slate-100 active:bg-slate-300"
+            } transition ease-in-out duration-300 rounded-full hover:shadow-sky-300/20 shadow-xl shadow-sky-500/10`}
           >
             {theme == "light" ? (
               <SunIcon className="h-full p-2 w-full text-slate-700" />
@@ -131,7 +131,7 @@ const Navbar = () => {
               <MoonIcon className="h-full p-3 w-full text-white" />
             ) : theme == "system" ? (
               <ComputerDesktopIcon
-                className={`h-full p-2 w-full ${
+                className={`h-full p-2.5 w-full ${
                   resolvedTheme == "light"
                     ? "text-slate-700"
                     : resolvedTheme == "dark"

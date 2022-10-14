@@ -14,7 +14,7 @@ const Sidebar = () => {
   return (
     <div
       className={`flex items-center ml-3 h-full pt-[4.5rem] ${
-        playingTrack?.url?.length > 3 ? "pb-24" : "pb-3"
+        playingTrack?.url?.length > 3 ? "pb-24" : "pb-5"
       } rounded-xl w-56 fixed select-none`}
     >
       <div className="bg-slate-100 dark:bg-slate-800 rounded-xl w-56 h-full flex flex-col justify-start items-start">
