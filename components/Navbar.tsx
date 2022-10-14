@@ -115,13 +115,13 @@ const Navbar = () => {
           {user?.photoURL && user?.displayName ? (
             <button
               onClick={() => signOut(auth)}
-              className={`absolute inline-flex items-center justify-center right-12 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 h-8 ${
+              className={`absolute inline-flex items-center justify-center right-10 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 h-8 ${
                 resolvedTheme == "light"
                   ? "bg-slate-100 active:bg-slate-300"
                   : resolvedTheme == "dark"
                   ? "bg-slate-800 active:bg-slate-600"
                   : "bg-slate-100 active:bg-slate-300"
-              } transition ease-in-out gap-2 text-slate-800 px-3 overflow-hidden rounded-full duration-300 hover:shadow-sky-300/20 shadow-xl shadow-sky-500/10`}
+              } transition ease-in-out gap-2 text-slate-800 dark:text-white px-3 overflow-hidden rounded-full duration-300 hover:shadow-sky-500/10 shadow-xl shadow-sky-500/5`}
             >
               <span className="text-[0.75rem]">{user?.displayName}</span>
               <img
@@ -134,13 +134,13 @@ const Navbar = () => {
           ) : (
             <button
               onClick={() => signInWithPopup(auth, provider)}
-              className={`absolute right-12 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 w-10 h-10 ${
+              className={`absolute right-10 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 w-8 h-8 ${
                 resolvedTheme == "light"
                   ? "bg-slate-100 active:bg-slate-300"
                   : resolvedTheme == "dark"
                   ? "bg-slate-800 active:bg-slate-600"
                   : "bg-slate-100 active:bg-slate-300"
-              } transition ease-in-out p-2.5 duration-300 rounded-full hover:shadow-sky-300/20 shadow-xl shadow-sky-500/10`}
+              } transition ease-in-out p-2 duration-300 rounded-full hover:shadow-sky-300/20 shadow-xl shadow-sky-500/10`}
             >
               <img
                 src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/google-icon.svg"
@@ -158,7 +158,7 @@ const Navbar = () => {
                 ? setTheme("light")
                 : ""
             }
-            className={`absolute right-0 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 w-10 h-10 ${
+            className={`absolute right-0 border border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 h-8 ${
               resolvedTheme == "light"
                 ? "bg-slate-100 active:bg-slate-300"
                 : resolvedTheme == "dark"
@@ -167,12 +167,12 @@ const Navbar = () => {
             } transition ease-in-out duration-300 rounded-full hover:shadow-sky-300/20 shadow-xl shadow-sky-500/10`}
           >
             {theme == "light" ? (
-              <SunIcon className="h-full p-2 w-full text-slate-700" />
+              <SunIcon className="h-full p-1.5 w-full text-slate-700" />
             ) : theme == "dark" ? (
-              <MoonIcon className="h-full p-3 w-full text-white" />
+              <MoonIcon className="h-full p-2 w-full text-white" />
             ) : theme == "system" ? (
               <ComputerDesktopIcon
-                className={`h-full p-2.5 w-full ${
+                className={`h-full p-2 w-full ${
                   resolvedTheme == "light"
                     ? "text-slate-700"
                     : resolvedTheme == "dark"
