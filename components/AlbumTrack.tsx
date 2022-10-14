@@ -39,7 +39,9 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
             trackNum: index,
           });
         })
-        .catch((err: any) => console.log(err));
+        .catch(
+          (err: any) => {}
+        );
     } else {
       setCurrentTrack({
         url: "",

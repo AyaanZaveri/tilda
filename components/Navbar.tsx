@@ -41,7 +41,9 @@ const Navbar = () => {
         .then((res: any) => {
           setSearchRes(res.data);
         })
-        .catch((err: any) => console.log(err));
+        .catch(
+          (err: any) => {}
+        );
     } else {
       setSearchRes("");
     }
@@ -79,8 +81,6 @@ const Navbar = () => {
   }
 
   const { theme, setTheme, resolvedTheme } = useTheme();
-
-  // console.log(resolvedTheme);
 
   return (
     <div className="fixed w-full z-10 px-3 select-none">

@@ -15,7 +15,6 @@ export async function axiosReq(
     });
     return data;
   } catch (error) {
-    console.log(error);
     throw new Error("Failed to fetch videos...");
   }
 }

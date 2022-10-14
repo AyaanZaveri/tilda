@@ -48,14 +48,12 @@ const BAudioPlayer = () => {
   };
 
   useEffect(() => {
-    console.log(currentPlaylist[0]?.play);
     currentPlaylist?.length >= 1 && currentPlaylist[0]?.play
       ? handlePlayButton()
       : null;
   }, [currentPlaylist]);
 
   useEffect(() => {
-    console.log(currentTrackIndex);
     currentPlaylist?.length >= 1
       ? setPlayingSong(currentPlaylist[currentTrackIndex])
       : null;
@@ -65,10 +63,8 @@ const BAudioPlayer = () => {
     setPlayingTrack(playingSong);
   }, [playingSong]);
 
-  console.log(currentTrackIndex);
 
   const handleClickNext = () => {
-    // console.log("click next");
     if (playingSong?.trackNum >= 0) {
       setCurrentTrackIndex((currentTrackIndex: any) =>
         currentTrackIndex < currentPlaylist?.length - 1
@@ -79,7 +75,6 @@ const BAudioPlayer = () => {
   };
 
   const handleClickPrevious = () => {
-    // console.log("click previous");
     if (playingSong?.trackNum >= 0) {
       setCurrentTrackIndex((currentTrackIndex: any) =>
         currentTrackIndex > 0 ? currentTrackIndex - 1 : 0
@@ -88,7 +83,6 @@ const BAudioPlayer = () => {
   };
 
   const handleEnd = () => {
-    // console.log("end");
     if (playingSong?.trackNum >= 0) {
       setCurrentTrackIndex((currentTrackIndex: any) =>
         currentTrackIndex < currentPlaylist?.length - 1

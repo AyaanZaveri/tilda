@@ -33,7 +33,7 @@ const Track = ({ track }: Props) => {
             track: track,
           });
         })
-        .catch((err: any) => console.log(err));
+        .catch((err: any) => {});
     } else {
       setCurrentTrack({
         url: "",
@@ -72,7 +72,6 @@ const Track = ({ track }: Props) => {
           ) : (
               <FaPlay
             className="w-2 hover:cursor-pointer"
-            // onClick={() => console.log(track.preview_url)}
           />
         )} */}
             <span className="font-semibold inline-flex gap-1 items-center">

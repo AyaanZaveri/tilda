@@ -21,7 +21,9 @@ const Album = ({ album }: Props) => {
       .then((res: any) => {
         setAlbumData(res.data);
       })
-      .catch((err: any) => console.log(err));
+      .catch(
+        (err: any) => {}
+      );
   };
 
   useEffect(() => {

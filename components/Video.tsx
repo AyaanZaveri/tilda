@@ -30,7 +30,9 @@ const Video = ({ video }: Props) => {
             track: video,
           });
         })
-        .catch((err: any) => console.log(err));
+        .catch(
+          (err: any) => {}
+        );
     } else {
       setCurrentTrack({
         url: "",

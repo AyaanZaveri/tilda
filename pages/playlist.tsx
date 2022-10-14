@@ -36,10 +36,7 @@ const Playlist: NextPage = () => {
       .then((res: any) => {
         setAlbumBrowseId(res.data);
       })
-      .catch(
-        (err: any) => {}
-        // console.log(err)
-      );
+      .catch((err: any) => {});
   };
 
   const getAlbumData = () => {
@@ -48,7 +45,7 @@ const Playlist: NextPage = () => {
       .then((res: any) => {
         setAlbumData(res.data);
       })
-      .catch((err: any) => console.log(err));
+      .catch((err: any) => {});
   };
 
   const checkIsExplicit = () => {
@@ -134,17 +131,6 @@ const Playlist: NextPage = () => {
       } catch (error) {}
     }
   }, [curPlay]);
-
-  console.log();
-
-  // curPlay?.sort((a: any, b: any) =>
-  // a.duration_seconds > b.duration_seconds
-  //   ? 1
-  //   : b.duration_seconds > a.duration_seconds
-  //   ? -1
-  //   : 0
-
-  // console.log(curPlay);
 
   return (
     <div

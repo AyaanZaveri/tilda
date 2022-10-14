@@ -53,7 +53,7 @@ const Search = () => {
         .then((res: any) => {
           setSearchResults(res.data);
         })
-        .catch((err: any) => console.log(err));
+        .catch((err: any) => {});
     }
   };
 
@@ -64,8 +64,6 @@ const Search = () => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
   const [currentPlaylist, setCurrentPlaylist] =
     useRecoilState(currentPlaylistState);
-
-  console.log(currentPlaylist);
 
   useEffect(() => {
     if (searchResults) {
