@@ -172,7 +172,7 @@ const Navbar = () => {
               <MoonIcon className="h-full p-2 w-full text-white" />
             ) : theme == "system" ? (
               <ComputerDesktopIcon
-                className={`h-full p-2 w-full ${
+                className={`h-full p-[7px] w-full ${
                   resolvedTheme == "light"
                     ? "text-slate-700"
                     : resolvedTheme == "dark"
