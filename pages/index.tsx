@@ -13,6 +13,7 @@ import AudioPlayer from "react-h5-audio-player";
 import { MdExplicit } from "react-icons/md";
 import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
+import EqualizerAniLight from "../components/SVGs/EqualizerAniLight";
 
 const Home: NextPage = () => {
   return <div></div>;

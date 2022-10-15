@@ -112,7 +112,7 @@ const Navbar = () => {
           </div>
           {user?.photoURL && user?.displayName ? (
             <button
-              // onClick={() => signOut(auth)}
+              onClick={() => signOut(auth)}
               className={`absolute inline-flex items-center justify-center right-10 border border-slate-200 hover:border-slate-300 active:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 m-3 mr-4 h-8 ${
                 resolvedTheme == "light"
                   ? "bg-slate-100 active:bg-slate-300"

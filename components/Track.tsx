@@ -9,6 +9,7 @@ import { titleCase } from "title-case";
 import { pipedApiUrl } from "../utils/apiUrl";
 import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
+import { PlayIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   track: any;
@@ -51,13 +52,14 @@ const Track = ({ track }: Props) => {
         // router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
         getCurrentSong(track.videoId)
       }
-      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-slate-700 hover:text-white dark:text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 hover:cursor-pointer"
+      className="flex group h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-slate-700 hover:text-white active:text-white dark:text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 hover:cursor-pointer"
     >
       <div className="flex flex-row gap-3">
-        <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all">
+        <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all group-active:brightness-90">
+          <PlayIcon className="w-5 h-5 absolute group-hover:opacity-100 group-active:opacity-100 opacity-0 text-sky-700 ml-0.5 z-10 transition-all ease-in-out duration-300" />
           <img
             draggable={false}
-            className="w-[2.5rem] h-[2.5rem]"
+            className="w-[2.5rem] h-[2.5rem] group-hover:blur-sm group-hover:scale-110 group-active:blur-sm transition ease-in-out duration-300"
             src={track?.thumbnails[1]?.url}
             alt=""
           />

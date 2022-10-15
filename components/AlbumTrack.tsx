@@ -10,6 +10,7 @@ import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
 import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
 import { playingTrackState } from "../atoms/playingTrack";
+import EqualizerAniLight from "./SVGs/EqualizerAniLight";
 
 interface Props {
   track: any;
@@ -65,7 +66,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
             <span
               className={`font-semibold inline-flex gap-1 items-center ${
                 track.title == playingTrack?.track?.title
-                  ? "text-sky-600 dark:text-sky-500 group-hover:text-white transition-all ease-in-out duration-300"
+                  ? "text-sky-600 dark:text-sky-400 group-hover:text-white transition-all ease-in-out duration-300"
                   : ""
               }`}
             >
