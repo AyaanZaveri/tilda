@@ -132,7 +132,7 @@ const Navbar = () => {
           ) : (
             <button
               onClick={() => signInWithPopup(auth, provider)}
-              className={`absolute right-10 border border-slate-200 hover:border-slate-300 active:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 dark:active:border-slate-600 m-3 mr-4 w-8 h-8 ${
+              className={`absolute right-10 border border-slate-200 hover:border-slate-300 active:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 dark:active:border-slate-600 m-3 mr-4 w-min h-8 ${
                 resolvedTheme == "light"
                   ? "bg-slate-100 active:bg-slate-300"
                   : resolvedTheme == "dark"
