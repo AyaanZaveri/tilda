@@ -88,45 +88,37 @@ const Track = ({ track }: Props) => {
   return (
     <div
       key={track.videoId}
-      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-slate-700 hover:shadow-sky-500/10"
+      className="flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:shadow-sky-500/10"
     >
       <div className="flex flex-row gap-3">
         <div
-          onClick={() =>
-            // router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
-            getCurrentSong(track.videoId)
-          }
-          className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all cursor-pointer"
+          onClick={() => getCurrentSong(track.videoId)}
+          className="group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-md transition-all"
         >
-          <PlayIcon className="w-5 h-5 absolute group-hover:opacity-100 group-active:opacity-100 group-active:brightness-90 opacity-0 text-white ml-0.5 z-10 transition-all ease-in-out duration-300" />
+          <PlayIcon className="absolute z-10 ml-0.5 h-5 w-5 text-white opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100 group-active:opacity-100 group-active:brightness-90" />
           <img
             draggable={false}
-            className="w-[2.5rem] h-[2.5rem] group-hover:blur-sm group-hover:scale-110 group-active:scale-110 group-active:blur-sm group-active:brightness-75 transition ease-in-out duration-300"
+            className="h-[2.5rem] w-[2.5rem] transition duration-300 ease-in-out group-hover:scale-110 group-hover:blur-sm group-active:scale-110 group-active:blur-sm group-active:brightness-75"
             src={track?.thumbnails[1]?.url}
             alt=""
           />
         </div>
         <div className="flex flex-col justify-center">
           <div className="flex flex-row gap-3">
-            {/* {playing ? (
-          <FaPause
-          className="w-2 hover:cursor-pointer"
-          onClick={() => setPlaying(!playing)}
-          />
-          ) : (
-              <FaPlay
-            className="w-2 hover:cursor-pointer"
-          />
-        )} */}
-            <span className="font-semibold inline-flex gap-1 items-center hover:text-sky-500 transition duration-300 ease-in-out">
-              {track.title} {track.isExplicit ? <MdExplicit /> : null}
+            <span className="inline-flex items-center gap-0.5">
+              <span
+                className="inline-flex cursor-pointer items-center gap-1 font-semibold transition duration-300 ease-in-out hover:text-sky-500 active:text-sky-600"
+                onClick={() => getCurrentSong(track.videoId)}
+              >
+                {track.title} {track.isExplicit ? <MdExplicit /> : null}
+              </span>
               <HiStar
                 onClick={handleFavorited}
                 className={`h-4 w-5 group-hover:text-white group-active:text-white ${
                   checkIfFavoriteExists(track?.videoId as string)
                     ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
                     : "text-slate-700 hover:text-amber-500 active:text-amber-600"
-                } hover:cursor-pointer transition duration-300 ease-in-out`}
+                } transition duration-300 ease-in-out hover:cursor-pointer`}
               />
             </span>
           </div>
