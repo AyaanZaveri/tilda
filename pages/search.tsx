@@ -40,6 +40,7 @@ const Search = () => {
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
   const getSearchResults = () => {
+    setSearchResults([])
     setTopResults([]);
     setSongs([]);
     setArtists([]);
@@ -60,10 +61,6 @@ const Search = () => {
   useEffect(() => {
     getSearchResults();
   }, [query.q]);
-
-  const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
-  const [currentPlaylist, setCurrentPlaylist] =
-    useRecoilState(currentPlaylistState);
 
   useEffect(() => {
     if (searchResults) {
