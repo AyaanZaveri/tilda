@@ -92,17 +92,17 @@ const Track = ({ track }: Props) => {
   return (
     <div
       key={track.videoId}
-      className="group-one flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:shadow-sky-500/10"
+      className="group-one flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 hover:bg-slate-100 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:shadow-sky-500/10"
     >
       <div className="flex flex-row gap-3">
         <div
           onClick={() => getCurrentSong(track.videoId)}
           className="group-two relative flex cursor-pointer items-center justify-center overflow-hidden rounded-md transition-all"
         >
-          <PlayIcon className="group-two-hover:opacity-100 group-two-active:opacity-100 group-two-active:brightness-90 absolute z-10 ml-0.5 h-5 w-5 text-white opacity-0 transition-all duration-300 ease-in-out" />
+          <PlayIcon className="group-one-hover:opacity-100 group-one-active:opacity-100 group-two-active:brightness-90 absolute z-10 ml-0.5 h-5 w-5 text-white opacity-0 transition-all duration-300 ease-in-out" />
           <img
             draggable={false}
-            className="group-two-hover:scale-110 group-two-hover:blur-sm group-two-active:scale-110 group-two-active:blur-sm group-two-active:brightness-75 h-[2.5rem] w-[2.5rem] transition duration-300 ease-in-out"
+            className="group-one-hover:scale-110 group-one-hover:blur-sm group-one-active:scale-110 group-one-active:blur-sm group-two-active:brightness-75 h-[2.5rem] w-[2.5rem] transition duration-300 ease-in-out"
             src={track?.thumbnails[1]?.url}
             alt=""
           />
