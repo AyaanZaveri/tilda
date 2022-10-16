@@ -14,6 +14,7 @@ import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { axiosReq } from "../utils/axiosReq";
 import { playingTrackState } from "../atoms/playingTrack";
+import Tilt from "react-parallax-tilt";
 
 const Playlist: NextPage = () => {
   const { query } = useRouter();
@@ -140,21 +141,27 @@ const Playlist: NextPage = () => {
     >
       <div className="pt-[4.5rem] pb-8">
         <div className="pt-8">
-          <div className="flex flex-row items-start gap-12">
-            {albumData?.thumbnails ? (
-              <img
-                draggable={false}
-                className="w-[16.5rem] h-[16.5rem] rounded-xl select-none shadow-2xl shadow-sky-500/20 hover:scale-[1.03]"
-                style={{
-                  transition:
-                    "transform 2s cubic-bezier(0.34, 1.56, 0.64, 1.8)",
-                }}
-                src={
-                  albumData?.thumbnails[albumData?.thumbnails.length - 1]?.url
-                }
-                alt=""
-              />
-            ) : null}
+          <div className="flex flex-row items-start gap-12 w-full">
+            <Tilt
+              glareEnable={true}
+              glareMaxOpacity={0.8}
+              glareColor="#ffffff"
+              glarePosition="bottom"
+            >
+              {albumData?.thumbnails ? (
+                <div className="w-[16.5rem] h-[16.5rem]">
+                  <img
+                    draggable={false}
+                    className="rounded-xl select-none shadow-2xl shadow-sky-500/20"
+                    src={
+                      albumData?.thumbnails[albumData?.thumbnails.length - 1]
+                        ?.url
+                    }
+                    alt=""
+                  />
+                </div>
+              ) : null}
+            </Tilt>
             <div className="flex flex-col pt-3 gap-4 select-none text-slate-700 dark:text-white">
               <span className="text-4xl font-semibold">{albumData?.title}</span>
               <div className="flex flex-col">
