@@ -88,47 +88,45 @@ const Track = ({ track }: Props) => {
   return (
     <div
       key={track.videoId}
-      className="flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:shadow-sky-500/10"
+      className="group-one flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:shadow-sky-500/10"
     >
       <div className="flex flex-row gap-3">
         <div
           onClick={() => getCurrentSong(track.videoId)}
-          className="group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-md transition-all"
+          className="group-two relative flex cursor-pointer items-center justify-center overflow-hidden rounded-md transition-all"
         >
-          <PlayIcon className="absolute z-10 ml-0.5 h-5 w-5 text-white opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100 group-active:opacity-100 group-active:brightness-90" />
+          <PlayIcon className="group-two-hover:opacity-100 group-two-active:opacity-100 group-two-active:brightness-90 absolute z-10 ml-0.5 h-5 w-5 text-white opacity-0 transition-all duration-300 ease-in-out" />
           <img
             draggable={false}
-            className="h-[2.5rem] w-[2.5rem] transition duration-300 ease-in-out group-hover:scale-110 group-hover:blur-sm group-active:scale-110 group-active:blur-sm group-active:brightness-75"
+            className="group-two-hover:scale-110 group-two-hover:blur-sm group-two-active:scale-110 group-two-active:blur-sm group-two-active:brightness-75 h-[2.5rem] w-[2.5rem] transition duration-300 ease-in-out"
             src={track?.thumbnails[1]?.url}
             alt=""
           />
         </div>
         <div className="flex flex-col justify-center">
           <div className="flex flex-row gap-3">
-            <span className="inline-flex items-center gap-0.5">
-              <span
-                className="inline-flex cursor-pointer items-center gap-1 font-semibold transition duration-300 ease-in-out hover:text-sky-500 active:text-sky-600"
-                onClick={() => getCurrentSong(track.videoId)}
-              >
-                {track.title} {track.isExplicit ? <MdExplicit /> : null}
-              </span>
-              <HiStar
-                onClick={handleFavorited}
-                className={`h-4 w-5 group-hover:text-white group-active:text-white ${
-                  checkIfFavoriteExists(track?.videoId as string)
-                    ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
-                    : "text-slate-700 hover:text-amber-500 active:text-amber-600"
-                } transition duration-300 ease-in-out hover:cursor-pointer`}
-              />
+            <span
+              className="inline-flex cursor-pointer items-center gap-1 font-semibold transition duration-300 ease-in-out hover:text-sky-500 active:text-sky-600"
+              onClick={() => getCurrentSong(track.videoId)}
+            >
+              {track.title} {track.isExplicit ? <MdExplicit /> : null}
             </span>
           </div>
           <div>
-            <span className="font-normal">
+            <span className="inline-flex items-center gap-1 font-normal">
               {titleCase(track?.resultType)} ·{" "}
               {track?.artists.map((artist: any, index: number) => (
                 <span>{(index ? ", " : "") + artist?.name}</span>
               ))}{" "}
               &nbsp;· {track?.album?.name}
+              <HiHeart
+                onClick={handleFavorited}
+                className={`w-50 h-4 ${
+                  checkIfFavoriteExists(track?.videoId as string)
+                    ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
+                    : "group-one-hover:opacity-100 group-one-active:opacity-100 text-slate-700 opacity-0 hover:text-rose-500 active:text-rose-600"
+                } mb-0.5 transition duration-300 ease-in-out hover:cursor-pointer`}
+              />
             </span>
           </div>
         </div>

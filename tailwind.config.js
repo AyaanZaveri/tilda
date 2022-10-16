@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const plugin = require("tailwindcss/plugin");
+
 module.exports = {
   darkMode: "class",
   content: [
@@ -12,5 +15,13 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/line-clamp"),
+    require("tailwindcss-labeled-groups")(["one", "two" /* RENAME ME! */]),
+  ],
+  variants: {
+    hover: "hover",
+    active: "active",
+  },
 };
