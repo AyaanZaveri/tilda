@@ -3,21 +3,26 @@ import { Router, useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { MdExplicit } from "react-icons/md";
-import { HiHeart } from "react-icons/hi";
+import { HiHeart, HiStar } from "react-icons/hi";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
 import { pipedApiUrl } from "../utils/apiUrl";
 import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
 import { PlayIcon } from "@heroicons/react/24/solid";
+import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollection } from "react-firebase-hooks/firestore";
 
 interface Props {
   track: any;
 }
 
 const Track = ({ track }: Props) => {
-  const [playing, setPlaying] = useState<boolean>(false);
+  const [user] = useAuthState(auth);
 
+  const [playing, setPlaying] = useState<boolean>(false);
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
 
   const getCurrentSong = (query: string) => {
@@ -45,6 +50,41 @@ const Track = ({ track }: Props) => {
 
   const router = useRouter();
 
+  const usersRef = collection(db, "users");
+
+  // get uid of user from firebase
+  const userRef = doc(usersRef, user?.uid);
+  const favoritesRef = collection(userRef, "favorites");
+
+  const [favoritesSnapshot] = useCollection(favoritesRef);
+
+  const checkIfFavoriteExists = (videoId: string) => {
+    return favoritesSnapshot?.docs.find(
+      (doc) => doc.data().videoId === videoId
+    );
+  };
+
+  const addFavorite = async () => {
+    if (!checkIfFavoriteExists(track?.videoId)) {
+      await addDoc(favoritesRef, track);
+    }
+  };
+
+  const deleteFavorite = async () => {
+    const favoriteDoc = favoritesSnapshot?.docs.find(
+      (doc) => doc.data().videoId === track?.videoId
+    )?.id;
+    await deleteDoc(doc(favoritesRef, favoriteDoc));
+  };
+
+  const handleFavorited = () => {
+    if (checkIfFavoriteExists(track?.videoId)) {
+      deleteFavorite();
+    } else {
+      addFavorite();
+    }
+  };
+
   return (
     <div
       key={track.videoId}
@@ -56,7 +96,7 @@ const Track = ({ track }: Props) => {
     >
       <div className="flex flex-row gap-3">
         <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all group-active:brightness-90">
-          <PlayIcon className="w-5 h-5 absolute group-hover:opacity-100 group-active:opacity-100 opacity-0 text-sky-700 ml-0.5 z-10 transition-all ease-in-out duration-300" />
+          <PlayIcon className="w-5 h-5 absolute group-hover:opacity-100 group-active:opacity-100 opacity-0 text-white ml-0.5 z-10 transition-all ease-in-out duration-300" />
           <img
             draggable={false}
             className="w-[2.5rem] h-[2.5rem] group-hover:blur-sm group-hover:scale-110 group-active:blur-sm transition ease-in-out duration-300"
@@ -78,6 +118,14 @@ const Track = ({ track }: Props) => {
         )} */}
             <span className="font-semibold inline-flex gap-1 items-center">
               {track.title} {track.isExplicit ? <MdExplicit /> : null}
+              <HiStar
+                onClick={handleFavorited}
+                className={`h-4 w-5 group-hover:text-white group-active:text-white ${
+                  checkIfFavoriteExists(track?.videoId as string)
+                    ? "text-sky-500 hover:text-sky-600 "
+                    : "text-slate-700 first:hover:text-amber-500"
+                } hover:cursor-pointer transition duration-300 ease-in-out `}
+              />
             </span>
           </div>
           <div>
