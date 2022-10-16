@@ -54,27 +54,31 @@ const Track = ({ track }: Props) => {
 
   // get uid of user from firebase
   const userRef = doc(usersRef, user?.uid);
-  const favoritesRef = collection(userRef, "favorites");
+  const userCollectionRef = collection(userRef, "user");
+  const favoritesRef = doc(userCollectionRef, "favorites")
+  const favoriteTracksRef = collection(favoritesRef, "tracks");
 
-  const [favoritesSnapshot] = useCollection(favoritesRef);
+  const [favoriteTracksSnapshot] = useCollection(favoriteTracksRef);
+
+  console.log(favoriteTracksSnapshot)
 
   const checkIfFavoriteExists = (videoId: string) => {
-    return favoritesSnapshot?.docs.find(
+    return favoriteTracksSnapshot?.docs.find(
       (doc) => doc.data().videoId === videoId
     );
   };
 
   const addFavorite = async () => {
     if (!checkIfFavoriteExists(track?.videoId)) {
-      await addDoc(favoritesRef, track);
+      await addDoc(favoriteTracksRef, track);
     }
   };
 
   const deleteFavorite = async () => {
-    const favoriteDoc = favoritesSnapshot?.docs.find(
+    const favoriteDoc = favoriteTracksSnapshot?.docs.find(
       (doc) => doc.data().videoId === track?.videoId
     )?.id;
-    await deleteDoc(doc(favoritesRef, favoriteDoc));
+    await deleteDoc(doc(favoriteTracksRef, favoriteDoc));
   };
 
   const handleFavorited = () => {

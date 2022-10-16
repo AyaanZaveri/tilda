@@ -18,7 +18,7 @@ module.exports = {
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/line-clamp"),
-    require("tailwindcss-labeled-groups")(["one", "two" /* RENAME ME! */]),
+    require("tailwindcss-labeled-groups")(["one", "two"]),
   ],
   variants: {
     hover: "hover",
