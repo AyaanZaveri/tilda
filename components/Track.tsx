@@ -88,18 +88,20 @@ const Track = ({ track }: Props) => {
   return (
     <div
       key={track.videoId}
-      onClick={() =>
-        // router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
-        getCurrentSong(track.videoId)
-      }
-      className="flex group h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-slate-700 hover:text-white active:text-white dark:text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 hover:cursor-pointer"
+      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-slate-700 hover:shadow-sky-500/10"
     >
       <div className="flex flex-row gap-3">
-        <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all group-active:brightness-90">
-          <PlayIcon className="w-5 h-5 absolute group-hover:opacity-100 group-active:opacity-100 opacity-0 text-white ml-0.5 z-10 transition-all ease-in-out duration-300" />
+        <div
+          onClick={() =>
+            // router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
+            getCurrentSong(track.videoId)
+          }
+          className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all cursor-pointer"
+        >
+          <PlayIcon className="w-5 h-5 absolute group-hover:opacity-100 group-active:opacity-100 group-active:brightness-90 opacity-0 text-white ml-0.5 z-10 transition-all ease-in-out duration-300" />
           <img
             draggable={false}
-            className="w-[2.5rem] h-[2.5rem] group-hover:blur-sm group-hover:scale-110 group-active:blur-sm transition ease-in-out duration-300"
+            className="w-[2.5rem] h-[2.5rem] group-hover:blur-sm group-hover:scale-110 group-active:scale-110 group-active:blur-sm group-active:brightness-75 transition ease-in-out duration-300"
             src={track?.thumbnails[1]?.url}
             alt=""
           />
@@ -116,15 +118,15 @@ const Track = ({ track }: Props) => {
             className="w-2 hover:cursor-pointer"
           />
         )} */}
-            <span className="font-semibold inline-flex gap-1 items-center">
+            <span className="font-semibold inline-flex gap-1 items-center hover:text-sky-500 transition duration-300 ease-in-out">
               {track.title} {track.isExplicit ? <MdExplicit /> : null}
               <HiStar
                 onClick={handleFavorited}
                 className={`h-4 w-5 group-hover:text-white group-active:text-white ${
                   checkIfFavoriteExists(track?.videoId as string)
-                    ? "text-sky-500 hover:text-sky-600 "
-                    : "text-slate-700 first:hover:text-amber-500"
-                } hover:cursor-pointer transition duration-300 ease-in-out `}
+                    ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
+                    : "text-slate-700 hover:text-amber-500 active:text-amber-600"
+                } hover:cursor-pointer transition duration-300 ease-in-out`}
               />
             </span>
           </div>
