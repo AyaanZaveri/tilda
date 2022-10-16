@@ -25,6 +25,7 @@ import Marquee from "react-fast-marquee";
 import { currentPlaylistState } from "../atoms/playlistAtom";
 import { BsSkipEndFill, BsSkipStartFill } from "react-icons/bs";
 import { playingTrackState } from "../atoms/playingTrack";
+import Tilt from "react-parallax-tilt";
 
 const BAudioPlayer = () => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
@@ -97,19 +98,27 @@ const BAudioPlayer = () => {
         <div className="fixed bottom-0 w-full justify-center flex items-center bg-white/75 dark:bg-slate-900/75 backdrop-blur-md h-20">
           <div className="flex flex-row gap-3 items-center text-sm text-slate-700 dark:text-white w-full justify-center">
             <div className="absolute left-0 flex flex-row gap-3 pl-4">
-              <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all">
-                <img
-                  draggable={false}
-                  className="w-[3rem]"
-                  src={
-                    playingSong?.track?.thumbnails
-                      ? playingSong?.track?.thumbnails[0]?.url
-                      : playingSong?.thumbnails
-                      ? playingSong?.thumbnails[0]?.url
-                      : ""
-                  }
-                  alt=""
-                />
+              <div className="relative flex justify-center items-center overflow-hidden group transition-all">
+                <Tilt
+                  glareEnable={true}
+                  glareMaxOpacity={0.8}
+                  glareColor="#ffffff"
+                  glarePosition="bottom"
+                  glareBorderRadius="6px"
+                >
+                  <img
+                    draggable={false}
+                    className="w-[3rem] rounded-md"
+                    src={
+                      playingSong?.track?.thumbnails
+                        ? playingSong?.track?.thumbnails[0]?.url
+                        : playingSong?.thumbnails
+                        ? playingSong?.thumbnails[0]?.url
+                        : ""
+                    }
+                    alt=""
+                  />
+                </Tilt>
               </div>
               <div className="flex flex-col justify-center">
                 <div className="flex flex-row gap-3">
@@ -131,8 +140,8 @@ const BAudioPlayer = () => {
             </div>
             <div className="w-2/5">
               <AudioPlayer
-                autoPlay
-                showSkipControls
+                autoPlay={true}
+                showSkipControls={true}
                 src={playingSong?.url}
                 onEnded={handleEnd}
                 onClickNext={handleClickNext}

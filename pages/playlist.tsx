@@ -147,6 +147,7 @@ const Playlist: NextPage = () => {
               glareMaxOpacity={0.8}
               glareColor="#ffffff"
               glarePosition="bottom"
+              glareBorderRadius="12px"
             >
               {albumData?.thumbnails ? (
                 <div className="w-[16.5rem] h-[16.5rem]">
@@ -233,7 +234,7 @@ const Playlist: NextPage = () => {
                   </div>
                 )}
                 {albumData?.tracks ? (
-                  <div className="mt-3">
+                  <div className="mt-3 w-min">
                     <button
                       onClick={setPlaylistSongs}
                       className="px-4 py-1.5 text-sm text-white shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded-md transition ease-in-out duration-300"
