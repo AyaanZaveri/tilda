@@ -10,7 +10,6 @@ import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
 import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
 import { playingTrackState } from "../atoms/playingTrack";
-import EqualizerAniLight from "./SVGs/EqualizerAniLight";
 
 interface Props {
   track: any;
