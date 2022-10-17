@@ -95,7 +95,7 @@ const BAudioPlayer = () => {
 
   const pauseAudio = () => {
     player?.current?.audio.current.pause();
-    setPlayingTrack({
+    setCurrentTrack({
       ...currentTrack,
       play: false,
     });
@@ -103,21 +103,19 @@ const BAudioPlayer = () => {
 
   const playAudio = () => {
     player?.current?.audio.current.play();
-    setPlayingTrack({
+    setCurrentTrack({
       ...currentTrack,
       play: true,
     });
   };
 
   useEffect(() => {
-    if (currentTrack) {
-      if (currentTrack?.play == true) {
-        playAudio();
-      } else {
-        pauseAudio();
-      }
+    if (currentTrack?.play == true) {
+      playAudio();
+    } else {
+      pauseAudio();
     }
-  }, [currentTrack]);
+  }, [currentTrack?.play]);
 
   return (
     <div className="z-20 select-none">
@@ -167,6 +165,18 @@ const BAudioPlayer = () => {
             </div>
             <div className="w-2/5">
               <AudioPlayer
+                onPause={() =>
+                  setCurrentTrack({
+                    ...currentTrack,
+                    play: false,
+                  })
+                }
+                onPlay={() =>
+                  setCurrentTrack({
+                    ...currentTrack,
+                    play: true,
+                  })
+                }
                 ref={player}
                 autoPlay={true}
                 showSkipControls={true}
