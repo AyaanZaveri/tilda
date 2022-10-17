@@ -61,14 +61,14 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
         <div className="group-two relative flex h-4 w-4 cursor-pointer items-center justify-center overflow-hidden rounded-md transition-all">
           <span
             className={`text-slate-400 ${
-              track.title == playingTrack?.track?.title && currentTrack?.play
+              track.title == playingTrack?.track?.title && playingTrack?.play
                 ? "opacity-0"
                 : "opacity-100"
             } transition-all duration-300 ease-in-out group-hover:text-white group-one-hover:opacity-0 group-one-active:opacity-0`}
           >
             {index + 1}
           </span>
-          {track.title == playingTrack?.track?.title && currentTrack?.play ? (
+          {track.title == playingTrack?.track?.title && playingTrack?.play ? (
             <PauseIcon
               onClick={() => getCurrentSong(track.videoId, false)}
               className="absolute left-0 ml-0.5 h-4 w-4 text-sky-500 transition-all duration-300 ease-in-out hover:text-sky-600 active:text-sky-700"

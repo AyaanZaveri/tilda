@@ -36,17 +36,16 @@ const BAudioPlayer = () => {
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState<any>(0);
-  const [playingSong, setPlayingSong] = useState<any>();
 
   useEffect(() => {
-    setPlayingSong(currentTrack);
+    setPlayingTrack(currentTrack);
     currentTrack?.trackNum
       ? setCurrentTrackIndex(currentTrack?.trackNum)
       : null;
   }, [currentTrack]);
 
   const handlePlayButton = () => {
-    setPlayingSong(currentPlaylist[0]);
+    setPlayingTrack(currentPlaylist[0]);
     setCurrentTrackIndex(0);
   };
 
@@ -58,16 +57,16 @@ const BAudioPlayer = () => {
 
   useEffect(() => {
     currentPlaylist?.length >= 1
-      ? setPlayingSong(currentPlaylist[currentTrackIndex])
+      ? setPlayingTrack(currentPlaylist[currentTrackIndex])
       : null;
   }, [currentTrackIndex]);
 
   useEffect(() => {
-    setPlayingTrack(playingSong);
-  }, [playingSong]);
+    setPlayingTrack(playingTrack);
+  }, [playingTrack]);
 
   const handleClickNext = () => {
-    if (playingSong?.trackNum >= 0) {
+    if (playingTrack?.trackNum >= 0) {
       setCurrentTrackIndex((currentTrackIndex: any) =>
         currentTrackIndex < currentPlaylist?.length - 1
           ? currentTrackIndex + 1
@@ -77,7 +76,7 @@ const BAudioPlayer = () => {
   };
 
   const handleClickPrevious = () => {
-    if (playingSong?.trackNum >= 0) {
+    if (playingTrack?.trackNum >= 0) {
       setCurrentTrackIndex((currentTrackIndex: any) =>
         currentTrackIndex > 0 ? currentTrackIndex - 1 : 0
       );
@@ -85,7 +84,7 @@ const BAudioPlayer = () => {
   };
 
   const handleEnd = () => {
-    if (playingSong?.trackNum >= 0) {
+    if (playingTrack?.trackNum >= 0) {
       setCurrentTrackIndex((currentTrackIndex: any) =>
         currentTrackIndex < currentPlaylist?.length - 1
           ? currentTrackIndex + 1
@@ -96,23 +95,33 @@ const BAudioPlayer = () => {
 
   const pauseAudio = () => {
     player?.current?.audio.current.pause();
+    setPlayingTrack({
+      ...currentTrack,
+      play: false,
+    });
   };
 
   const playAudio = () => {
     player?.current?.audio.current.play();
+    setPlayingTrack({
+      ...currentTrack,
+      play: true,
+    });
   };
 
   useEffect(() => {
-    if (currentTrack?.play == true) {
-      playAudio();
-    } else {
-      pauseAudio();
+    if (currentTrack) {
+      if (currentTrack?.play == true) {
+        playAudio();
+      } else {
+        pauseAudio();
+      }
     }
   }, [currentTrack]);
 
   return (
     <div className="z-20 select-none">
-      {playingSong?.url?.length > 0 ? (
+      {playingTrack?.url?.length > 0 ? (
         <div className="fixed bottom-0 flex h-20 w-full items-center justify-center bg-white/75 backdrop-blur-md dark:bg-slate-900/75">
           <div className="flex w-full flex-row items-center justify-center gap-3 text-sm text-slate-700 dark:text-white">
             <div className="absolute left-0 flex flex-row gap-3 pl-4">
@@ -128,10 +137,10 @@ const BAudioPlayer = () => {
                     draggable={false}
                     className="w-[3rem] rounded-md"
                     src={
-                      playingSong?.track?.thumbnails
-                        ? playingSong?.track?.thumbnails[0]?.url
-                        : playingSong?.thumbnails
-                        ? playingSong?.thumbnails[0]?.url
+                      playingTrack?.track?.thumbnails
+                        ? playingTrack?.track?.thumbnails[0]?.url
+                        : playingTrack?.thumbnails
+                        ? playingTrack?.thumbnails[0]?.url
                         : ""
                     }
                     alt=""
@@ -141,13 +150,13 @@ const BAudioPlayer = () => {
               <div className="flex flex-col justify-center">
                 <div className="flex flex-row gap-3">
                   <span className="inline-flex items-center gap-1 font-semibold">
-                    {playingSong?.track?.title}{" "}
-                    {playingSong?.track?.isExplicit ? <MdExplicit /> : null}
+                    {playingTrack?.track?.title}{" "}
+                    {playingTrack?.track?.isExplicit ? <MdExplicit /> : null}
                   </span>
                 </div>
                 <div>
                   <span className="font-normal">
-                    {playingSong?.track?.artists?.map(
+                    {playingTrack?.track?.artists?.map(
                       (artist: any, index: number) => (
                         <span>{(index ? ", " : "") + artist?.name}</span>
                       )
@@ -161,7 +170,7 @@ const BAudioPlayer = () => {
                 ref={player}
                 autoPlay={true}
                 showSkipControls={true}
-                src={playingSong?.url}
+                src={playingTrack?.url}
                 onEnded={handleEnd}
                 onClickNext={handleClickNext}
                 onClickPrevious={handleClickPrevious}
