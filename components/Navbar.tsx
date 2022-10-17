@@ -124,7 +124,7 @@ const Navbar = () => {
               <span className="text-[0.75rem]">{user?.displayName}</span>
               <img
                 draggable={false}
-                className="h-4 rounded-full"
+                className="h-4 w-4 rounded-full"
                 src={user?.photoURL}
                 alt=""
               />
