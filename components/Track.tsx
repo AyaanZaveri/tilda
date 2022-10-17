@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Router, useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { MdExplicit } from "react-icons/md";
 import { HiHeart, HiStar } from "react-icons/hi";
@@ -37,6 +37,7 @@ const Track = ({ track }: Props) => {
                 a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
               )[0]?.url,
             track: track,
+            play: true,
           });
         })
         .catch((err: any) => {});
@@ -60,7 +61,7 @@ const Track = ({ track }: Props) => {
 
   const [favoriteTracksSnapshot] = useCollection(favoriteTracksRef);
 
-  console.log(favoriteTracksSnapshot)
+  // console.log(favoriteTracksSnapshot)
 
   const checkIfFavoriteExists = (videoId: string) => {
     return favoriteTracksSnapshot?.docs.find(
@@ -92,7 +93,7 @@ const Track = ({ track }: Props) => {
   return (
     <div
       key={track.videoId}
-      className="group-one flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 hover:bg-slate-100 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:shadow-sky-500/10"
+      className="group-one flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 hover:bg-slate-100 text-sm dark:text-white dark:hover:bg-slate-800 text-slate-700 transition-all duration-300 ease-in-out hover:shadow-sky-500/10"
     >
       <div className="flex flex-row gap-3">
         <div
@@ -110,8 +111,7 @@ const Track = ({ track }: Props) => {
         <div className="flex flex-col justify-center">
           <div className="flex flex-row gap-3">
             <span
-              className="inline-flex cursor-pointer items-center gap-1 font-semibold transition duration-300 ease-in-out hover:text-sky-500 active:text-sky-600"
-              onClick={() => getCurrentSong(track.videoId)}
+              className="inline-flex items-center gap-1 font-semibold"
             >
               {track.title} {track.isExplicit ? <MdExplicit /> : null}
             </span>
@@ -128,7 +128,7 @@ const Track = ({ track }: Props) => {
                 className={`w-50 h-4 ${
                   checkIfFavoriteExists(track?.videoId as string)
                     ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
-                    : "group-one-hover:opacity-100 group-one-active:opacity-100 text-slate-700 opacity-0 hover:text-rose-500 active:text-rose-600"
+                    : "group-one-hover:opacity-100 group-one-active:opacity-100 text-slate-700 dark:text-white opacity-0 hover:text-rose-500 active:text-rose-600"
                 } mb-0.5 transition duration-300 ease-in-out hover:cursor-pointer`}
               />
             </span>

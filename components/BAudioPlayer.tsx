@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import {
   HiFastForward,
   HiPause,
@@ -28,6 +28,8 @@ import { playingTrackState } from "../atoms/playingTrack";
 import Tilt from "react-parallax-tilt";
 
 const BAudioPlayer = () => {
+  const player = useRef<any>();
+
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
   const [currentPlaylist, setCurrentPlaylist] =
     useRecoilState(currentPlaylistState);
@@ -92,13 +94,29 @@ const BAudioPlayer = () => {
     }
   };
 
+  const pauseAudio = () => {
+    player?.current?.audio.current.pause();
+  };
+
+  const playAudio = () => {
+    player?.current?.audio.current.play();
+  };
+
+  useEffect(() => {
+    if (currentTrack?.play == true) {
+      playAudio();
+    } else {
+      pauseAudio();
+    }
+  }, [currentTrack]);
+
   return (
     <div className="z-20 select-none">
       {playingSong?.url?.length > 0 ? (
-        <div className="fixed bottom-0 w-full justify-center flex items-center bg-white/75 dark:bg-slate-900/75 backdrop-blur-md h-20">
-          <div className="flex flex-row gap-3 items-center text-sm text-slate-700 dark:text-white w-full justify-center">
+        <div className="fixed bottom-0 flex h-20 w-full items-center justify-center bg-white/75 backdrop-blur-md dark:bg-slate-900/75">
+          <div className="flex w-full flex-row items-center justify-center gap-3 text-sm text-slate-700 dark:text-white">
             <div className="absolute left-0 flex flex-row gap-3 pl-4">
-              <div className="relative flex justify-center items-center overflow-hidden group transition-all">
+              <div className="group relative flex items-center justify-center overflow-hidden transition-all">
                 <Tilt
                   glareEnable={true}
                   glareMaxOpacity={0.8}
@@ -122,7 +140,7 @@ const BAudioPlayer = () => {
               </div>
               <div className="flex flex-col justify-center">
                 <div className="flex flex-row gap-3">
-                  <span className="font-semibold inline-flex gap-1 items-center">
+                  <span className="inline-flex items-center gap-1 font-semibold">
                     {playingSong?.track?.title}{" "}
                     {playingSong?.track?.isExplicit ? <MdExplicit /> : null}
                   </span>
@@ -140,6 +158,7 @@ const BAudioPlayer = () => {
             </div>
             <div className="w-2/5">
               <AudioPlayer
+                ref={player}
                 autoPlay={true}
                 showSkipControls={true}
                 src={playingSong?.url}

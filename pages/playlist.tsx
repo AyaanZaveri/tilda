@@ -15,6 +15,7 @@ import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { axiosReq } from "../utils/axiosReq";
 import { playingTrackState } from "../atoms/playingTrack";
 import Tilt from "react-parallax-tilt";
+import { getPlaylistSongs } from "../utils/getPlaylistSongs";
 
 const Playlist: NextPage = () => {
   const { query } = useRouter();
@@ -81,33 +82,33 @@ const Playlist: NextPage = () => {
       )[0]?.url;
   };
 
-  const getPlaylistSongs = async (playSong: boolean) => {
-    setCurPlay([]);
-    if (albumData?.tracks?.length >= 1) {
-      await albumData?.tracks?.map(async (track: any, idx: number) => {
-        const songUrl = await getAudioFromSong(track?.videoId);
-        // await setCurPlay((oldCurPlay: any) => [...oldCurPlay, idx]);
-        await setCurPlay((oldPlaylist: any) => [
-          ...oldPlaylist,
-          {
-            ...track,
-            track: {
-              title: track?.title,
-              thumbnails: albumData?.thumbnails,
-              isExplicit: track?.isExplicit,
-              artists: track?.artists,
-            },
-            trackNum: idx,
-            url: songUrl,
-            play: playSong,
-          },
-        ]);
-      });
-    }
-  };
+  // const getPlaylistSongs = async (playSong: boolean) => {
+  //   setCurPlay([]);
+  //   if (albumData?.tracks?.length >= 1) {
+  //     await albumData?.tracks?.map(async (track: any, idx: number) => {
+  //       const songUrl = await getAudioFromSong(track?.videoId);
+  //       await setCurPlay((oldCurPlay: any) => [...oldCurPlay, idx]);
+  //       await setCurPlay((oldPlaylist: any) => [
+  //         ...oldPlaylist,
+  //         {
+  //           ...track,
+  //           track: {
+  //             title: track?.title,
+  //             thumbnails: albumData?.thumbnails,
+  //             isExplicit: track?.isExplicit,
+  //             artists: track?.artists,
+  //           },
+  //           play: playSong,
+  //           trackNum: idx,
+  //           url: songUrl,
+  //         },
+  //       ]);
+  //     });
+  //   }
+  // };
 
   const setPlaylistSongs = () => {
-    getPlaylistSongs(true);
+    getPlaylistSongs(true, setCurPlay, albumData, getAudioFromSong);
     try {
       setCurrentPlaylist(
         curPlay?.sort((a: any, b: any) =>
@@ -118,7 +119,7 @@ const Playlist: NextPage = () => {
   };
 
   useEffect(() => {
-    getPlaylistSongs(false);
+    getPlaylistSongs(false, setCurPlay, albumData, getAudioFromSong);
   }, [albumData]);
 
   useEffect(() => {
@@ -135,13 +136,13 @@ const Playlist: NextPage = () => {
 
   return (
     <div
-      className={`pl-64 ml-3 pr-12 ${
+      className={`ml-3 pl-64 pr-12 ${
         playingTrack?.url?.length > 3 ? "pb-16" : ""
       }`}
     >
       <div className="pt-[4.5rem] pb-8">
         <div className="pt-8">
-          <div className="flex flex-row items-start gap-12 w-full">
+          <div className="flex w-full flex-row items-start gap-12">
             <Tilt
               glareEnable={true}
               glareMaxOpacity={0.8}
@@ -150,10 +151,10 @@ const Playlist: NextPage = () => {
               glareBorderRadius="12px"
             >
               {albumData?.thumbnails ? (
-                <div className="w-[16.5rem] h-[16.5rem]">
+                <div className="h-[16.5rem] w-[16.5rem]">
                   <img
                     draggable={false}
-                    className="rounded-xl select-none shadow-2xl shadow-sky-500/20"
+                    className="select-none rounded-xl shadow-2xl shadow-sky-500/20"
                     src={
                       albumData?.thumbnails[albumData?.thumbnails.length - 1]
                         ?.url
@@ -163,10 +164,10 @@ const Playlist: NextPage = () => {
                 </div>
               ) : null}
             </Tilt>
-            <div className="flex flex-col pt-3 gap-4 select-none text-slate-700 dark:text-white">
+            <div className="flex select-none flex-col gap-4 pt-3 text-slate-700 dark:text-white">
               <span className="text-4xl font-semibold">{albumData?.title}</span>
               <div className="flex flex-col">
-                <div className="inline-flex gap-2 items-center">
+                <div className="inline-flex items-center gap-2">
                   {isExplicit ? <MdExplicit /> : null}
                   {albumData ? (
                     <span>
@@ -178,7 +179,7 @@ const Playlist: NextPage = () => {
                     </span>
                   ) : null}
                 </div>
-                <div className="inline-flex gap-2 items-center">
+                <div className="inline-flex items-center gap-2">
                   {albumData ? (
                     <span className="text-sky-400">
                       {albumData?.trackCount} Tracks ·{" "}
@@ -203,7 +204,7 @@ const Playlist: NextPage = () => {
                         />
                         <button
                           onClick={() => setShowMore(false)}
-                          className="text-sky-400 hover:text-sky-500 transition-colors duration-300 text-sm"
+                          className="text-sm text-sky-400 transition-colors duration-300 hover:text-sky-500"
                         >
                           Show Less
                         </button>
@@ -215,7 +216,7 @@ const Playlist: NextPage = () => {
                     {albumData?.description ? (
                       <div>
                         <div
-                          className="mt-3 text-slate-700 dark:text-white line-clamp-2"
+                          className="mt-3 text-slate-700 line-clamp-2 dark:text-white"
                           dangerouslySetInnerHTML={{
                             __html: albumData?.description?.replaceAll(
                               /\n/g,
@@ -225,7 +226,7 @@ const Playlist: NextPage = () => {
                         />
                         <button
                           onClick={() => setShowMore(true)}
-                          className="text-sky-400 hover:text-sky-500 transition-colors ease-in-out duration-300 text-sm"
+                          className="text-sm text-sky-400 transition-colors duration-300 ease-in-out hover:text-sky-500"
                         >
                           Show More
                         </button>
@@ -237,9 +238,9 @@ const Playlist: NextPage = () => {
                   <div className="mt-3 w-min">
                     <button
                       onClick={setPlaylistSongs}
-                      className="px-4 py-1.5 text-sm text-white shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30 bg-sky-500 inline-flex gap-2 items-center active:bg-sky-600 rounded-md transition ease-in-out duration-300"
+                      className="inline-flex items-center gap-2 rounded-md bg-sky-500 px-4 py-1.5 text-sm text-white shadow-lg shadow-sky-500/20 transition duration-300 ease-in-out hover:shadow-xl hover:shadow-sky-500/30 active:bg-sky-600"
                     >
-                      <PlayIcon className="w-4 h-4" />
+                      <PlayIcon className="h-4 w-4" />
                       Play
                     </button>
                   </div>

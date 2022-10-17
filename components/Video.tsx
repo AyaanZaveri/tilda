@@ -35,6 +35,7 @@ const Video = ({ video }: Props) => {
               a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
             )[0]?.url,
             track: video,
+            play: true,
           });
         })
         .catch((err: any) => {});
@@ -56,7 +57,7 @@ const Video = ({ video }: Props) => {
 
   const [favoriteTracksSnapshot] = useCollection(favoriteTracksRef);
 
-  console.log(favoriteTracksSnapshot)
+  // console.log(favoriteTracksSnapshot)
 
   const checkIfFavoriteExists = (videoId: string) => {
     return favoriteTracksSnapshot?.docs.find(

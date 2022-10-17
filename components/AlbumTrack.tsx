@@ -10,6 +10,7 @@ import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
 import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
 import { playingTrackState } from "../atoms/playingTrack";
+import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   track: any;
@@ -23,7 +24,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
-  const getCurrentSong = (query: string) => {
+  const getCurrentSong = (query: string, playAudio: boolean) => {
     if (query.length > 2) {
       axios
         .get(`${pipedApiUrl}/streams/${query}`)
@@ -39,6 +40,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
               thumbnails: thumbnails,
             },
             trackNum: index,
+            play: playAudio,
           });
         })
         .catch((err: any) => {});
@@ -53,19 +55,37 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
   return (
     <div
       key={track.videoId}
-      className="flex py-3 w-full flex-row select-none transition-all ease-in-out justify-between duration-300 items-center group gap-3 rounded-md px-3 text-sm group text-slate-700 dark:text-white hover:text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 hover:cursor-pointer"
-      onClick={() => getCurrentSong(track.videoId)}
+      className="group-one flex h-11 w-full select-none flex-row items-center justify-between gap-3 rounded-md px-3 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:bg-slate-100 hover:shadow-sky-500/10 dark:text-white dark:hover:bg-slate-800"
     >
-      <div className="flex flex-row gap-5 items-center">
-        <span className="text-slate-400 group-hover:text-white transition-all ease-in-out duration-300">
-          {index + 1}
-        </span>
+      <div className="flex flex-row items-center gap-5">
+        <div className="group-two relative flex h-4 w-4 cursor-pointer items-center justify-center overflow-hidden rounded-md transition-all">
+          <span
+            className={`text-slate-400 ${
+              track.title == playingTrack?.track?.title && currentTrack?.play
+                ? "opacity-0"
+                : "opacity-100"
+            } transition-all duration-300 ease-in-out group-hover:text-white group-one-hover:opacity-0 group-one-active:opacity-0`}
+          >
+            {index + 1}
+          </span>
+          {track.title == playingTrack?.track?.title && currentTrack?.play ? (
+            <PauseIcon
+              onClick={() => getCurrentSong(track.videoId, false)}
+              className="absolute left-0 ml-0.5 h-4 w-4 text-sky-500 transition-all duration-300 ease-in-out hover:text-sky-600 active:text-sky-700"
+            />
+          ) : (
+            <PlayIcon
+              onClick={() => getCurrentSong(track.videoId, true)}
+              className="absolute left-0 ml-0.5 h-4 w-4 text-slate-600 opacity-0 transition-all duration-300 ease-in-out hover:text-sky-500 active:text-sky-600 group-one-hover:opacity-100 group-one-active:opacity-100 dark:text-white dark:hover:text-sky-500 dark:active:text-sky-600"
+            />
+          )}
+        </div>
         <div className="flex flex-col justify-center">
-          <div className="flex flex-row gap-3">
+          <div className="flex h-full w-full flex-row gap-3">
             <span
-              className={`font-semibold inline-flex gap-1 items-center ${
+              className={`inline-flex items-center gap-1 font-semibold ${
                 track.title == playingTrack?.track?.title
-                  ? "text-sky-600 dark:text-sky-400 group-hover:text-white transition-all ease-in-out duration-300"
+                  ? "text-sky-500 transition-all duration-300 ease-in-out group-hover:text-white dark:text-sky-400"
                   : ""
               }`}
             >
