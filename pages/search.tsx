@@ -66,24 +66,57 @@ const Search = () => {
     if (searchResults) {
       searchResults?.map((result: any) => {
         if (result?.category == "Top result") {
-          setTopResults((oldTopResults: any) => [...oldTopResults, result]);
+          setTopResults((oldTopResults: any) => [
+            ...oldTopResults,
+            {
+              ...result,
+              type: result?.resultType,
+            },
+          ]);
         }
         if (result?.category == "Songs") {
-          setSongs((oldSongs: any) => [...oldSongs, result]);
+          setSongs((oldSongs: any) => [
+            ...oldSongs,
+            {
+              ...result,
+              type: "track",
+            },
+          ]);
         }
         if (result?.category == "Albums") {
-          setAlbums((oldAlbums: any) => [...oldAlbums, result]);
+          setAlbums((oldAlbums: any) => [
+            ...oldAlbums,
+            {
+              ...result,
+              type: "album",
+            },
+          ]);
         }
         if (result?.category == "Videos") {
-          setVideos((oldVideos: any) => [...oldVideos, result]);
+          setVideos((oldVideos: any) => [
+            ...oldVideos,
+            {
+              ...result,
+              type: "video",
+            },
+          ]);
         }
         if (result?.category == "Artists") {
-          setArtists((oldArists: any) => [...oldArists, result]);
+          setArtists((oldArists: any) => [
+            ...oldArists,
+            {
+              ...result,
+              type: "artist",
+            },
+          ]);
         }
         if (result?.category == "Community playlists") {
           setCommunityPlaylists((oldCommunityPlaylists: any) => [
             ...oldCommunityPlaylists,
-            result,
+            {
+              ...result,
+              type: "communityPlaylist",
+            },
           ]);
         }
       });
@@ -111,7 +144,7 @@ const Search = () => {
                 </div>
               ) : null}
               {songs.length > 0 ? (
-                <div className="flex flex-col justify-center gap-3 w-full">
+                <div className="flex w-full flex-col justify-center gap-3">
                   <span className="w-min items-start justify-start text-2xl font-semibold text-slate-700 dark:text-white">
                     Tracks
                   </span>

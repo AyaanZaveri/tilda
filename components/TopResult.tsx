@@ -132,7 +132,7 @@ const TopResult = ({ result }: { result: any }) => {
             onClick={() => getCurrentSong(result.videoId, result.type)}
             className="absolute right-0 bottom-0 m-4 rounded-full bg-sky-500 p-3 text-white opacity-0 transition duration-300 ease-in-out hover:bg-sky-600 active:bg-sky-700 group-one-hover:opacity-100 group-one-active:opacity-100"
           >
-            <PlayIcon onClick={handleFavorited} className="ml-0.5 h-6 w-6" />
+            <PlayIcon className="ml-0.5 h-6 w-6" />
           </button>
         </div>
       ) : result?.resultType == "artist" ? (

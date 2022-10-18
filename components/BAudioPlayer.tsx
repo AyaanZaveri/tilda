@@ -138,7 +138,7 @@ const BAudioPlayer = () => {
                   glarePosition="bottom"
                   glareBorderRadius="6px"
                 >
-                  {currentTrack?.type == "video" || "Video" ? (
+                  {currentTrack?.type == "video" ? (
                     <div className="rounded-md bg-sky-200 py-1">
                       <img
                         draggable={false}
