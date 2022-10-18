@@ -138,18 +138,36 @@ const BAudioPlayer = () => {
                   glarePosition="bottom"
                   glareBorderRadius="6px"
                 >
-                  <img
-                    draggable={false}
-                    className="w-[3rem] rounded-md"
-                    src={
-                      playingTrack?.track?.thumbnails
-                        ? playingTrack?.track?.thumbnails[0]?.url
-                        : playingTrack?.thumbnails
-                        ? playingTrack?.thumbnails[0]?.url
-                        : ""
-                    }
-                    alt=""
-                  />
+                  {currentTrack?.type == "video" || "Video" ? (
+                    <div className="rounded-md bg-sky-200 py-1">
+                      <img
+                        draggable={false}
+                        className="w-[3rem]"
+                        src={
+                          playingTrack?.track?.thumbnails
+                            ? playingTrack?.track?.thumbnails[0]?.url
+                            : playingTrack?.thumbnails
+                            ? playingTrack?.thumbnails[0]?.url
+                            : ""
+                        }
+                        alt=""
+                      />
+                    </div>
+                  ) : (
+                    <img
+                      draggable={false}
+                      className="w-[3rem] rounded-md"
+                      src={
+                        playingTrack?.track?.thumbnails
+                          ? playingTrack?.track?.thumbnails[0]?.url
+                          : playingTrack?.thumbnails
+                          ? playingTrack?.thumbnails[0]?.url
+                          : ""
+                      }
+                      alt=""
+                    />
+                  )}
+                  {}
                 </Tilt>
               </div>
               <div className="flex flex-col justify-center">

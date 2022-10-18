@@ -29,7 +29,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
-  const getCurrentSong = (query: string) => {
+  const getCurrentSong = (query: string, type: string) => {
     if (query.length > 2) {
       axios
         .get(`${pipedApiUrl}/streams/${query}`)
@@ -45,6 +45,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
               thumbnails: thumbnails,
             },
             trackNum: index,
+            type: type,
           });
         })
         .catch((err: any) => {});
@@ -126,7 +127,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
           ) : (
             <PlayIcon
               onClick={() => {
-                getCurrentSong(track.videoId);
+                getCurrentSong(track.videoId, "track");
                 setIsPlaying({
                   isPlaying: true,
                   type: "track",

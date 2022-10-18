@@ -25,7 +25,7 @@ const Video = ({ video }: Props) => {
   const router = useRouter();
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
 
-  const getCurrentSong = (query: string) => {
+  const getCurrentSong = (query: string, type: string) => {
     if (query.length > 2) {
       axios
         .get(`${pipedApiUrl}/streams/${query}`)
@@ -35,6 +35,7 @@ const Video = ({ video }: Props) => {
               a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
             )[0]?.url,
             track: video,
+            type: type,
           });
         })
         .catch((err: any) => {});
@@ -51,7 +52,7 @@ const Video = ({ video }: Props) => {
   // get uid of user from firebase
   const userRef = doc(usersRef, user?.uid);
   const userCollectionRef = collection(userRef, "user");
-  const favoritesRef = doc(userCollectionRef, "favorites")
+  const favoritesRef = doc(userCollectionRef, "favorites");
   const favoriteTracksRef = collection(favoritesRef, "tracks");
 
   const [favoriteTracksSnapshot] = useCollection(favoriteTracksRef);
@@ -88,23 +89,25 @@ const Video = ({ video }: Props) => {
   return (
     <div
       key={video.videoId}
-      className="group-one flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 hover:bg-slate-100 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:shadow-sky-500/10"
-      onClick={() => getCurrentSong(video.videoId)}
+      className="group-one flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:bg-slate-100 hover:shadow-sky-500/10 dark:text-white dark:hover:bg-slate-800"
       id={video.videoId}
     >
       <div className="flex flex-row gap-3">
-        <div className="group-two relative flex cursor-pointer items-center justify-center overflow-hidden rounded-md transition-all bg-sky-200">
-        <PlayIcon className="group-one-hover:opacity-100 group-one-active:opacity-100 group-two-active:brightness-90 absolute z-10 ml-0.5 h-5 w-5 text-white opacity-0 transition-all duration-300 ease-in-out" />
+        <div
+          onClick={() => getCurrentSong(video.videoId, "video")}
+          className="group-two relative flex cursor-pointer items-center justify-center overflow-hidden rounded-md bg-sky-200 transition-all dark:bg-sky-700"
+        >
+          <PlayIcon className="absolute z-10 ml-0.5 h-5 w-5 text-white opacity-0 transition-all duration-300 ease-in-out group-one-hover:opacity-100 group-one-active:opacity-100 group-two-active:brightness-90" />
           <img
             draggable={false}
-            className="group-one-hover:scale-110 group-one-hover:blur-sm group-one-active:scale-110 group-one-active:blur-sm group-two-active:brightness-75 w-12 h-auto group-hover:blur-sm group-hover:scale-110 group-active:blur-sm transition ease-in-out duration-300"
+            className="h-auto w-12 transition duration-300 ease-in-out group-hover:scale-110 group-hover:blur-sm group-active:blur-sm group-one-hover:scale-110 group-one-hover:blur-sm group-one-active:scale-110 group-one-active:blur-sm group-two-active:brightness-75"
             src={video?.thumbnails[0]?.url}
             alt=""
           />
         </div>
         <div className="flex flex-col justify-center">
           <div className="flex flex-row gap-3">
-            <span className="font-semibold inline-flex gap-1 items-center">
+            <span className="inline-flex items-center gap-1 font-semibold">
               {video.title} {video.isExplicit ? <MdExplicit /> : null}
             </span>
           </div>
@@ -119,7 +122,7 @@ const Video = ({ video }: Props) => {
                 className={`w-50 h-4 ${
                   checkIfFavoriteExists(video?.videoId as string)
                     ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
-                    : "group-one-hover:opacity-100 group-one-active:opacity-100 text-slate-700 opacity-0 hover:text-rose-500 active:text-rose-600"
+                    : "text-slate-700 opacity-0 hover:text-rose-500 active:text-rose-600 group-one-hover:opacity-100 group-one-active:opacity-100 dark:text-white dark:hover:text-rose-500 dark:active:text-rose-600"
                 } mb-0.5 transition duration-300 ease-in-out hover:cursor-pointer`}
               />
             </span>

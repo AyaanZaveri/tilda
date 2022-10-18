@@ -40,7 +40,7 @@ const Search = () => {
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
   const getSearchResults = () => {
-    setSearchResults([])
+    setSearchResults([]);
     setTopResults([]);
     setSongs([]);
     setArtists([]);
@@ -92,61 +92,71 @@ const Search = () => {
 
   return (
     <div>
-      <div className="pt-[4.5rem] pb-8 select-none">
-        <div className="flex pl-64 ml-3 justify-center pt-2">
+      <div className="select-none pt-[4.5rem] pb-8">
+        <div className="ml-3 flex justify-center pl-64 pt-2">
           <div
-            className={`flex flex-col gap-4 w-full ${
+            className={`flex w-full flex-col gap-4 ${
               playingTrack?.url?.length > 3 ? "pb-16" : ""
             }`}
           >
-            {topResults.length > 0 ? (
-              <div className="w-3/4 flex justify-center flex-col gap-2">
-                <span className="justify-start items-start font-semibold text-2xl text-slate-700 dark:text-white w-full">
-                  Top Result
-                </span>
-                {topResults?.map((result: any, index: number) => (
-                  <TopResult result={result} key={index} />
-                ))}
-              </div>
-            ) : null}
-            {songs.length > 0 ? (
-              <div className="w-3/4 flex justify-center flex-col gap-2">
-                <span className="justify-start items-start font-semibold text-2xl text-slate-700 dark:text-white w-min">
-                  Tracks
-                </span>
-                {songs?.map((track: any, index: number) => (
-                  <Track track={track} key={index} />
-                ))}
-              </div>
-            ) : null}
+            <div className="flex flex-row items-start pr-6">
+              {topResults.length > 0 ? (
+                <div className="flex w-3/4 flex-col justify-center gap-3">
+                  <span className="w-full items-start justify-start text-2xl font-semibold text-slate-700 dark:text-white">
+                    Top Result
+                  </span>
+                  {topResults?.map((result: any, index: number) => (
+                    <TopResult result={result} key={index} />
+                  ))}
+                </div>
+              ) : null}
+              {songs.length > 0 ? (
+                <div className="flex flex-col justify-center gap-3 w-full">
+                  <span className="w-min items-start justify-start text-2xl font-semibold text-slate-700 dark:text-white">
+                    Tracks
+                  </span>
+                  <div className="flex flex-col gap-2">
+                    {songs?.map((track: any, index: number) => (
+                      <Track track={track} key={index} />
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+            </div>
             {albums.length > 0 ? (
-              <div className="w-3/4 flex justify-center flex-col gap-2">
-                <span className="justify-start items-start font-semibold text-2xl text-slate-700 dark:text-white w-min">
+              <div className="flex w-3/4 flex-col justify-center gap-3">
+                <span className="w-min items-start justify-start text-2xl font-semibold text-slate-700 dark:text-white">
                   Albums
                 </span>
-                {albums?.map((album: any, index: number) => (
-                  <Album album={album} key={index} />
-                ))}
+                <div className="flex flex-col gap-2">
+                  {albums?.map((album: any, index: number) => (
+                    <Album album={album} key={index} />
+                  ))}
+                </div>
               </div>
             ) : null}
             {videos.length > 0 ? (
-              <div className="w-3/4 flex justify-center flex-col gap-2">
-                <span className="justify-start items-start font-semibold text-2xl text-slate-700 dark:text-white w-min">
+              <div className="flex w-3/4 flex-col justify-center gap-3">
+                <span className="w-min items-start justify-start text-2xl font-semibold text-slate-700 dark:text-white">
                   Videos
                 </span>
-                {videos?.map((video: any, index: number) => (
-                  <Video video={video} key={index} />
-                ))}
+                <div className="flex flex-col gap-2">
+                  {videos?.map((video: any, index: number) => (
+                    <Video video={video} key={index} />
+                  ))}
+                </div>
               </div>
             ) : null}
             {artists.length > 0 ? (
-              <div className="w-3/4 flex justify-center flex-col gap-2">
-                <span className="justify-start items-start font-semibold text-2xl text-slate-700 dark:text-white w-min">
+              <div className="flex w-3/4 flex-col justify-center gap-3">
+                <span className="w-min items-start justify-start text-2xl font-semibold text-slate-700 dark:text-white">
                   Artists
                 </span>
-                {artists?.map((artist: any, index: number) => (
-                  <Artist artist={artist} key={index} />
-                ))}
+                <div className="flex flex-col gap-2">
+                  {artists?.map((artist: any, index: number) => (
+                    <Artist artist={artist} key={index} />
+                  ))}
+                </div>
               </div>
             ) : null}
           </div>
