@@ -7,7 +7,7 @@ import { MdExplicit } from "react-icons/md";
 import { useRecoilState } from "recoil";
 import { titleCase } from "title-case";
 import { currentPlaylistState } from "../atoms/playlistAtom";
-import { currentTrackState } from "../atoms/songAtom";
+import { currentTrackState, isPlayingState } from "../atoms/songAtom";
 import AlbumTrack from "../components/AlbumTrack";
 import Navbar from "../components/Navbar";
 import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
@@ -24,6 +24,7 @@ const Playlist: NextPage = () => {
   const [albumData, setAlbumData] = useState<any>();
   const [isExplicit, setIsExplicit] = useState<boolean>();
   const [showMore, setShowMore] = useState<boolean>(false);
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
 
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
   const [currentPlaylist, setCurrentPlaylist] =
@@ -82,33 +83,30 @@ const Playlist: NextPage = () => {
       )[0]?.url;
   };
 
-  // const getPlaylistSongs = async (playSong: boolean) => {
-  //   setCurPlay([]);
-  //   if (albumData?.tracks?.length >= 1) {
-  //     await albumData?.tracks?.map(async (track: any, idx: number) => {
-  //       const songUrl = await getAudioFromSong(track?.videoId);
-  //       await setCurPlay((oldCurPlay: any) => [...oldCurPlay, idx]);
-  //       await setCurPlay((oldPlaylist: any) => [
-  //         ...oldPlaylist,
-  //         {
-  //           ...track,
-  //           track: {
-  //             title: track?.title,
-  //             thumbnails: albumData?.thumbnails,
-  //             isExplicit: track?.isExplicit,
-  //             artists: track?.artists,
-  //           },
-  //           play: playSong,
-  //           trackNum: idx,
-  //           url: songUrl,
-  //         },
-  //       ]);
-  //     });
-  //   }
-  // };
+  const getPlaylistSongs = async () => {
+    setCurPlay([]);
+    if (albumData?.tracks?.length >= 1) {
+      await albumData?.tracks?.map(async (track: any, idx: number) => {
+        const songUrl = await getAudioFromSong(track?.videoId);
+        await setCurPlay((oldPlaylist: any) => [
+          ...oldPlaylist,
+          {
+            ...track,
+            track: {
+              title: track?.title,
+              thumbnails: albumData?.thumbnails,
+              isExplicit: track?.isExplicit,
+              artists: track?.artists,
+            },
+            trackNum: idx,
+            url: songUrl,
+          },
+        ]);
+      });
+    }
+  };
 
   const setPlaylistSongs = () => {
-    getPlaylistSongs(true, setCurPlay, albumData, getAudioFromSong);
     try {
       setCurrentPlaylist(
         curPlay?.sort((a: any, b: any) =>
@@ -119,7 +117,7 @@ const Playlist: NextPage = () => {
   };
 
   useEffect(() => {
-    getPlaylistSongs(false, setCurPlay, albumData, getAudioFromSong);
+    getPlaylistSongs();
   }, [albumData]);
 
   useEffect(() => {
@@ -133,6 +131,8 @@ const Playlist: NextPage = () => {
       } catch (error) {}
     }
   }, [curPlay]);
+
+  // console.log(currentPlaylist);
 
   return (
     <div
@@ -237,7 +237,13 @@ const Playlist: NextPage = () => {
                 {albumData?.tracks ? (
                   <div className="mt-3 w-min">
                     <button
-                      onClick={setPlaylistSongs}
+                      onClick={() => {
+                        setPlaylistSongs();
+                        setIsPlaying({
+                          isPlaying: true,
+                          type: "playlist"
+                        });
+                      }}
                       className="inline-flex items-center gap-2 rounded-md bg-sky-500 px-4 py-1.5 text-sm text-white shadow-lg shadow-sky-500/20 transition duration-300 ease-in-out hover:shadow-xl hover:shadow-sky-500/30 active:bg-sky-600"
                     >
                       <PlayIcon className="h-4 w-4" />

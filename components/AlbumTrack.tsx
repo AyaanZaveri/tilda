@@ -7,7 +7,7 @@ import { HiHeart } from "react-icons/hi";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
 import { useRecoilState } from "recoil";
-import { currentTrackState } from "../atoms/songAtom";
+import { currentTrackState, isPlayingState } from "../atoms/songAtom";
 import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
 import { playingTrackState } from "../atoms/playingTrack";
 import { PauseIcon, PlayIcon } from "@heroicons/react/24/solid";
@@ -29,7 +29,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
-  const getCurrentSong = (query: string, playAudio: boolean) => {
+  const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
         .get(`${pipedApiUrl}/streams/${query}`)
@@ -45,7 +45,6 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
               thumbnails: thumbnails,
             },
             trackNum: index,
-            play: playAudio,
           });
         })
         .catch((err: any) => {});
@@ -64,6 +63,8 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
   const userCollectionRef = collection(userRef, "user");
   const favoritesRef = doc(userCollectionRef, "favorites");
   const favoriteTracksRef = collection(favoritesRef, "tracks");
+
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
 
   const [favoriteTracksSnapshot] = useCollection(favoriteTracksRef);
 
@@ -105,21 +106,32 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
         <div className="group-two relative flex h-4 w-4 cursor-pointer items-center justify-center overflow-hidden rounded-md transition-all">
           <span
             className={`text-slate-400 ${
-              track.title == playingTrack?.track?.title && currentTrack?.play
+              track.title == playingTrack?.track?.title && isPlaying.isPlaying
                 ? "opacity-0"
                 : "opacity-100"
             } transition-all duration-300 ease-in-out group-hover:text-white group-one-hover:opacity-0 group-one-active:opacity-0`}
           >
             {index + 1}
           </span>
-          {track.title == playingTrack?.track?.title && currentTrack?.play ? (
+          {track.title == playingTrack?.track?.title && isPlaying.isPlaying ? (
             <PauseIcon
-              onClick={() => getCurrentSong(track.videoId, false)}
+              onClick={() => {
+                setIsPlaying({
+                  isPlaying: false,
+                  type: "track",
+                });
+              }}
               className="absolute left-0 ml-0.5 h-4 w-4 text-sky-500 transition-all duration-300 ease-in-out hover:text-sky-600 active:text-sky-700"
             />
           ) : (
             <PlayIcon
-              onClick={() => getCurrentSong(track.videoId, true)}
+              onClick={() => {
+                getCurrentSong(track.videoId);
+                setIsPlaying({
+                  isPlaying: true,
+                  type: "track",
+                });
+              }}
               className="absolute left-0 ml-0.5 h-4 w-4 text-slate-600 opacity-0 transition-all duration-300 ease-in-out hover:text-sky-500 active:text-sky-600 group-one-hover:opacity-100 group-one-active:opacity-100 dark:text-white dark:hover:text-sky-500 dark:active:text-sky-600"
             />
           )}

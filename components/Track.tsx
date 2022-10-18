@@ -37,7 +37,6 @@ const Track = ({ track }: Props) => {
                 a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
               )[0]?.url,
             track: track,
-            play: true,
           });
         })
         .catch((err: any) => {});

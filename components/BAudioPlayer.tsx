@@ -9,7 +9,7 @@ import {
 } from "react-icons/hi";
 import { MdExplicit } from "react-icons/md";
 import AudioPlayer from "react-h5-audio-player";
-import { currentTrackState } from "../atoms/songAtom";
+import { currentTrackState, isPlayingState } from "../atoms/songAtom";
 import { useRecoilState } from "recoil";
 import {
   FastForward20Filled,
@@ -33,7 +33,10 @@ const BAudioPlayer = () => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
   const [currentPlaylist, setCurrentPlaylist] =
     useRecoilState(currentPlaylistState);
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
+
+  // console.log(isPlaying);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState<any>(0);
 
@@ -44,26 +47,28 @@ const BAudioPlayer = () => {
       : null;
   }, [currentTrack]);
 
-  const handlePlayButton = () => {
-    setPlayingTrack(currentPlaylist[0]);
-    setCurrentTrackIndex(0);
-  };
-
-  useEffect(() => {
-    currentPlaylist?.length >= 1 && currentPlaylist[0]?.play
-      ? handlePlayButton()
-      : null;
-  }, [currentPlaylist]);
-
   useEffect(() => {
     currentPlaylist?.length >= 1
       ? setPlayingTrack(currentPlaylist[currentTrackIndex])
       : null;
   }, [currentTrackIndex]);
 
+  const handlePlayButton = () => {
+    setPlayingTrack(currentPlaylist[0]);
+    setCurrentTrackIndex(0);
+  };
+
+  useEffect(() => {
+    isPlaying.isPlaying && isPlaying.type == "playlist"
+      ? handlePlayButton()
+      : null;
+  }, [isPlaying.type]);
+
   useEffect(() => {
     setPlayingTrack(playingTrack);
   }, [playingTrack]);
+
+  console.log(isPlaying);
 
   const handleClickNext = () => {
     if (playingTrack?.trackNum >= 0) {
@@ -95,27 +100,29 @@ const BAudioPlayer = () => {
 
   const pauseAudio = () => {
     player?.current?.audio.current.pause();
-    setCurrentTrack({
-      ...currentTrack,
-      play: false,
+    setIsPlaying({
+      ...isPlaying,
+      isPlaying: false,
     });
   };
 
   const playAudio = () => {
     player?.current?.audio.current.play();
-    setCurrentTrack({
-      ...currentTrack,
-      play: true,
+    setIsPlaying({
+      ...isPlaying,
+      isPlaying: true,
     });
   };
 
   useEffect(() => {
-    if (currentTrack?.play == true) {
+    if (isPlaying.isPlaying == true) {
       playAudio();
     } else {
       pauseAudio();
     }
-  }, [currentTrack?.play]);
+  }, [isPlaying.isPlaying]);
+
+  // console.log(isPlaying);
 
   return (
     <div className="z-20 select-none">
@@ -166,15 +173,15 @@ const BAudioPlayer = () => {
             <div className="w-2/5">
               <AudioPlayer
                 onPause={() =>
-                  setCurrentTrack({
-                    ...currentTrack,
-                    play: false,
+                  setIsPlaying({
+                    ...isPlaying,
+                    isPlaying: false,
                   })
                 }
                 onPlay={() =>
-                  setCurrentTrack({
-                    ...currentTrack,
-                    play: true,
+                  setIsPlaying({
+                    ...isPlaying,
+                    isPlaying: true,
                   })
                 }
                 ref={player}

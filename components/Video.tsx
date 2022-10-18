@@ -35,7 +35,6 @@ const Video = ({ video }: Props) => {
               a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
             )[0]?.url,
             track: video,
-            play: true,
           });
         })
         .catch((err: any) => {});

@@ -19,7 +19,6 @@ export const getPlaylistSongs = async (
             isExplicit: track?.isExplicit,
             artists: track?.artists,
           },
-          play: playSong,
           trackNum: idx,
           url: songUrl,
         },
