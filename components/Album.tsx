@@ -76,7 +76,7 @@ const Album = ({ album }: Props) => {
   return (
     <div
       key={album.videoId}
-      className="group-one flex flex-col items-center justify-between gap-3 rounded-xl p-4 pb-8 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:scale-105 hover:cursor-pointer hover:bg-slate-100 hover:text-white active:bg-slate-200 active:text-white dark:text-white dark:hover:bg-slate-800 dark:active:bg-slate-800 dark:active:ring-1 dark:active:ring-slate-700"
+      className="group-one flex flex-col items-center justify-between gap-3 rounded-xl p-4 pb-8 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:scale-105 hover:cursor-pointer hover:bg-slate-100 active:bg-slate-200 dark:text-white dark:hover:bg-slate-800 dark:active:bg-slate-800 dark:active:ring-1 dark:active:ring-slate-700"
     >
       <div className="flex flex-col gap-4">
         <div className="group relative flex items-center justify-center overflow-hidden rounded-md transition-all">
