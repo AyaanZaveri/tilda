@@ -92,6 +92,13 @@ const Track = ({ track }: Props) => {
 
   return (
     <div
+      onClick={() => {
+        getCurrentSong(track.videoId);
+        setIsPlaying({
+          isPlaying: true,
+          type: "track",
+        });
+      }}
       key={track.videoId}
       className="group-one flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:cursor-pointer hover:bg-slate-100 active:bg-slate-200 dark:text-white dark:hover:bg-slate-800 dark:active:bg-slate-800 dark:active:ring-1 dark:active:ring-slate-700"
     >
@@ -130,7 +137,10 @@ const Track = ({ track }: Props) => {
                 &nbsp;· {track?.album?.name}
               </span>
               <HiHeart
-                onClick={handleFavorited}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleFavorited();
+                }}
                 className={`w-50 h-4 ${
                   checkIfFavoriteExists(track?.videoId as string)
                     ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
