@@ -157,11 +157,11 @@ const Search = () => {
               ) : null}
             </div>
             {albums.length > 0 ? (
-              <div className="flex w-3/4 flex-col justify-center gap-3">
+              <div className="flex flex-col justify-center gap-3">
                 <span className="w-min items-start justify-start text-2xl font-semibold text-slate-700 dark:text-white">
                   Albums
                 </span>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-row flex-wrap gap-6">
                   {albums?.map((album: any, index: number) => (
                     <Album album={album} key={index} />
                   ))}
