@@ -93,7 +93,7 @@ const Track = ({ track }: Props) => {
   return (
     <div
       key={track.videoId}
-      className="group-one flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:bg-slate-100 hover:shadow-sky-500/10 dark:text-white dark:hover:bg-slate-800"
+      className="group-one flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:cursor-pointer hover:bg-slate-100 hover:text-white active:bg-slate-200 active:text-white dark:text-white dark:hover:bg-slate-800 dark:active:bg-slate-800 dark:active:ring-1 dark:active:ring-slate-700"
     >
       <div className="flex flex-row gap-3">
         <div

@@ -6,7 +6,11 @@ import { MdExplicit } from "react-icons/md";
 import { HiHeart } from "react-icons/hi";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
-import { tildaApiUrl } from "../utils/apiUrl";
+import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
 
 interface Props {
   album: any;
@@ -21,9 +25,7 @@ const Album = ({ album }: Props) => {
       .then((res: any) => {
         setAlbumData(res.data);
       })
-      .catch(
-        (err: any) => {}
-      );
+      .catch((err: any) => {});
   };
 
   useEffect(() => {
@@ -32,36 +34,85 @@ const Album = ({ album }: Props) => {
 
   const router = useRouter();
 
+  const [user] = useAuthState(auth);
+
+  const usersRef = collection(db, "users");
+
+  // get uid of user from firebase
+  const userRef = doc(usersRef, user?.uid);
+  const userCollectionRef = collection(userRef, "user");
+  const favoritesRef = doc(userCollectionRef, "favorites");
+  const favoriteAlbumsRef = collection(favoritesRef, "albums");
+
+  const [favoriteAlbumsSnapshot] = useCollection(favoriteAlbumsRef);
+
+  const checkIfFavoriteExists = (browseId: string) => {
+    return favoriteAlbumsSnapshot?.docs.find(
+      (doc) => doc.data().browseId === browseId
+    );
+  };
+
+  const addFavorite = async () => {
+    if (!checkIfFavoriteExists(album?.browseId)) {
+      await addDoc(favoriteAlbumsRef, album);
+    }
+  };
+
+  const deleteFavorite = async () => {
+    const favoriteDoc = favoriteAlbumsSnapshot?.docs.find(
+      (doc) => doc.data().browseId === album?.browseId
+    )?.id;
+    await deleteDoc(doc(favoriteAlbumsRef, favoriteDoc));
+  };
+
+  const handleFavorited = () => {
+    if (checkIfFavoriteExists(album?.browseId)) {
+      deleteFavorite();
+    } else {
+      addFavorite();
+    }
+  };
+
   return (
     <div
       key={album.videoId}
-      onClick={() =>
-        router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
-      }
-      className="flex h-16 w-full flex-row transition-all ease-in-out justify-between duration-300 items-center gap-3 rounded-md px-3 text-sm text-slate-700 hover:text-white active:text-white dark:text-white hover:bg-sky-500 active:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/10 hover:cursor-pointer"
+      className="group-one flex h-16 w-full flex-row items-center justify-between gap-3 rounded-md px-3 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:cursor-pointer hover:bg-slate-100 hover:text-white active:bg-slate-200 active:text-white dark:text-white dark:hover:bg-slate-800 dark:active:bg-slate-800 dark:active:ring-1 dark:active:ring-slate-700"
     >
       <div className="flex flex-row gap-3">
-        <div className="relative flex justify-center items-center overflow-hidden rounded-md group transition-all">
+        <div className="group relative flex items-center justify-center overflow-hidden rounded-md transition-all">
           <img
             draggable={false}
-            className="w-[2.5rem] h-[2.5rem]"
+            className="h-[2.5rem] w-[2.5rem]"
             src={album?.thumbnails[1]?.url}
             alt=""
           />
         </div>
         <div className="flex flex-col justify-center">
-          <div className="flex flex-row gap-3">
-            <span className="font-semibold inline-flex gap-1 items-center">
+          <div
+            onClick={() =>
+              router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
+            }
+            className="flex flex-row gap-3"
+          >
+            <span className="inline-flex items-center gap-1 font-semibold decoration-sky-500 transition-colors duration-300 ease-in-out hover:underline decoration-2">
               {album.title} {album.isExplicit ? <MdExplicit /> : null}
             </span>
           </div>
-          <div>
+          <div className="inline-flex items-center gap-1 overflow-hidden text-ellipsis">
             <span className="font-normal">
               {titleCase(album?.resultType)} ·{" "}
               {album?.artists.map((artist: any, index: number) => (
                 <span>{(index ? ", " : "") + artist?.name}</span>
               ))}
             </span>
+            <HiHeart
+              onClick={handleFavorited}
+              className={`w-50 h-4 ${
+                checkIfFavoriteExists(album?.browseId as string)
+                  ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
+                  : "text-slate-700 opacity-0 hover:text-rose-500 active:text-rose-600 group-one-hover:opacity-100 group-one-active:opacity-100 dark:text-white dark:hover:text-rose-500 dark:active:text-rose-600"
+              } mb-0.5 transition duration-300 ease-in-out hover:cursor-pointer`}
+            />
           </div>
         </div>
       </div>
