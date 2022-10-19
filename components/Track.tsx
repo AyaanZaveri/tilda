@@ -8,7 +8,7 @@ import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
 import { pipedApiUrl } from "../utils/apiUrl";
 import { useRecoilState } from "recoil";
-import { currentTrackState } from "../atoms/songAtom";
+import { currentTrackState, isPlayingState } from "../atoms/songAtom";
 import { PlayIcon } from "@heroicons/react/24/solid";
 import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import { auth, db } from "../firebase";
@@ -24,6 +24,7 @@ const Track = ({ track }: Props) => {
 
   const [playing, setPlaying] = useState<boolean>(false);
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
 
   const getCurrentSong = (query: string) => {
     if (query.length > 2) {
@@ -96,7 +97,13 @@ const Track = ({ track }: Props) => {
     >
       <div className="flex flex-row gap-3">
         <div
-          onClick={() => getCurrentSong(track.videoId)}
+          onClick={() => {
+            getCurrentSong(track.videoId);
+            setIsPlaying({
+              isPlaying: true,
+              type: "track",
+            });
+          }}
           className="group-two relative flex cursor-pointer items-center justify-center overflow-hidden rounded-md transition-all"
         >
           <PlayIcon className="absolute z-10 ml-0.5 h-5 w-5 text-white opacity-0 transition-all duration-300 ease-in-out group-one-hover:opacity-100 group-one-active:opacity-100 group-two-active:brightness-90" />

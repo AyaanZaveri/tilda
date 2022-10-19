@@ -68,7 +68,7 @@ const BAudioPlayer = () => {
     setPlayingTrack(playingTrack);
   }, [playingTrack]);
 
-  console.log(isPlaying);
+  // console.log(isPlaying);
 
   const handleClickNext = () => {
     if (playingTrack?.trackNum >= 0) {
