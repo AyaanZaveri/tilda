@@ -75,7 +75,7 @@ const Album = (album: any) => {
   // console.log(albumData);
 
   return (
-    <div className="group-one relative flex h-[13rem] w-full cursor-pointer flex-col justify-center rounded-xl bg-slate-100 transition duration-300 ease-in-out hover:bg-slate-200 active:bg-slate-300 dark:bg-slate-900 dark:text-white dark:ring-1 dark:ring-slate-800 dark:hover:ring-slate-700">
+    <div className="group-one relative flex h-[13rem] w-full cursor-pointer flex-col justify-center rounded-xl bg-white ring-1 ring-slate-100 hover:ring-slate-200 hover:shadow-xl hover:shadow-sky-500/5 transition duration-300 ease-in-out dark:bg-slate-900 dark:text-white dark:ring-1 dark:ring-slate-800 dark:hover:ring-slate-700">
       <div className="relative flex flex-col gap-5 px-6">
         <div className="flex items-center justify-start rounded-md">
           <Tilt
@@ -95,7 +95,7 @@ const Album = (album: any) => {
             />
           </Tilt>
         </div>
-        <div className="re flex flex-col justify-center gap-1.5">
+        <div className="flex flex-col justify-center gap-1.5">
           <div
             onClick={() =>
               router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
