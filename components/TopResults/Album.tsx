@@ -61,7 +61,7 @@ const Album = (album: any) => {
 
   const getAlbumData = () => {
     axios
-      .get(`${tildaApiUrl}/album/${album?.browseId}`)
+      .get(`${tildaApiUrl}/album/${albumInfo?.browseId}`)
       .then((res: any) => {
         setAlbumData(res.data);
       })
@@ -70,9 +70,9 @@ const Album = (album: any) => {
 
   useEffect(() => {
     getAlbumData();
-  }, [album]);
+  }, [albumInfo]);
 
-  console.log(albumInfo?.album?.browseId);
+  console.log(albumData);
 
   return (
     <div className="group-one relative flex h-[13rem] w-full cursor-pointer flex-col justify-center rounded-xl bg-slate-100 transition duration-300 ease-in-out hover:bg-slate-200 active:bg-slate-300 dark:bg-slate-900 dark:text-white dark:ring-1 dark:ring-slate-800 dark:hover:ring-slate-700">
