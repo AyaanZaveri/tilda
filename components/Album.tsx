@@ -78,7 +78,12 @@ const Album = ({ album }: Props) => {
       key={album.videoId}
       className="group-one flex flex-col items-center justify-between gap-3 rounded-xl p-4 pb-8 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:scale-105 hover:cursor-pointer hover:bg-slate-100 active:bg-slate-200 dark:text-white dark:hover:bg-slate-800 dark:active:bg-slate-800 dark:active:ring-1 dark:active:ring-slate-700"
     >
-      <div className="flex flex-col gap-4">
+      <button
+        onClick={() =>
+          router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
+        }
+        className="flex flex-col gap-4"
+      >
         <div className="group relative flex items-center justify-center overflow-hidden rounded-md transition-all">
           <img
             draggable={false}
@@ -88,16 +93,11 @@ const Album = ({ album }: Props) => {
           />
         </div>
         <div className="flex flex-col justify-center">
-          <div
-            onClick={() =>
-              router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
-            }
-            className="flex flex-row gap-3"
-          >
+          <button className="flex flex-row gap-3">
             <span className="inline-flex items-center gap-1 text-base font-semibold decoration-sky-500 decoration-2 transition-colors duration-300 ease-in-out hover:underline">
               {album.title} {album.isExplicit ? <MdExplicit /> : null}
             </span>
-          </div>
+          </button>
           <div className="inline-flex items-center gap-1 overflow-hidden text-ellipsis">
             <span className="font-normal">
               {titleCase(album?.resultType)} ·{" "}
@@ -105,17 +105,23 @@ const Album = ({ album }: Props) => {
                 <span>{(index ? ", " : "") + artist?.name}</span>
               ))}
             </span>
-            <HiHeart
-              onClick={handleFavorited}
-              className={`w-50 h-4 ${
-                checkIfFavoriteExists(album?.browseId as string)
-                  ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
-                  : "text-slate-700 opacity-0 hover:text-rose-500 active:text-rose-600 group-one-hover:opacity-100 group-one-active:opacity-100 dark:text-white dark:hover:text-rose-500 dark:active:text-rose-600"
-              } mb-0.5 transition duration-300 ease-in-out hover:cursor-pointer`}
-            />
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleFavorited();
+              }}
+            >
+              <HiHeart
+                className={`w-50 h-4 ${
+                  checkIfFavoriteExists(album?.browseId as string)
+                    ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
+                    : "text-slate-700 opacity-0 hover:text-rose-500 active:text-rose-600 group-one-hover:opacity-100 group-one-active:opacity-100 dark:text-white dark:hover:text-rose-500 dark:active:text-rose-600"
+                } mb-0.5 transition duration-300 ease-in-out hover:cursor-pointer`}
+              />
+            </button>
           </div>
         </div>
-      </div>
+      </button>
     </div>
   );
 };
