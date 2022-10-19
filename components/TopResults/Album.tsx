@@ -75,7 +75,12 @@ const Album = (album: any) => {
   // console.log(albumData);
 
   return (
-    <div className="group-one relative flex h-[13rem] w-full cursor-pointer flex-col justify-center rounded-xl bg-white ring-1 ring-slate-100 hover:ring-slate-200 hover:shadow-xl hover:shadow-sky-500/5 transition duration-300 ease-in-out dark:bg-slate-900 dark:text-white dark:ring-1 dark:ring-slate-800 dark:hover:ring-slate-700">
+    <div
+      onClick={() =>
+        router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
+      }
+      className="group-one relative flex h-[13rem] w-full cursor-pointer flex-col justify-center rounded-xl bg-white transition duration-300 ease-in-out dark:text-white dark:bg-slate-900 dark:ring-1 dark:ring-slate-800 dark:hover:bg-slate-800 dark:active:ring-slate-700 ring-1 ring-slate-100 hover:bg-slate-100 active:ring-slate-200"
+      >
       <div className="relative flex flex-col gap-5 px-6">
         <div className="flex items-center justify-start rounded-md">
           <Tilt
@@ -96,12 +101,7 @@ const Album = (album: any) => {
           </Tilt>
         </div>
         <div className="flex flex-col justify-center gap-1.5">
-          <div
-            onClick={() =>
-              router.push(`/playlist?list=${albumData?.audioPlaylistId}`)
-            }
-            className="flex flex-row"
-          >
+          <div className="flex flex-row">
             <span className="inline-flex items-center gap-1 text-3xl font-semibold text-slate-700 decoration-sky-500 transition duration-300 ease-in-out hover:underline dark:text-white">
               {albumInfo.title}
             </span>
@@ -111,7 +111,10 @@ const Album = (album: any) => {
               {titleCase(albumInfo?.type)}
             </span>
             <HiHeart
-              onClick={handleFavorited}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleFavorited();
+              }}
               className={`h-4 w-4 ${
                 checkIfFavoriteExists(albumInfo?.album?.browseId as string)
                   ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
