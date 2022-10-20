@@ -26,11 +26,21 @@ import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
 import { currentPlaylistState } from "../atoms/playlistAtom";
 import { playingTrackState } from "../atoms/playingTrack";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
 
-const Search = () => {
+const Search = (searchResults: any) => {
+  useEffect(() => {
+    searchResults?.searchResults?.length > 1
+      ? (searchResults = JSON.parse(searchResults?.searchResults))
+      : null;
+  }, [searchResults]);
+
+  const [user] = useAuthState(auth);
+
   const { query } = useRouter();
 
-  const [searchResults, setSearchResults] = useState<any>([]);
+  // const [searchResults, setSearchResults] = useState<any>([]);
   const [topResults, setTopResults] = useState<any>([]);
   const [songs, setSongs] = useState<any>([]);
   const [albums, setAlbums] = useState<any>([]);
@@ -39,87 +49,66 @@ const Search = () => {
   const [communityPlaylists, setCommunityPlaylists] = useState<any>([]);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
-  const getSearchResults = () => {
-    setSearchResults([]);
-    setTopResults([]);
-    setSongs([]);
-    setArtists([]);
-    setVideos([]);
-    setAlbums([]);
-    setCommunityPlaylists([]);
-
-    if (query.q) {
-      axios
-        .get(`${tildaApiUrl}/search/all/${query.q}`)
-        .then((res: any) => {
-          setSearchResults(res.data);
-        })
-        .catch((err: any) => {});
-    }
-  };
-
   useEffect(() => {
-    getSearchResults();
-  }, [query.q]);
-
-  useEffect(() => {
-    if (searchResults) {
-      searchResults?.map((result: any) => {
-        if (result?.category == "Top result") {
-          setTopResults((oldTopResults: any) => [
-            ...oldTopResults,
-            {
-              ...result,
-              type: result?.resultType,
-            },
-          ]);
-        }
-        if (result?.category == "Songs") {
-          setSongs((oldSongs: any) => [
-            ...oldSongs,
-            {
-              ...result,
-              type: "track",
-            },
-          ]);
-        }
-        if (result?.category == "Albums") {
-          setAlbums((oldAlbums: any) => [
-            ...oldAlbums,
-            {
-              ...result,
-              type: "album",
-            },
-          ]);
-        }
-        if (result?.category == "Videos") {
-          setVideos((oldVideos: any) => [
-            ...oldVideos,
-            {
-              ...result,
-              type: "video",
-            },
-          ]);
-        }
-        if (result?.category == "Artists") {
-          setArtists((oldArists: any) => [
-            ...oldArists,
-            {
-              ...result,
-              type: "artist",
-            },
-          ]);
-        }
-        if (result?.category == "Community playlists") {
-          setCommunityPlaylists((oldCommunityPlaylists: any) => [
-            ...oldCommunityPlaylists,
-            {
-              ...result,
-              type: "communityPlaylist",
-            },
-          ]);
-        }
-      });
+    if (user) {
+      if (searchResults) {
+        searchResults?.map((result: any) => {
+          if (result?.category == "Top result") {
+            setTopResults((oldTopResults: any) => [
+              ...oldTopResults,
+              {
+                ...result,
+                type: result?.resultType,
+              },
+            ]);
+          }
+          if (result?.category == "Songs") {
+            setSongs((oldSongs: any) => [
+              ...oldSongs,
+              {
+                ...result,
+                type: "track",
+              },
+            ]);
+          }
+          if (result?.category == "Albums") {
+            setAlbums((oldAlbums: any) => [
+              ...oldAlbums,
+              {
+                ...result,
+                type: "album",
+              },
+            ]);
+          }
+          if (result?.category == "Videos") {
+            setVideos((oldVideos: any) => [
+              ...oldVideos,
+              {
+                ...result,
+                type: "video",
+              },
+            ]);
+          }
+          if (result?.category == "Artists") {
+            setArtists((oldArists: any) => [
+              ...oldArists,
+              {
+                ...result,
+                type: "artist",
+              },
+            ]);
+          }
+          if (result?.category == "Community playlists") {
+            setCommunityPlaylists((oldCommunityPlaylists: any) => [
+              ...oldCommunityPlaylists,
+              {
+                ...result,
+                type: "communityPlaylist",
+              },
+            ]);
+          }
+        });
+      }
     }
   }, [searchResults]);
 
@@ -200,3 +189,17 @@ const Search = () => {
 };
 
 export default Search;
+
+export const getServerSideProps = async (context: any) => {
+  const { q } = context.query;
+
+  const { data: searchResults } = await axios.get(
+    `${tildaApiUrl}/search/all/${q}`
+  );
+
+  return {
+    props: {
+      searchResults: JSON.stringify(searchResults),
+    },
+  };
+};
