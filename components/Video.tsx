@@ -67,7 +67,9 @@ const Video = ({ video }: Props) => {
 
   const addFavorite = async () => {
     if (!checkIfFavoriteExists(video?.videoId)) {
-      await addDoc(favoriteTracksRef, video);
+      await addDoc(favoriteTracksRef, {
+        videoId: video?.videoId,
+      });
     }
   };
 

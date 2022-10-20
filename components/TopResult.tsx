@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { titleCase } from "title-case";
-import Artist from "./Artist";
 import Track from "./Track";
 import Video from "./Video";
 import Tilt from "react-parallax-tilt";
@@ -16,6 +15,7 @@ import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
 import { useRouter } from "next/router";
 import Album from "./TopResults/Album";
+import Artist from "./TopResults/Artist";
 
 const TopResult = ({ result }: { result: any }) => {
   const [user] = useAuthState(auth);
@@ -41,7 +41,9 @@ const TopResult = ({ result }: { result: any }) => {
 
   const addFavorite = async () => {
     if (!checkIfFavoriteExists(result?.videoId)) {
-      await addDoc(favoriteTracksRef, result);
+      await addDoc(favoriteTracksRef, {
+        videoId: result?.videoId,
+      });
     }
   };
 
@@ -115,38 +117,7 @@ const TopResult = ({ result }: { result: any }) => {
           </button>
         </div>
       ) : result?.resultType == "artist" ? (
-        <div className="group-one relative flex h-[13rem] w-full cursor-pointer flex-col justify-center rounded-xl bg-slate-100 transition duration-300 ease-in-out hover:bg-slate-200 active:bg-slate-300 dark:bg-slate-900 dark:text-white dark:ring-1 dark:ring-slate-800 dark:hover:ring-slate-700">
-          <div className="flex flex-col gap-5 px-6">
-            <div className="group relative flex items-center justify-start rounded-md transition-all">
-              <Tilt
-                glareEnable={true}
-                glareMaxOpacity={0.8}
-                glareColor="#ffffff"
-                glarePosition="bottom"
-                glareBorderRadius="8px"
-              >
-                <img
-                  draggable={false}
-                  className="z-10 h-[5.25rem] w-[5.25rem] rounded-lg"
-                  src={result?.thumbnails[1]?.url}
-                  alt=""
-                />
-              </Tilt>
-            </div>
-            <div className="flex flex-col justify-center gap-1.5">
-              <div className="flex flex-row">
-                <span className="inline-flex items-center gap-1 text-3xl font-semibold text-slate-700">
-                  {result.artist}
-                </span>
-              </div>
-              <div>
-                <span className="rounded-full bg-slate-700 px-3 py-0.5 text-xs font-normal text-white">
-                  {titleCase(result?.resultType)}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Artist artist={result} />
       ) : null}
     </div>
   );

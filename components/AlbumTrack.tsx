@@ -79,7 +79,9 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
 
   const addFavorite = async () => {
     if (!checkIfFavoriteExists(track?.videoId)) {
-      await addDoc(favoriteTracksRef, track);
+      await addDoc(favoriteTracksRef, {
+        videoId: track?.videoId,
+      });
     }
   };
 
