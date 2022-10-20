@@ -113,7 +113,7 @@ const Album = ({ album }: Props) => {
             </span>
             <div className="inline-flex items-center gap-1">
               <span className="rounded-full bg-slate-700 px-3 py-0.5 text-xs font-normal text-white">
-                {titleCase(album?.resultType)}
+                {titleCase(album?.year)}
               </span>
               <button
                 onClick={(e) => {
