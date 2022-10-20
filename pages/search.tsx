@@ -30,15 +30,26 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 
 const Search = (searchResults: any) => {
-  useEffect(() => {
-    searchResults?.searchResults?.length > 1
-      ? (searchResults = JSON.parse(searchResults?.searchResults))
-      : null;
-  }, [searchResults]);
-
   const [user] = useAuthState(auth);
 
   const { query } = useRouter();
+
+  // useEffect(() => {
+  //   searchResults?.searchResults?.length > 1
+  //     ? (searchResults = JSON.parse(searchResults?.searchResults))
+  //     : null;
+  // }, [searchResults, query.q]);
+
+  useEffect(() => {
+    if (query.q) {
+      setTopResults([]);
+      setSongs([]);
+      setArtists([]);
+      setVideos([]);
+      setAlbums([]);
+      setCommunityPlaylists([]);
+    }
+  }, [query.q]);
 
   // const [searchResults, setSearchResults] = useState<any>([]);
   const [topResults, setTopResults] = useState<any>([]);
@@ -52,7 +63,7 @@ const Search = (searchResults: any) => {
   useEffect(() => {
     if (user) {
       if (searchResults) {
-        searchResults?.map((result: any) => {
+        searchResults?.searchResults?.map((result: any) => {
           if (result?.category == "Top result") {
             setTopResults((oldTopResults: any) => [
               ...oldTopResults,
@@ -110,7 +121,9 @@ const Search = (searchResults: any) => {
         });
       }
     }
-  }, [searchResults]);
+  }, [searchResults?.searchResults, query.q]);
+
+  // console.log(topResults);
 
   return (
     <div>
@@ -199,7 +212,7 @@ export const getServerSideProps = async (context: any) => {
 
   return {
     props: {
-      searchResults: JSON.stringify(searchResults),
+      searchResults,
     },
   };
 };

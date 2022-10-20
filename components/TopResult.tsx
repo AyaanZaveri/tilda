@@ -62,6 +62,8 @@ const TopResult = ({ result }: { result: any }) => {
     }
   };
 
+  // console.log(result)
+
   return (
     <div className="mr-8">
       {result?.resultType == "album" ? (
