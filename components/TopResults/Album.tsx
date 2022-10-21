@@ -16,10 +16,6 @@ import { PlayIcon } from "@heroicons/react/24/solid";
 const Album = (album: any) => {
   const [albumInfo, setAlbumInfo] = useState(album?.album);
 
-  useEffect(() => {
-    setAlbumInfo(album?.album);
-  }, [album]);
-
   const [user] = useAuthState(auth);
 
   const usersRef = collection(db, "users");
@@ -62,7 +58,6 @@ const Album = (album: any) => {
   };
 
   const router = useRouter();
-  const { query } = useRouter();
 
   const [albumData, setAlbumData] = useState<any>();
 
@@ -77,7 +72,7 @@ const Album = (album: any) => {
 
   useEffect(() => {
     getAlbumData();
-  }, [album, query.q]);
+  }, [albumInfo]);
 
   // console.log(albumData);
 

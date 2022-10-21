@@ -62,7 +62,7 @@ const TopResult = ({ result }: { result: any }) => {
     }
   };
 
-  // console.log(result)
+  // console.log(result)3
 
   return (
     <div className="mr-8">

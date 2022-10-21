@@ -26,32 +26,11 @@ import { useRecoilState } from "recoil";
 import { currentTrackState } from "../atoms/songAtom";
 import { currentPlaylistState } from "../atoms/playlistAtom";
 import { playingTrackState } from "../atoms/playingTrack";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../firebase";
 
-const Search = (searchResults: any) => {
-  const [user] = useAuthState(auth);
-
+const Search = () => {
   const { query } = useRouter();
 
-  // useEffect(() => {
-  //   searchResults?.searchResults?.length > 1
-  //     ? (searchResults = JSON.parse(searchResults?.searchResults))
-  //     : null;
-  // }, [searchResults, query.q]);
-
-  useEffect(() => {
-    if (query.q) {
-      setTopResults([]);
-      setSongs([]);
-      setArtists([]);
-      setVideos([]);
-      setAlbums([]);
-      setCommunityPlaylists([]);
-    }
-  }, [query.q]);
-
-  // const [searchResults, setSearchResults] = useState<any>([]);
+  const [searchResults, setSearchResults] = useState<any>([]);
   const [topResults, setTopResults] = useState<any>([]);
   const [songs, setSongs] = useState<any>([]);
   const [albums, setAlbums] = useState<any>([]);
@@ -60,70 +39,89 @@ const Search = (searchResults: any) => {
   const [communityPlaylists, setCommunityPlaylists] = useState<any>([]);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
-  useEffect(() => {
-    if (user) {
-      if (searchResults) {
-        searchResults?.searchResults?.map((result: any) => {
-          if (result?.category == "Top result") {
-            setTopResults((oldTopResults: any) => [
-              ...oldTopResults,
-              {
-                ...result,
-                type: result?.resultType,
-              },
-            ]);
-          }
-          if (result?.category == "Songs") {
-            setSongs((oldSongs: any) => [
-              ...oldSongs,
-              {
-                ...result,
-                type: "track",
-              },
-            ]);
-          }
-          if (result?.category == "Albums") {
-            setAlbums((oldAlbums: any) => [
-              ...oldAlbums,
-              {
-                ...result,
-                type: "album",
-              },
-            ]);
-          }
-          if (result?.category == "Videos") {
-            setVideos((oldVideos: any) => [
-              ...oldVideos,
-              {
-                ...result,
-                type: "video",
-              },
-            ]);
-          }
-          if (result?.category == "Artists") {
-            setArtists((oldArists: any) => [
-              ...oldArists,
-              {
-                ...result,
-                type: "artist",
-              },
-            ]);
-          }
-          if (result?.category == "Community playlists") {
-            setCommunityPlaylists((oldCommunityPlaylists: any) => [
-              ...oldCommunityPlaylists,
-              {
-                ...result,
-                type: "communityPlaylist",
-              },
-            ]);
-          }
-        });
-      }
-    }
-  }, [searchResults?.searchResults, query.q]);
+  const getSearchResults = () => {
+    setSearchResults([]);
+    setTopResults([]);
+    setSongs([]);
+    setArtists([]);
+    setVideos([]);
+    setAlbums([]);
+    setCommunityPlaylists([]);
 
-  // console.log(topResults);
+    if (query.q) {
+      axios
+        .get(`${tildaApiUrl}/search/all/${query.q}`)
+        .then((res: any) => {
+          setSearchResults(res.data);
+        })
+        .catch((err: any) => {});
+    }
+  };
+
+  useEffect(() => {
+    getSearchResults();
+  }, [query.q]);
+
+  useEffect(() => {
+    if (searchResults) {
+      searchResults?.map((result: any) => {
+        if (result?.category == "Top result") {
+          setTopResults((oldTopResults: any) => [
+            ...oldTopResults,
+            {
+              ...result,
+              type: result?.resultType,
+            },
+          ]);
+        }
+        if (result?.category == "Songs") {
+          setSongs((oldSongs: any) => [
+            ...oldSongs,
+            {
+              ...result,
+              type: "track",
+            },
+          ]);
+        }
+        if (result?.category == "Albums") {
+          setAlbums((oldAlbums: any) => [
+            ...oldAlbums,
+            {
+              ...result,
+              type: "album",
+            },
+          ]);
+        }
+        if (result?.category == "Videos") {
+          setVideos((oldVideos: any) => [
+            ...oldVideos,
+            {
+              ...result,
+              type: "video",
+            },
+          ]);
+        }
+        if (result?.category == "Artists") {
+          setArtists((oldArists: any) => [
+            ...oldArists,
+            {
+              ...result,
+              type: "artist",
+            },
+          ]);
+        }
+        if (result?.category == "Community playlists") {
+          setCommunityPlaylists((oldCommunityPlaylists: any) => [
+            ...oldCommunityPlaylists,
+            {
+              ...result,
+              type: "communityPlaylist",
+            },
+          ]);
+        }
+      });
+    }
+  }, [searchResults]);
 
   return (
     <div>
@@ -202,17 +200,3 @@ const Search = (searchResults: any) => {
 };
 
 export default Search;
-
-export const getServerSideProps = async (context: any) => {
-  const { q } = context.query;
-
-  const { data: searchResults } = await axios.get(
-    `${tildaApiUrl}/search/all/${q}`
-  );
-
-  return {
-    props: {
-      searchResults,
-    },
-  };
-};
