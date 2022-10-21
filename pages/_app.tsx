@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [user]);
 
   return (
-    <div className="font-['Poppins']">
+    <div className="font-['Rubik']">
       <RecoilRoot>
         <ThemeProvider attribute="class">
           <Layout>

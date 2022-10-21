@@ -39,6 +39,7 @@ const BAudioPlayer = () => {
   // console.log(isPlaying);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState<any>(0);
+  console.log(currentPlaylist);
 
   useEffect(() => {
     setPlayingTrack(currentTrack);
@@ -62,7 +63,7 @@ const BAudioPlayer = () => {
     isPlaying.isPlaying && isPlaying.type == "playlist"
       ? handlePlayButton()
       : null;
-  }, [isPlaying.type]);
+  }, [isPlaying]);
 
   useEffect(() => {
     setPlayingTrack(playingTrack);

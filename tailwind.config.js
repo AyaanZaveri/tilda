@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
+        rubik: ["Rubik", "sans-serif"],
       },
     },
   },

@@ -63,6 +63,8 @@ const Playlist: NextPage = () => {
     getAlbumBrowseId();
   }, [listId]);
 
+  console.log(listId)
+
   useEffect(() => {
     getAlbumData();
   }, [albumBrowseId]);

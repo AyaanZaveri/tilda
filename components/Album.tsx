@@ -3,7 +3,7 @@ import { Router, useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { MdExplicit } from "react-icons/md";
-import { HiHeart } from "react-icons/hi";
+import { HiHeart, HiPlay } from "react-icons/hi";
 import { fancyTimeFormat } from "../utils/fancyTimeFormat";
 import { titleCase } from "title-case";
 import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
@@ -12,6 +12,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { pipedApiUrl, tildaApiUrl } from "../utils/apiUrl";
 import Tilt from "react-parallax-tilt";
+import { useRecoilState } from "recoil";
+import { currentTrackState, isPlayingState } from "../atoms/songAtom";
+import { currentPlaylistState } from "../atoms/playlistAtom";
+import { playingTrackState } from "../atoms/playingTrack";
 
 interface Props {
   album: any;
@@ -76,6 +80,98 @@ const Album = ({ album }: Props) => {
     }
   };
 
+  const { query } = useRouter();
+  const [albumListId, setAlbumListeId] = useState<any>();
+  const [isExplicit, setIsExplicit] = useState<boolean>();
+  const [showMore, setShowMore] = useState<boolean>(false);
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
+
+  const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
+  const [currentPlaylist, setCurrentPlaylist] =
+    useRecoilState(currentPlaylistState);
+  const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
+
+  const [curPlay, setCurPlay] = useState<any>();
+
+  const checkIsExplicit = () => {
+    albumData?.tracks?.map((track: any) => {
+      if (track?.isExplicit) {
+        setIsExplicit(true);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getAlbumData();
+  }, [album?.browseId]);
+
+  useEffect(() => {
+    if (albumData) {
+      checkIsExplicit();
+    }
+  }, [albumData]);
+
+  const getAudioFromSong = async (videoId: string) => {
+    const response = await axios.get(`${pipedApiUrl}/streams/${videoId}`);
+    const data = response.data;
+    return data?.audioStreams
+      .filter((stream: any) => stream?.mimeType == "audio/mp4")
+      .sort((a: any, b: any) =>
+        a.bitrate < b.bitrate ? 1 : b.bitrate < a.bitrate ? -1 : 0
+      )[0]?.url;
+  };
+
+  const getPlaylistSongs = async () => {
+    setCurPlay([]);
+    if (albumData?.tracks?.length >= 1) {
+      await albumData?.tracks?.map(async (track: any, idx: number) => {
+        const songUrl = await getAudioFromSong(track?.videoId);
+        await setCurPlay((oldPlaylist: any) => [
+          ...oldPlaylist,
+          {
+            ...track,
+            track: {
+              title: track?.title,
+              thumbnails: albumData?.thumbnails,
+              isExplicit: track?.isExplicit,
+              artists: track?.artists,
+            },
+            trackNum: idx,
+            url: songUrl,
+          },
+        ]);
+      });
+    }
+  };
+
+  const setPlaylistSongs = () => {
+    try {
+      setCurrentPlaylist(
+        curPlay?.sort((a: any, b: any) =>
+          a.trackNum > b.trackNum ? 1 : b.trackNum > a.trackNum ? -1 : 0
+        )
+      );
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getPlaylistSongs();
+  }, [albumData]);
+
+  useEffect(() => {
+    if (curPlay && curPlay != "undefined") {
+      try {
+        setCurrentPlaylist(
+          curPlay?.sort((a: any, b: any) =>
+            a.trackNum > b.trackNum ? 1 : b.trackNum > a.trackNum ? -1 : 0
+          )
+        );
+      } catch (error) {}
+    }
+  }, [curPlay]);
+
+  // console.log(curPlay)
+
   return (
     <div
       onClick={() =>
@@ -131,7 +227,31 @@ const Album = ({ album }: Props) => {
                   } mb-0.5 transition duration-300 ease-in-out hover:cursor-pointer`}
                 />
               </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPlaylistSongs();
+                  setIsPlaying({
+                    isPlaying: true,
+                    type: "playlist",
+                    id: album?.browseId,
+                  });
+                }}
+              >
+                <HiPlay
+                  className={`w-50 h-4 ${
+                    checkIfFavoriteExists(album?.browseId as string)
+                      ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
+                      : "text-slate-700 opacity-0 hover:text-rose-500 active:text-rose-600 group-one-hover:opacity-100 group-one-active:opacity-100 dark:text-white dark:hover:text-rose-500 dark:active:text-rose-600"
+                  } mb-0.5 transition duration-300 ease-in-out hover:cursor-pointer`}
+                />
+              </button>
             </div>
+            <span className="rounded-full bg-slate-700 px-3 py-0.5 text-xs font-normal text-white">
+              {albumData?.tracks?.length} Songs
+              {"\n" + albumData?.title}
+              {"\n" + curPlay?.length}
+            </span>
           </div>
         </div>
       </button>

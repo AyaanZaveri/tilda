@@ -7,7 +7,7 @@ $rhap_font-family: "Poppins", sans-serif !default; // Font family of current tim
 @import "react-h5-audio-player/src/styles.scss";
 
 html {
-  @apply h-full overflow-hidden font-['Inter'];
+  @apply h-full overflow-hidden;
 }
 
 body {
