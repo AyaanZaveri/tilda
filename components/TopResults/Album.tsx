@@ -102,9 +102,9 @@ const Album = (album: any) => {
             />
           </Tilt>
         </div>
-        <div className="flex flex-col justify-center gap-1.5">
+        <div className="flex flex-col justify-start gap-1.5">
           <div className="flex flex-row">
-            <span className="inline-flex items-center gap-1 text-3xl font-semibold text-slate-700 decoration-sky-500 transition duration-300 ease-in-out hover:underline dark:text-white">
+            <span className="inline-flex gap-1 text-3xl font-semibold text-slate-700 decoration-sky-500 transition duration-300 ease-in-out hover:underline dark:text-white">
               {albumInfo.title}
             </span>
           </div>

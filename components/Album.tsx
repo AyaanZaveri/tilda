@@ -103,7 +103,7 @@ const Album = ({ album }: Props) => {
         </Tilt>
         <div className="flex flex-col justify-start">
           <button className="flex flex-row gap-3">
-            <span className="inline-flex items-center gap-1 text-base font-semibold decoration-sky-500 decoration-2 transition-colors duration-300 ease-in-out hover:underline">
+            <span className="inline-flex items-center gap-1 text-start text-base font-semibold decoration-sky-500 decoration-2 transition-colors duration-300 ease-in-out hover:underline">
               {album.title} {album.isExplicit ? <MdExplicit /> : null}
             </span>
           </button>
