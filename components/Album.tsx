@@ -227,7 +227,7 @@ const Album = ({ album }: Props) => {
                   } mb-0.5 transition duration-300 ease-in-out hover:cursor-pointer`}
                 />
               </button>
-              <button
+              {/* <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setPlaylistSongs();
@@ -245,13 +245,13 @@ const Album = ({ album }: Props) => {
                       : "text-slate-700 opacity-0 hover:text-rose-500 active:text-rose-600 group-one-hover:opacity-100 group-one-active:opacity-100 dark:text-white dark:hover:text-rose-500 dark:active:text-rose-600"
                   } mb-0.5 transition duration-300 ease-in-out hover:cursor-pointer`}
                 />
-              </button>
+              </button> */}
             </div>
-            <span className="rounded-full bg-slate-700 px-3 py-0.5 text-xs font-normal text-white">
+            {/* <span className="rounded-full bg-slate-700 px-3 py-0.5 text-xs font-normal text-white">
               {albumData?.tracks?.length} Songs
-              {"\n" + albumData?.title}
+              {/* {"\n" + albumData?.title}
               {"\n" + curPlay?.length}
-            </span>
+            </span> */}
           </div>
         </div>
       </button>
