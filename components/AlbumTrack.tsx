@@ -29,7 +29,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
   const [currentTrack, setCurrentTrack] = useRecoilState(currentTrackState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
-  const getCurrentSong = (query: string, type: string) => {
+  const getCurrentSong = (query: string) => {
     if (query.length > 2) {
       axios
         .get(`${pipedApiUrl}/streams/${query}`)
@@ -45,7 +45,6 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
               thumbnails: thumbnails,
             },
             trackNum: index,
-            type: type,
           });
         })
         .catch((err: any) => {});
@@ -99,7 +98,6 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
       addFavorite();
     }
   };
-
   return (
     <div
       key={track.videoId}
@@ -129,7 +127,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
           ) : (
             <PlayIcon
               onClick={() => {
-                getCurrentSong(track.videoId, "track");
+                getCurrentSong(track.videoId);
                 setIsPlaying({
                   isPlaying: true,
                   type: "track",
@@ -154,7 +152,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
                 className={`w-50 h-4 ${
                   checkIfFavoriteExists(track?.videoId as string)
                     ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
-                    : "text-slate-700 opacity-0 hover:text-rose-500 active:text-rose-600 group-one-hover:opacity-100 group-one-active:opacity-100 dark:text-white dark:hover:text-rose-500 dark:active:text-rose-600"
+                    : "text-slate-700 opacity-0 hover:text-rose-500 active:text-rose-600 group-one-hover:opacity-100 group-one-active:opacity-100"
                 } mb-0.5 transition duration-300 ease-in-out hover:cursor-pointer`}
               />
             </span>

@@ -39,7 +39,6 @@ const BAudioPlayer = () => {
   // console.log(isPlaying);
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState<any>(0);
-  console.log(currentPlaylist);
 
   useEffect(() => {
     setPlayingTrack(currentTrack);
@@ -63,13 +62,13 @@ const BAudioPlayer = () => {
     isPlaying.isPlaying && isPlaying.type == "playlist"
       ? handlePlayButton()
       : null;
-  }, [isPlaying]);
+  }, [isPlaying.id]);
 
   useEffect(() => {
     setPlayingTrack(playingTrack);
   }, [playingTrack]);
 
-  // console.log(isPlaying);
+  console.log(isPlaying);
 
   const handleClickNext = () => {
     if (playingTrack?.trackNum >= 0) {
@@ -139,36 +138,18 @@ const BAudioPlayer = () => {
                   glarePosition="bottom"
                   glareBorderRadius="6px"
                 >
-                  {currentTrack?.type == "video" ? (
-                    <div className="rounded-md bg-sky-200 py-1">
-                      <img
-                        draggable={false}
-                        className="w-[3rem]"
-                        src={
-                          playingTrack?.track?.thumbnails
-                            ? playingTrack?.track?.thumbnails[0]?.url
-                            : playingTrack?.thumbnails
-                            ? playingTrack?.thumbnails[0]?.url
-                            : ""
-                        }
-                        alt=""
-                      />
-                    </div>
-                  ) : (
-                    <img
-                      draggable={false}
-                      className="w-[3rem] rounded-md"
-                      src={
-                        playingTrack?.track?.thumbnails
-                          ? playingTrack?.track?.thumbnails[0]?.url
-                          : playingTrack?.thumbnails
-                          ? playingTrack?.thumbnails[0]?.url
-                          : ""
-                      }
-                      alt=""
-                    />
-                  )}
-                  {}
+                  <img
+                    draggable={false}
+                    className="w-[3rem] rounded-md"
+                    src={
+                      playingTrack?.track?.thumbnails
+                        ? playingTrack?.track?.thumbnails[0]?.url
+                        : playingTrack?.thumbnails
+                        ? playingTrack?.thumbnails[0]?.url
+                        : ""
+                    }
+                    alt=""
+                  />
                 </Tilt>
               </div>
               <div className="flex flex-col justify-center">

@@ -63,8 +63,6 @@ const Playlist: NextPage = () => {
     getAlbumBrowseId();
   }, [listId]);
 
-  console.log(listId)
-
   useEffect(() => {
     getAlbumData();
   }, [albumBrowseId]);
@@ -244,6 +242,7 @@ const Playlist: NextPage = () => {
                         setIsPlaying({
                           isPlaying: true,
                           type: "playlist",
+                          id: albumBrowseId,
                         });
                       }}
                       className="inline-flex items-center gap-2 rounded-md bg-sky-500 px-4 py-1.5 text-sm text-white shadow-lg shadow-sky-500/20 transition duration-300 ease-in-out hover:shadow-xl hover:shadow-sky-500/30 active:bg-sky-600"
