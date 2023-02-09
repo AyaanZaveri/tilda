@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@fluentui/react-icons": "^2.0.183",

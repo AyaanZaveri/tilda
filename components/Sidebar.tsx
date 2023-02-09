@@ -31,6 +31,12 @@ const Sidebar = () => {
               Library
             </span>
           </div>
+          <div className="relative inline-flex w-full text-slate-700 dark:text-white hover:shadow-xl hover:text-white hover:shadow-sky-500/30 items-center hover:bg-sky-500 active:bg-sky-600 py-1 break-all rounded-md px-3 transition duration-300 ease-in-out hover:cursor-pointer">
+            <span className="inline-flex gap-2 items-center">
+              <MdLibraryMusic className="w-4 h-4" />
+              Library
+            </span>
+          </div>
         </div>
       </div>
     </div>
