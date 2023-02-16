@@ -103,7 +103,7 @@ const Navbar = () => {
             </div>
             <form onSubmit={(e) => handleSearch(e)}>
               <input
-                className="w-full rounded-md border border-slate-200 bg-slate-100 pl-8 pr-12 shadow-2xl shadow-sky-500/30 transition duration-300 ease-in-out hover:border-slate-300 hover:shadow-sky-500/50 focus:border-sky-500 focus:ring focus:ring-sky-200 active:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-100 dark:hover:border-slate-600 dark:focus:border-sky-700 dark:focus:ring-sky-400/90 dark:active:bg-slate-900 sm:text-sm"
+                className="w-full rounded-md border border-slate-200 bg-slate-100 pl-8 pr-12 shadow-2xl shadow-emerald-500/30 transition duration-300 ease-in-out hover:border-slate-300 hover:shadow-emerald-500/50 focus:border-emerald-500 focus:ring focus:ring-emerald-200 active:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-100 dark:hover:border-slate-600 dark:focus:border-emerald-700 dark:focus:ring-emerald-400/90 dark:active:bg-slate-900 sm:text-sm"
                 type="text"
                 placeholder="Search"
                 onChange={(e) => setSearch(e.target.value)}
@@ -119,7 +119,7 @@ const Navbar = () => {
                   : resolvedTheme == "dark"
                   ? "bg-slate-800 active:bg-slate-700"
                   : "bg-slate-100 active:bg-slate-300"
-              } gap-2 overflow-hidden rounded-full px-3 text-slate-800 shadow-xl shadow-sky-500/5 transition duration-300 ease-in-out hover:shadow-sky-500/10 dark:text-white dark:active:border-slate-600`}
+              } gap-2 overflow-hidden rounded-full px-3 text-slate-800 shadow-xl shadow-emerald-500/5 transition duration-300 ease-in-out hover:shadow-emerald-500/10 dark:text-white dark:active:border-slate-600`}
             >
               <span className="text-[0.75rem]">{user?.displayName}</span>
               <img
@@ -138,7 +138,7 @@ const Navbar = () => {
                   : resolvedTheme == "dark"
                   ? "bg-slate-800 active:bg-slate-700"
                   : "bg-slate-100 active:bg-slate-300"
-              } rounded-full p-2 shadow-xl shadow-sky-500/10 transition duration-300 ease-in-out hover:shadow-sky-300/20`}
+              } rounded-full p-2 shadow-xl shadow-emerald-500/10 transition duration-300 ease-in-out hover:shadow-emerald-300/20`}
             >
               <img
                 src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/google-icon.svg"
@@ -162,7 +162,7 @@ const Navbar = () => {
                 : resolvedTheme == "dark"
                 ? "bg-slate-800 active:bg-slate-600"
                 : "bg-slate-100 active:bg-slate-300"
-            } rounded-full shadow-xl shadow-sky-500/10 transition duration-300 ease-in-out hover:shadow-sky-300/20`}
+            } rounded-full shadow-xl shadow-emerald-500/10 transition duration-300 ease-in-out hover:shadow-emerald-300/20`}
           >
             {theme == "light" ? (
               <SunIcon className="h-full w-full p-1.5 text-slate-700" />
@@ -186,7 +186,7 @@ const Navbar = () => {
         <div className="pl-64">
           <div ref={searchSuggestionsRef} className="w-6/12">
             {searchRes && showSuggestions ? (
-              <div className="flex w-full select-none flex-col gap-1 overflow-hidden rounded-lg bg-slate-100/90 py-2 text-slate-700 shadow-2xl shadow-sky-500/10 backdrop-blur-md transition duration-300 ease-in-out hover:shadow-sky-500/20 dark:bg-slate-800/90 dark:text-white">
+              <div className="flex w-full select-none flex-col gap-1 overflow-hidden rounded-lg bg-slate-100/90 py-2 text-slate-700 shadow-2xl shadow-emerald-500/10 backdrop-blur-md transition duration-300 ease-in-out hover:shadow-emerald-500/20 dark:bg-slate-800/90 dark:text-white">
                 {searchRes?.slice(0, 8)?.map((track: any, index: any) => (
                   <div
                     onClick={() => {
@@ -195,7 +195,7 @@ const Navbar = () => {
                     }}
                     key={index}
                   >
-                    <span className="inline-flex w-full cursor-pointer py-2 px-4 text-sm transition hover:bg-sky-500 hover:text-white hover:shadow-xl hover:shadow-sky-500/10 active:bg-sky-600 active:text-white">
+                    <span className="inline-flex w-full cursor-pointer py-2 px-4 text-sm transition hover:bg-emerald-500 hover:text-white hover:shadow-xl hover:shadow-emerald-500/10 active:bg-emerald-600 active:text-white">
                       {track}
                     </span>
                   </div>

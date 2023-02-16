@@ -101,7 +101,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
   return (
     <div
       key={track.videoId}
-      className="group-one flex h-11 w-full select-none flex-row items-center justify-between gap-3 rounded-md px-3 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:bg-slate-100 hover:shadow-sky-500/10 dark:text-white dark:hover:bg-slate-800"
+      className="group-one flex h-11 w-full select-none flex-row items-center justify-between gap-3 rounded-md px-3 text-sm text-slate-700 transition-all duration-300 ease-in-out hover:bg-slate-100 hover:shadow-emerald-500/10 dark:text-white dark:hover:bg-slate-800"
     >
       <div className="flex flex-row items-center gap-5">
         <div className="group-two relative flex h-4 w-4 cursor-pointer items-center justify-center overflow-hidden rounded-md transition-all">
@@ -122,7 +122,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
                   type: "track",
                 });
               }}
-              className="absolute left-0 ml-0.5 h-4 w-4 text-sky-500 transition-all duration-300 ease-in-out hover:text-sky-600 active:text-sky-700"
+              className="absolute left-0 ml-0.5 h-4 w-4 text-emerald-500 transition-all duration-300 ease-in-out hover:text-emerald-600 active:text-emerald-700"
             />
           ) : (
             <PlayIcon
@@ -133,7 +133,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
                   type: "track",
                 });
               }}
-              className="absolute left-0 ml-0.5 h-4 w-4 text-slate-600 opacity-0 transition-all duration-300 ease-in-out hover:text-sky-500 active:text-sky-600 group-one-hover:opacity-100 group-one-active:opacity-100 dark:text-white dark:hover:text-sky-500 dark:active:text-sky-600"
+              className="absolute left-0 ml-0.5 h-4 w-4 text-slate-600 opacity-0 transition-all duration-300 ease-in-out hover:text-emerald-500 active:text-emerald-600 group-one-hover:opacity-100 group-one-active:opacity-100 dark:text-white dark:hover:text-emerald-500 dark:active:text-emerald-600"
             />
           )}
         </div>
@@ -142,7 +142,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
             <span
               className={`inline-flex items-center gap-1 font-semibold ${
                 track.title == playingTrack?.track?.title
-                  ? "text-sky-500 transition-all duration-300 ease-in-out group-hover:text-white dark:text-sky-400"
+                  ? "text-emerald-500 transition-all duration-300 ease-in-out group-hover:text-white dark:text-emerald-400"
                   : ""
               }`}
             >
@@ -151,7 +151,7 @@ const AlbumTrack = ({ track, index, thumbnails }: Props) => {
                 onClick={handleFavorited}
                 className={`w-50 h-4 ${
                   checkIfFavoriteExists(track?.videoId as string)
-                    ? "text-sky-500 hover:text-sky-600 active:text-sky-700"
+                    ? "text-emerald-500 hover:text-emerald-600 active:text-emerald-700"
                     : "text-slate-700 opacity-0 hover:text-rose-500 active:text-rose-600 dark:hover:text-rose-500 dark:active:text-rose-600 group-one-hover:opacity-100 group-one-active:opacity-100 dark:text-white"
                 } mb-0.5 transition duration-300 ease-in-out hover:cursor-pointer`}
               />
