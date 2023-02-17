@@ -6,6 +6,7 @@ importers:
     specifiers:
       '@fluentui/react-icons': ^2.0.183
       '@heroicons/react': ^2.0.11
+      '@jellyfin/sdk': ^0.7.0
       '@tailwindcss/forms': ^0.5.3
       '@tailwindcss/line-clamp': ^0.4.2
       '@tauri-apps/cli': ^1.1.1
@@ -43,6 +44,7 @@ importers:
     dependencies:
       '@fluentui/react-icons': 2.0.183_react@18.1.0
       '@heroicons/react': 2.0.11_react@18.1.0
+      '@jellyfin/sdk': 0.7.0
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.1.8
       '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.1.8
       '@vercel/analytics': 0.1.1_react@18.1.0
@@ -648,6 +650,15 @@ packages:
       react: 18.1.0
     dev: false
 
+  /@jellyfin/sdk/0.7.0:
+    resolution: {integrity: sha512-GNoGv+2qY+xK7WpO7sUUNpZvzgN7RwXMyOhIy9mE/LdDSr6bqZHwrzT1Pv0+vUW7Epw67bwIMWuYivyBYejEHw==}
+    dependencies:
+      axios: 0.27.2
+      compare-versions: 5.0.1
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /@next/env/13.0.0:
     resolution: {integrity: sha512-65v9BVuah2Mplohm4+efsKEnoEuhmlGm8B2w6vD1geeEP2wXtlSJCvR/cCRJ3fD8wzCQBV41VcMBQeYET6MRkg==}
     dev: false
@@ -1210,6 +1221,10 @@ packages:
     resolution: {integrity: sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==}
     engines: {node: '>= 6'}
     dev: true
+
+  /compare-versions/5.0.1:
+    resolution: {integrity: sha512-v8Au3l0b+Nwkp4G142JcgJFh1/TUhdxut7wzD1Nq1dyp5oa3tXaqb03EXOAB6jS4gMlalkjAUPZBMiAfKUixHQ==}
+    dev: false
 
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
