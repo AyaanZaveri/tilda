@@ -20,8 +20,13 @@ import { getItemsApi } from "@jellyfin/sdk/lib/utils/api/items-api";
 import { getArtistsApi } from "@jellyfin/sdk/lib/utils/api/artists-api";
 import { ItemFields } from "@jellyfin/sdk/lib/generated-client/models/item-fields.js";
 import Artist from "../components/Jellyfin/Artist";
+import Album from "../components/Jellyfin/Album";
 
 const Home: NextPage = () => {
+  const [serverUrl, setServerUrl] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
   const [api, setApi] = useState<any>();
   const [user, setUser] = useState<any>(null);
 
@@ -29,6 +34,7 @@ const Home: NextPage = () => {
   const [albums, setAlbums] = useState<any>(null);
 
   const handleJellyfin = async () => {
+    if (!serverUrl && !userName && !password) return;
     const jellyfin = new Jellyfin({
       clientInfo: {
         name: "My Client Application",
@@ -39,9 +45,7 @@ const Home: NextPage = () => {
         id: "unique-device-id",
       },
     });
-    const capi = jellyfin.createApi(
-      "https://revised-tribunal-telephony-arise.trycloudflare.com"
-    );
+    const capi = jellyfin.createApi(serverUrl);
     const auth = await capi.authenticateUserByName("abc", "abc");
     setUser(auth.data.User);
 
@@ -50,7 +54,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     handleJellyfin();
-  }, []);
+  }, [serverUrl]);
 
   const getJellyfinData = async () => {
     if (api) {
@@ -58,7 +62,7 @@ const Home: NextPage = () => {
         userId: user?.Id,
       });
 
-      setArtists(artistsData);
+      setArtists(artistsData.data.Items);
 
       const items: any = await getItemsApi(api).getItemsByUserId({
         userId: user.Id,
@@ -79,17 +83,43 @@ const Home: NextPage = () => {
     getJellyfinData();
   }, [user]);
 
-  console.log("albums", albums);
+  console.log(serverUrl);
 
   return (
     <div className="ml-3 pl-64 pr-12">
       <div className="pt-[4.5rem] pb-8">
         <div className="pt-6">
-          <h1 className="text-3xl font-semibold">Artists</h1>
-          <div className="flex flex-row flex-wrap gap-x-8 gap-y-2 pt-4">
-            {/* map out the artists into components */}
-            {artists?.data?.Items?.map((artist: any) => (
+          {/* create an input that changes the serverUrl */}
+          <input
+            type="text"
+            className="text-black bg-gray-200 rounded-md p-2 w-96"
+            value={serverUrl}
+            placeholder="Server URL"
+            onChange={(e) => setServerUrl(e.target.value)}
+          />
+          <input
+            type="text"
+            className="text-black bg-gray-200 rounded-md p-2 w-96"
+            value={userName}
+            placeholder="Username"
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <input
+            type="text"
+            className="text-black bg-gray-200 rounded-md p-2 w-96"
+            value={password}
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <h1 className="text-3xl font-semibold">Artists & Albums</h1>
+          {/* <div className="flex flex-row flex-wrap gap-x-8 gap-y-2 pt-4">
+            {artists?.map((artist: any) => (
               <Artist artist={artist} />
+            ))}
+          </div> */}
+          <div className="flex flex-row flex-wrap gap-x-8 gap-y-2 pt-4">
+            {albums?.map((album: any) => (
+              <Album album={album} />
             ))}
           </div>
         </div>
