@@ -89,28 +89,45 @@ const Home: NextPage = () => {
     <div className="ml-3 pl-64 pr-12">
       <div className="pt-[4.5rem] pb-8">
         <div className="pt-6">
-          {/* create an input that changes the serverUrl */}
-          <input
-            type="text"
-            className="text-black bg-gray-200 rounded-md p-2 w-96"
-            value={serverUrl}
-            placeholder="Server URL"
-            onChange={(e) => setServerUrl(e.target.value)}
-          />
-          <input
-            type="text"
-            className="text-black bg-gray-200 rounded-md p-2 w-96"
-            value={userName}
-            placeholder="Username"
-            onChange={(e) => setUserName(e.target.value)}
-          />
-          <input
-            type="text"
-            className="text-black bg-gray-200 rounded-md p-2 w-96"
-            value={password}
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="pb-8">
+            <form className="flex flex-col gap-y-3">
+              <label htmlFor="serverUrl">Server URL</label>
+              <input
+                type="text"
+                name="serverUrl"
+                id="serverUrl"
+                value={serverUrl}
+                className="w-[20rem] text-black rounded-lg"
+                onChange={(e) => setServerUrl(e.target.value)}
+              />
+              <label htmlFor="userName">Username</label>
+              <input
+                type="text"
+                name="userName"
+                id="userName"
+                value={userName}
+                className="w-[20rem] text-black rounded-lg"
+                onChange={(e) => setUserName(e.target.value)}
+              />
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={password}
+                className="w-[20rem] text-black rounded-lg"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+
+              <button
+                type="button"
+                onClick={() => handleJellyfin()}
+                className="bg-emerald-500 text-white rounded-md py-2 w-[20rem]"
+              >
+                Login
+              </button>
+            </form>
+          </div>
           <h1 className="text-3xl font-semibold">Artists & Albums</h1>
           {/* <div className="flex flex-row flex-wrap gap-x-8 gap-y-2 pt-4">
             {artists?.map((artist: any) => (
