@@ -46,7 +46,7 @@ const Home: NextPage = () => {
       },
     });
     const capi = jellyfin.createApi(serverUrl);
-    const auth = await capi.authenticateUserByName("abc", "abc");
+    const auth = await capi.authenticateUserByName(userName, password);
     setUser(auth.data.User);
 
     setApi(capi);
