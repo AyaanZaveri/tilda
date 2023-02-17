@@ -97,7 +97,7 @@ const Home: NextPage = () => {
                 name="serverUrl"
                 id="serverUrl"
                 value={serverUrl}
-                className="w-[20rem] text-black rounded-lg"
+                className="w-[20rem] text-black rounded-lg border-none outline-none ring-1 ring-gray-300 focus:bg-gray-100 focus:ring-gray-500 dark:text-white dark:ring-gray-700 dark:bg-gray-800 dark:focus:ring-gray-500 dark:focus:bg-gray-700 transiton duration-200"
                 onChange={(e) => setServerUrl(e.target.value)}
               />
               <label htmlFor="userName">Username</label>
@@ -106,7 +106,7 @@ const Home: NextPage = () => {
                 name="userName"
                 id="userName"
                 value={userName}
-                className="w-[20rem] text-black rounded-lg"
+                className="w-[20rem] text-black rounded-lg border-none outline-none ring-1 ring-gray-300 focus:bg-gray-100 focus:ring-gray-500 dark:text-white dark:ring-gray-700 dark:bg-gray-800 dark:focus:ring-gray-500 dark:focus:bg-gray-700 transiton duration-200"
                 onChange={(e) => setUserName(e.target.value)}
               />
               <label htmlFor="password">Password</label>
@@ -115,14 +115,14 @@ const Home: NextPage = () => {
                 name="password"
                 id="password"
                 value={password}
-                className="w-[20rem] text-black rounded-lg"
+                className="w-[20rem] text-black rounded-lg border-none outline-none ring-1 ring-gray-300 focus:bg-gray-100 focus:ring-gray-500 dark:text-white dark:ring-gray-700 dark:bg-gray-800 dark:focus:ring-gray-500 dark:focus:bg-gray-700 transiton duration-200"
                 onChange={(e) => setPassword(e.target.value)}
               />
 
               <button
                 type="button"
                 onClick={() => handleJellyfin()}
-                className="bg-emerald-500 text-white rounded-md py-2 w-[20rem]"
+                className="bg-emerald-500 text-white rounded-md py-2 w-[20rem] hover:bg-emerald-600 active:bg-emerald-700 transition duration-200"
               >
                 Login
               </button>
