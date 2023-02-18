@@ -90,14 +90,14 @@ const Home: NextPage = () => {
       <div className="pt-[4.5rem] pb-8">
         <div className="pt-6">
           <div className="pb-8">
-            <form className="flex flex-col gap-y-3">
+            <form className="flex flex-col gap-y-3 text-sm bg-slate-100 dark:bg-slate-800 w-min p-5 rounded-xl">
               <label htmlFor="serverUrl">Server URL</label>
               <input
                 type="text"
                 name="serverUrl"
                 id="serverUrl"
                 value={serverUrl}
-                className="w-[20rem] text-black rounded-lg border-none outline-none ring-1 ring-gray-300 focus:bg-gray-100 focus:ring-gray-500 dark:text-white dark:ring-gray-700 dark:bg-gray-800 dark:focus:ring-gray-500 dark:focus:bg-gray-700 transiton duration-200"
+                className="w-64 text-slate-500 text-sm rounded-lg border-none outline-none shadow-sm ring-1 ring-gray-300 focus:bg-gray-100 focus:ring-gray-500 dark:text-white dark:ring-gray-700 dark:bg-gray-800 dark:focus:ring-gray-500 dark:focus:bg-gray-700 transiton duration-200"
                 onChange={(e) => setServerUrl(e.target.value)}
               />
               <label htmlFor="userName">Username</label>
@@ -106,7 +106,7 @@ const Home: NextPage = () => {
                 name="userName"
                 id="userName"
                 value={userName}
-                className="w-[20rem] text-black rounded-lg border-none outline-none ring-1 ring-gray-300 focus:bg-gray-100 focus:ring-gray-500 dark:text-white dark:ring-gray-700 dark:bg-gray-800 dark:focus:ring-gray-500 dark:focus:bg-gray-700 transiton duration-200"
+                className="w-64 text-slate-500 text-sm rounded-lg border-none outline-none shadow-sm ring-1 ring-gray-300 focus:bg-gray-100 focus:ring-gray-500 dark:text-white dark:ring-gray-700 dark:bg-gray-800 dark:focus:ring-gray-500 dark:focus:bg-gray-700 transiton duration-200"
                 onChange={(e) => setUserName(e.target.value)}
               />
               <label htmlFor="password">Password</label>
@@ -115,25 +115,25 @@ const Home: NextPage = () => {
                 name="password"
                 id="password"
                 value={password}
-                className="w-[20rem] text-black rounded-lg border-none outline-none ring-1 ring-gray-300 focus:bg-gray-100 focus:ring-gray-500 dark:text-white dark:ring-gray-700 dark:bg-gray-800 dark:focus:ring-gray-500 dark:focus:bg-gray-700 transiton duration-200"
+                className="w-64 text-slate-500 text-sm rounded-lg border-none outline-none shadow-sm ring-1 ring-gray-300 focus:bg-gray-100 focus:ring-gray-500 dark:text-white dark:ring-gray-700 dark:bg-gray-800 dark:focus:ring-gray-500 dark:focus:bg-gray-700 transiton duration-200"
                 onChange={(e) => setPassword(e.target.value)}
               />
 
               <button
                 type="button"
                 onClick={() => handleJellyfin()}
-                className="bg-emerald-500 text-white rounded-md py-2 w-[20rem] hover:bg-emerald-600 active:bg-emerald-700 transition duration-200"
+                className="bg-emerald-500 text-white rounded-md py-2 w-64 hover:bg-emerald-600 active:bg-emerald-700 transition duration-200"
               >
                 Login
               </button>
             </form>
           </div>
           <h1 className="text-3xl font-semibold">Artists & Albums</h1>
-          {/* <div className="flex flex-row flex-wrap gap-x-8 gap-y-2 pt-4">
+          <div className="flex flex-row flex-wrap gap-x-8 gap-y-2 pt-4">
             {artists?.map((artist: any) => (
               <Artist artist={artist} />
             ))}
-          </div> */}
+          </div>
           <div className="flex flex-row flex-wrap gap-x-8 gap-y-2 pt-4">
             {albums?.map((album: any) => (
               <Album album={album} />
